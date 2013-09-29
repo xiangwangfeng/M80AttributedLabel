@@ -11,12 +11,10 @@
 @interface M80AttributedLabelURL : NSObject
 @property (nonatomic,retain)    id      linkData;
 @property (nonatomic,assign)    NSRange range;
-@property (nonatomic,assign)    BOOL    underLine;
 @property (nonatomic,retain)    UIColor *color;
 
 + (M80AttributedLabelURL *)urlWithLinkData: (id)linkData
                                      range: (NSRange)range
-                             showUnderLine: (BOOL)underLine
                                      color: (UIColor *)color;
 
 

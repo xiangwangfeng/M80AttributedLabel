@@ -122,6 +122,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                                blue:0xff/255.0
                                               alpha:1];
     self.userInteractionEnabled = YES;
+    _underLineForLink       = YES;
     _autoDetectLinks        = YES;
     [self resetFont];
 }
@@ -268,7 +269,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 [drawString setTextColor:self.linkColor range:url.range];
             }
             
-            [drawString setUnderlineStyle:url.underLine ? kCTUnderlineStyleSingle : kCTUnderlineStyleNone
+            [drawString setUnderlineStyle:_underLineForLink ? kCTUnderlineStyleSingle : kCTUnderlineStyleNone
                                  modifier:kCTUnderlinePatternSolid
                                     range:url.range];
         }
@@ -509,28 +510,16 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     [self addCustomLink:linkData
                forRange:range
-              underline:YES];
+              linkColor:self.linkColor];
     
 }
 
 - (void)addCustomLink: (id)linkData
              forRange: (NSRange)range
-            underline: (BOOL)underline
-{
-    [self addCustomLink:linkData
-               forRange:range
-              underline:underline
-              linkColor:self.linkColor];
-}
-
-- (void)addCustomLink: (id)linkData
-             forRange: (NSRange)range
-            underline: (BOOL)underline
             linkColor: (UIColor *)color
 {
     M80AttributedLabelURL *url = [M80AttributedLabelURL urlWithLinkData:linkData
                                                                   range:range
-                                                          showUnderLine:underline
                                                                   color:color];
     [_linkLocations addObject:url];
     [self resetTextFrame];

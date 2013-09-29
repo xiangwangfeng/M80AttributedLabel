@@ -21,13 +21,11 @@ static NSString *urlExpression = @"((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\
 
 + (M80AttributedLabelURL *)urlWithLinkData: (id)linkData
                                      range: (NSRange)range
-                             showUnderLine: (BOOL)underLine
                                      color: (UIColor *)color
 {
     M80AttributedLabelURL *url  = [[M80AttributedLabelURL alloc]init];
     url.linkData                = linkData;
     url.range                   = range;
-    url.underLine               = underLine;
     url.color                   = color;
     return [url autorelease];
     
@@ -51,7 +49,6 @@ static NSString *urlExpression = @"((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\
                                     NSString *text = [plainText substringWithRange:range];
                                     M80AttributedLabelURL *link = [M80AttributedLabelURL urlWithLinkData:text
                                                                                                    range:range
-                                                                                           showUnderLine:YES
                                                                                                    color:nil];
                                     [links addObject:link];
                              }];

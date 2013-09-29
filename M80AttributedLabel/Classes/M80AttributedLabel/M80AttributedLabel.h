@@ -22,6 +22,7 @@
 @property (nonatomic,retain)    UIColor *textColor;             //文字颜色
 @property (nonatomic,retain)    UIColor *highlightColor;        //链接点击时背景高亮色
 @property (nonatomic,retain)    UIColor *linkColor;             //链接色
+@property (nonatomic,assign)    BOOL    underLineForLink;       //链接是否带下划线
 @property (nonatomic,assign)    BOOL    autoDetectLinks;        //自动检测
 @property (nonatomic,assign)    NSInteger   numberOfLines;      //行数
 @property (nonatomic,assign)    BOOL    truncatesLastLine;      //最后一行添加...
@@ -53,12 +54,9 @@
 //链接
 - (void)addCustomLink: (id)linkData
              forRange: (NSRange)range;
+
 - (void)addCustomLink: (id)linkData
              forRange: (NSRange)range
-            underline: (BOOL)underline;
-- (void)addCustomLink: (id)linkData
-             forRange: (NSRange)range
-            underline: (BOOL)underline
             linkColor: (UIColor *)color;
 
 
