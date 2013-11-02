@@ -121,6 +121,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                               green:0xf2/255.0
                                                blue:0xff/255.0
                                               alpha:1];
+    self.linkBreadMode      = kCTLineBreakByCharWrapping;
     self.userInteractionEnabled = YES;
     _underLineForLink       = YES;
     _autoDetectLinks        = YES;
@@ -243,10 +244,12 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     if (_attributedString)
     {
+        //添加排版格式
         NSMutableAttributedString *drawString = [_attributedString mutableCopy];
         
         CTParagraphStyleSetting settings[]={
-            { kCTParagraphStyleSpecifierAlignment, sizeof(_textAlignment), &_textAlignment }
+            { kCTParagraphStyleSpecifierAlignment, sizeof(_textAlignment), &_textAlignment },
+            { kCTParagraphStyleSpecifierLineBreakMode, sizeof(_linkBreadMode), &_linkBreadMode }
         };
         CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings,sizeof(settings) / sizeof(settings[0]));
         [drawString addAttribute:(id)kCTParagraphStyleAttributeName
@@ -696,11 +699,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         
                         NSMutableAttributedString *truncationString = [[attributedString attributedSubstringFromRange:NSMakeRange(lastLineRange.location, lastLineRange.length)] mutableCopy];
                         if (lastLineRange.length > 0) {
-                            // Remove any whitespace at the end of the line.
-                            unichar lastCharacter = [[truncationString string] characterAtIndex:lastLineRange.length - 1];
-                            if ([[NSCharacterSet whitespaceAndNewlineCharacterSet] characterIsMember:lastCharacter]) {
-                                [truncationString deleteCharactersInRange:NSMakeRange(lastLineRange.length - 1, 1)];
-                            }
+                            // Remove last token
+                            [truncationString deleteCharactersInRange:NSMakeRange(lastLineRange.length - 1, 1)];
                         }
                         [truncationString appendAttributedString:tokenString];
 
