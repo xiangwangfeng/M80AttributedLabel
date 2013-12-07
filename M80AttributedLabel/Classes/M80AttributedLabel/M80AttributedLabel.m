@@ -266,9 +266,11 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 continue;
             }
             
-            if (url.color) {
+            if (url.color)
+            {
                 [drawString setTextColor:url.color range:url.range];
-            }else {
+            }else
+            {
                 [drawString setTextColor:self.linkColor range:url.range];
             }
             
