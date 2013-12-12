@@ -51,7 +51,7 @@
     for (NSInteger i = 0; i < 100; i++)
     {
         int index = arc4random();
-        switch (index % 4) {
+        switch (index % 5) {
             case 0:
                 [_attributedLabel appendText:[NSString stringWithFormat:@"%d",i]];
                 break;
@@ -69,6 +69,15 @@
                 [string setFont:[UIFont systemFontOfSize:15]];
                 [_attributedLabel appendAttributedText:string];
                 [string release];
+            }
+                break;
+            case 4:
+            {
+                UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
+
+                [button setBounds:CGRectMake(0, 0, 80, 20)];
+                [button setTitle:@"Test Button" forState:UIControlStateNormal];
+                [_attributedLabel appendView:button];
             }
                 break;
             default:

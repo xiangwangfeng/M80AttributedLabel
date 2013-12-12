@@ -51,9 +51,16 @@
              margin: (UIEdgeInsets)margin
           alignment: (M80ImageAlignment)alignment;
 
+//UI控件
+- (void)appendView: (UIView *)view;
+- (void)appendView: (UIView *)view
+            margin: (UIEdgeInsets)margin;
+- (void)appendView: (UIView *)view
+            margin: (UIEdgeInsets)margin
+         alignment: (M80ImageAlignment)alignment;
 
 
-//链接
+//添加自定义链接
 - (void)addCustomLink: (id)linkData
              forRange: (NSRange)range;
 

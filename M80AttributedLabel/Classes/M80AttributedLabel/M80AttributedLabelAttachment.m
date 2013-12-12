@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 Netease. All rights reserved.
 //
 
-#import "M80AttributedLabelImage.h"
+#import "M80AttributedLabelAttachment.h"
 
 void deallocCallback(void* ref)
 {
@@ -15,7 +15,7 @@ void deallocCallback(void* ref)
 
 CGFloat ascentCallback(void *ref)
 {
-    M80AttributedLabelImage *image = (M80AttributedLabelImage *)ref;
+    M80AttributedLabelAttachment *image = (M80AttributedLabelAttachment *)ref;
     CGFloat ascent = 0;
     CGFloat height = [image boxSize].height;
     switch (image.alignment)
@@ -42,7 +42,7 @@ CGFloat ascentCallback(void *ref)
 
 CGFloat descentCallback(void *ref)
 {
-    M80AttributedLabelImage *image = (M80AttributedLabelImage *)ref;
+    M80AttributedLabelAttachment *image = (M80AttributedLabelAttachment *)ref;
     CGFloat descent = 0;
     CGFloat height = [image boxSize].height;
     switch (image.alignment)
@@ -75,41 +75,43 @@ CGFloat descentCallback(void *ref)
 
 CGFloat widthCallback(void* ref)
 {
-    M80AttributedLabelImage *image  = (M80AttributedLabelImage *)ref;
+    M80AttributedLabelAttachment *image  = (M80AttributedLabelAttachment *)ref;
     return [image boxSize].width;
 }
 
 #pragma mark - M80AttributedLabelImage
-@interface M80AttributedLabelImage ()
+@interface M80AttributedLabelAttachment ()
 - (CGSize)calculateContentSize;
+- (CGSize)attachmentSize;
 @end
 
-@implementation M80AttributedLabelImage
+@implementation M80AttributedLabelAttachment
 
 - (void)dealloc
 {
-    [_image release];
+    [_content release];
     [super dealloc];
 }
 
-+ (M80AttributedLabelImage *)imageWithImage: (UIImage *)image
-                                     margin: (UIEdgeInsets)margin
-                                  alignment: (M80ImageAlignment)alignment
-                                    maxSize: (CGSize)maxSize
+
+
++ (M80AttributedLabelAttachment *)attachmentWith: (id)content
+                                          margin: (UIEdgeInsets)margin
+                                       alignment: (M80ImageAlignment)alignment
+                                         maxSize: (CGSize)maxSize
 {
-    M80AttributedLabelImage *attributedImage    = [[M80AttributedLabelImage alloc]init];
-    attributedImage.image                       = image;
-    attributedImage.margin                      = margin;
-    attributedImage.alignment                   = alignment;
-    attributedImage.maxSize                     = maxSize;
-    
-    return [attributedImage autorelease];
+    M80AttributedLabelAttachment *attachment    = [[M80AttributedLabelAttachment alloc]init];
+    attachment.content                          = content;
+    attachment.margin                           = margin;
+    attachment.alignment                        = alignment;
+    attachment.maxSize                          = maxSize;
+    return [attachment autorelease];
 }
 
 
 - (CGSize)boxSize
 {
-    CGSize contentSize = _image.size;
+    CGSize contentSize = [self attachmentSize];
     if (_maxSize.width > 0 &&_maxSize.height > 0 &&
         contentSize.width > 0 && contentSize.height > 0)
     {
@@ -123,14 +125,15 @@ CGFloat widthCallback(void* ref)
 #pragma mark - 辅助方法
 - (CGSize)calculateContentSize
 {
-    CGFloat width = self.image.size.width;
-    CGFloat height= self.image.size.height;
-    CGFloat newWidth = _maxSize.width;
-    CGFloat newHeight= _maxSize.height;
+    CGSize attachmentSize   = [self attachmentSize];
+    CGFloat width           = attachmentSize.width;
+    CGFloat height          = attachmentSize.height;
+    CGFloat newWidth        = _maxSize.width;
+    CGFloat newHeight       = _maxSize.height;
     if (width <= newWidth &&
         height<= newHeight)
     {
-        return self.image.size;
+        return attachmentSize;
     }
     CGSize size;
     if (width / height > newWidth / newHeight)
@@ -140,6 +143,20 @@ CGFloat widthCallback(void* ref)
     else
     {
         size = CGSizeMake(newHeight * width / height, newHeight);
+    }
+    return size;
+}
+
+- (CGSize)attachmentSize
+{
+    CGSize size = CGSizeZero;
+    if ([_content isKindOfClass:[UIImage class]])
+    {
+        size = [((UIImage *)_content) size];
+    }
+    else if ([_content isKindOfClass:[UIView class]])
+    {
+        size = [((UIView *)_content) bounds].size;
     }
     return size;
 }

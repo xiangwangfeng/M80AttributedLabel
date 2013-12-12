@@ -7,7 +7,7 @@
 //
 
 #import "M80AttributedLabel.h"
-#import "M80AttributedLabelImage.h"
+#import "M80AttributedLabelAttachment.h"
 #import "M80AttributedLabelURL.h"
 
 static NSString* const kEllipsesCharacter = @"\u2026";
@@ -23,7 +23,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 
 @interface M80AttributedLabel ()
 {
-    NSMutableArray              *_images;
+    NSMutableArray              *_attachments;
     NSMutableArray              *_linkLocations;
     CTFrameRef                  _textFrame;
     CGFloat                     _fontAscent;
@@ -52,7 +52,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             rect: (CGRect)rect
          context: (CGContextRef)context;
 - (void)drawHighlightWithRect: (CGRect)rect;
-- (void)drawImages;
+- (void)drawAttachments;
 
 //点击处理
 - (void)fireTouchEvent: (CGPoint)point;
@@ -101,7 +101,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     [_textColor release];
     [_linkColor release];
     [_attributedString release];
-    [_images release];
+    [_attachments release];
     [_linkLocations release];
     [super dealloc];
     
@@ -111,7 +111,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 - (void)initDatas
 {
     _attributedString       = [[NSMutableAttributedString alloc]init];
-    _images                 = [[NSMutableArray alloc]init];
+    _attachments                 = [[NSMutableArray alloc]init];
     _linkLocations          = [[NSMutableArray alloc]init];
     _textFrame              = nil;
     self.linkColor          = [UIColor blueColor];
@@ -131,9 +131,13 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 - (void)cleanAll
 {
     _linkDetected = NO;
-    [_images removeAllObjects];
+    [_attachments removeAllObjects];
     [_linkLocations removeAllObjects];
     self.touchedLink = nil;
+    for (UIView *subView in self.subviews)
+    {
+        [subView removeFromSuperview];
+    }
     [self resetTextFrame];
 }
 
@@ -170,10 +174,10 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         
         [_attributedString setFont:_font];
         [self resetFont];
-        for (M80AttributedLabelImage *image in _images)
+        for (M80AttributedLabelAttachment *attachment in _attachments)
         {
-            image.fontAscent = _fontAscent;
-            image.fontDescent = _fontDescent;
+            attachment.fontAscent = _fontAscent;
+            attachment.fontDescent = _fontDescent;
         }
         [self resetTextFrame];
     }
@@ -186,7 +190,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         [_textColor release];
         _textColor = [textColor retain];
         
-        [_attributedString setTextColor:_textColor];
         [self resetTextFrame];
     }
 }
@@ -209,10 +212,27 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         [_linkColor release];
         _linkColor = [linkColor retain];
         
-        for (M80AttributedLabelURL *url in _linkLocations)
-        {
-            url.color = _linkColor;
-        }
+        [self resetTextFrame];
+    }
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    CGRect oldRect = self.bounds;
+    [super setFrame:frame];
+    
+    if (!CGRectEqualToRect(self.bounds, oldRect)) {
+        [self resetTextFrame];
+    }
+}
+
+- (void)setBounds:(CGRect)bounds
+{
+    CGRect oldRect = self.bounds;
+    [super setBounds:bounds];
+    
+    if (!CGRectEqualToRect(self.bounds, oldRect))
+    {
         [self resetTextFrame];
     }
 }
@@ -265,20 +285,12 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             {
                 continue;
             }
-            
-            if (url.color)
-            {
-                [drawString setTextColor:url.color range:url.range];
-            }else
-            {
-                [drawString setTextColor:self.linkColor range:url.range];
-            }
-            
+            UIColor *drawLinkColor = url.color ? : self.linkColor;
+            [drawString setTextColor:drawLinkColor range:url.range];
             [drawString setUnderlineStyle:_underLineForLink ? kCTUnderlineStyleSingle : kCTUnderlineStyleNone
                                  modifier:kCTUnderlinePatternSolid
                                     range:url.range];
         }
-        
         return [drawString autorelease];
     }
     else
@@ -378,14 +390,16 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     
     // Iterate through each of the "runs" (i.e. a chunk of text) and find the runs that
     // intersect with the range.
-    for (CFIndex k = 0; k < runCount; k++) {
+    for (CFIndex k = 0; k < runCount; k++)
+    {
         CTRunRef run = CFArrayGetValueAtIndex(runs, k);
         
         CFRange stringRunRange = CTRunGetStringRange(run);
         NSRange lineRunRange = NSMakeRange(stringRunRange.location, stringRunRange.length);
         NSRange intersectedRunRange = NSIntersectionRange(lineRunRange, range);
         
-        if (intersectedRunRange.length == 0) {
+        if (intersectedRunRange.length == 0)
+        {
             // This run doesn't intersect the range, so skip it.
             continue;
         }
@@ -411,17 +425,36 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         linkRect.size.width = roundf(linkRect.size.width);
         linkRect.size.height = roundf(linkRect.size.height);
         
-        if (CGRectIsEmpty(rectForRange)) {
-            rectForRange = linkRect;
-            
-        } else {
-            rectForRange = CGRectUnion(rectForRange, linkRect);
-        }
+        rectForRange = CGRectIsEmpty(rectForRange) ? linkRect : CGRectUnion(rectForRange, linkRect);
     }
     
     return rectForRange;
 }
 
+- (void)appendAttachment: (M80AttributedLabelAttachment *)attachment
+{
+    attachment.fontAscent                   = _fontAscent;
+    attachment.fontDescent                  = _fontDescent;
+    unichar objectReplacementChar           = 0xFFFC;
+    NSString *objectReplacementString       = [NSString stringWithCharacters:&objectReplacementChar length:1];
+    NSMutableAttributedString *attachText   = [[NSMutableAttributedString alloc]initWithString:objectReplacementString];
+    
+    CTRunDelegateCallbacks callbacks;
+    callbacks.version       = kCTRunDelegateVersion1;
+    callbacks.getAscent     = ascentCallback;
+    callbacks.getDescent    = descentCallback;
+    callbacks.getWidth      = widthCallback;
+    callbacks.dealloc       = deallocCallback;
+    
+    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (void *)[attachment retain]);
+    NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:(id)delegate,kCTRunDelegateAttributeName, nil];
+    [attachText setAttributes:attr range:NSMakeRange(0, 1)];
+    CFRelease(delegate);
+    
+    [_attachments addObject:attachment];
+    [self appendAttributedText:attachText];
+    [attachText release];
+}
 
 
 #pragma mark - 设置文本
@@ -482,31 +515,38 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
              margin: (UIEdgeInsets)margin
           alignment: (M80ImageAlignment)alignment
 {
-    M80AttributedLabelImage *attributedImage = [M80AttributedLabelImage imageWithImage:image
-                                                                                margin:margin
+    M80AttributedLabelAttachment *attachment = [M80AttributedLabelAttachment attachmentWith:image
+                                                                                     margin:margin
                                                                              alignment:alignment
                                                                                maxSize:maxSize];
-    attributedImage.fontAscent = _fontAscent;
-    attributedImage.fontDescent = _fontDescent;
-    unichar objectReplacementChar = 0xFFFC;
-    NSString *objectReplacementString = [NSString stringWithCharacters:&objectReplacementChar length:1];
-    NSMutableAttributedString *imageText = [[NSMutableAttributedString alloc]initWithString:objectReplacementString];
-    
-    CTRunDelegateCallbacks callbacks;
-    callbacks.version = kCTRunDelegateVersion1;
-    callbacks.getAscent = ascentCallback;
-    callbacks.getDescent = descentCallback;
-    callbacks.getWidth = widthCallback;
-    callbacks.dealloc = deallocCallback;
-    
-    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (void *)[attributedImage retain]);
-    NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:(id)delegate,kCTRunDelegateAttributeName, nil];
-    [imageText setAttributes:attr range:NSMakeRange(0, 1)];
-    CFRelease(delegate);
-    
-    [_images addObject:attributedImage];
-    [self appendAttributedText:imageText];
-    [imageText release];
+    [self appendAttachment:attachment];
+}
+
+#pragma mark - 添加UI控件
+- (void)appendView: (UIView *)view
+{
+    [self appendView:view
+              margin:UIEdgeInsetsZero];
+}
+
+- (void)appendView: (UIView *)view
+            margin: (UIEdgeInsets)margin
+{
+    [self appendView:view
+              margin:margin
+           alignment:M80ImageAlignmentBottom];
+}
+
+
+- (void)appendView: (UIView *)view
+            margin: (UIEdgeInsets)margin
+         alignment: (M80ImageAlignment)alignment
+{
+    M80AttributedLabelAttachment *attachment = [M80AttributedLabelAttachment attachmentWith:view
+                                                                                     margin:margin
+                                                                                  alignment:alignment
+                                                                                    maxSize:CGSizeZero];
+    [self appendAttachment:attachment];
 }
 
 #pragma mark - 添加链接
@@ -548,7 +588,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
         CFArrayRef lines = CTFrameGetLines(frame);
         
-        if (nil != lines && CFArrayGetCount(lines) > 0) {
+        if (nil != lines && CFArrayGetCount(lines) > 0)
+        {
             NSInteger lastVisibleLineIndex = MIN(_numberOfLines, CFArrayGetCount(lines)) - 1;
             CTLineRef lastVisibleLine = CFArrayGetValueAtIndex(lines, lastVisibleLineIndex);
             
@@ -559,14 +600,14 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CFRelease(path);
     }
     
-    
     CFRange fitCFRange = CFRangeMake(0, 0);
     CGSize newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, range, NULL, size, &fitCFRange);
     if (framesetter)
     {
         CFRelease(framesetter);
     }
-    return CGSizeMake(ceilf(newSize.width), ceilf(newSize.height) + 2.0);
+    //计算出结果可能会有一点点的偏差,额外加上2个像素,使得极端情况下也可以显示出全部的文字
+    return CGSizeMake(ceilf(newSize.width) + 2.0, ceilf(newSize.height) + 2.0);
 }
 
 #pragma mark - 绘制方法
@@ -586,7 +627,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         [self prepareTextFrame:drawString rect:rect];
         [self drawHighlightWithRect:rect];
-        [self drawImages];
+        [self drawAttachments];
         [self drawText:drawString
                   rect:rect
                context:ctx];
@@ -679,7 +720,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             CGPoint lineOrigins[numberOfLines];
             CTFrameGetLineOrigins(_textFrame, CFRangeMake(0, numberOfLines), lineOrigins);
             
-            for (CFIndex lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+            for (CFIndex lineIndex = 0; lineIndex < numberOfLines; lineIndex++)
+            {
                 CGPoint lineOrigin = lineOrigins[lineIndex];
                 CGContextSetTextPosition(context, lineOrigin.x, lineOrigin.y);
                 CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
@@ -730,7 +772,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                     CTLineDraw(line, context);
                 }
             }
-
         }
         else
         {
@@ -740,9 +781,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 }
 
 
-- (void)drawImages
+- (void)drawAttachments
 {
-    if ([_images count] == 0)
+    if ([_attachments count] == 0)
     {
         return;
     }
@@ -780,7 +821,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             {
                 continue;
             }
-            M80AttributedLabelImage* attributedImage = (M80AttributedLabelImage *)CTRunDelegateGetRefCon(delegate);
+            M80AttributedLabelAttachment* attributedImage = (M80AttributedLabelAttachment *)CTRunDelegateGetRefCon(delegate);
             
             CGFloat ascent = 0.0f;
             CGFloat descent = 0.0f;
@@ -813,29 +854,32 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             flippedMargins.top = flippedMargins.bottom;
             flippedMargins.bottom = top;
             
-            CGRect imageRect = UIEdgeInsetsInsetRect(rect, flippedMargins);
+            CGRect attatchmentRect = UIEdgeInsetsInsetRect(rect, flippedMargins);
             
-            CGContextDrawImage(ctx, imageRect, attributedImage.image.CGImage);
+            id content = attributedImage.content;
+            if ([content isKindOfClass:[UIImage class]])
+            {
+                CGContextDrawImage(ctx, attatchmentRect, ((UIImage *)content).CGImage);
+            }
+            else if ([content isKindOfClass:[UIView class]])
+            {
+                UIView *view = (UIView *)content;
+                if (view.superview == nil)
+                {
+                    [self addSubview:view];
+                }
+                CGRect viewFrame = CGRectMake(attatchmentRect.origin.x,
+                                              self.bounds.size.height - attatchmentRect.origin.y - attatchmentRect.size.height,
+                                              attatchmentRect.size.width,
+                                              attatchmentRect.size.height);
+                [view setFrame:viewFrame];
+            }
+            else
+            {
+                NSLog(@"Attachment Content Not Supported %@",content);
+            }
             
         }
-    }
-}
-
-- (void)setFrame:(CGRect)frame{
-    CGRect oldRect = self.bounds;
-    [super setFrame:frame];
-    
-    if (!CGRectEqualToRect(self.bounds, oldRect)) {
-        [self resetTextFrame];
-    }
-}
-
-- (void)setBounds:(CGRect)bounds {
-    CGRect oldRect = self.bounds;
-    [super setBounds:bounds];
-    
-    if (!CGRectEqualToRect(self.bounds, oldRect)) {
-        [self resetTextFrame];
     }
 }
 
@@ -932,7 +976,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     self.touchedLink = [self urlForPoint:point];
     [self setNeedsDisplay];
     
-    if (!self.touchedLink) {
+    if (!self.touchedLink)
+    {
         [super touchesBegan:touches withEvent:event];
     }
 }
@@ -957,7 +1002,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    if(![self onLabelClick:point]) {
+    if(![self onLabelClick:point])
+    {
         [super touchesEnded:touches withEvent:event];
     }
     self.touchedLink = nil;

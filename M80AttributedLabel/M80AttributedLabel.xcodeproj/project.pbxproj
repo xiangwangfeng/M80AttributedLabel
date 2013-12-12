@@ -20,7 +20,7 @@
 		86B93C5C17D1D6480005D98A /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86B93C5A17D1D6480005D98A /* ViewController.xib */; };
 		86B93C6617D1D9470005D98A /* NSMutableAttributedString+M80.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B93C6517D1D9470005D98A /* NSMutableAttributedString+M80.m */; };
 		86B93C6C17D1DAB20005D98A /* M80AttributedLabelURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B93C6B17D1DAB20005D98A /* M80AttributedLabelURL.m */; };
-		86B93C6F17D1DAC50005D98A /* M80AttributedLabelImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B93C6E17D1DAC50005D98A /* M80AttributedLabelImage.m */; };
+		86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B93C6E17D1DAC50005D98A /* M80AttributedLabelAttachment.m */; };
 		86B9A52E17D2E19B00256F4D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B9A52D17D2E19B00256F4D /* CoreText.framework */; };
 		86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */; };
 		86B9A54217D32C5D00256F4D /* emoji_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B9A54117D32C5D00256F4D /* emoji_0.png */; };
@@ -47,8 +47,8 @@
 		86B93C6517D1D9470005D98A /* NSMutableAttributedString+M80.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+M80.m"; sourceTree = "<group>"; };
 		86B93C6A17D1DAB10005D98A /* M80AttributedLabelURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelURL.h; sourceTree = "<group>"; };
 		86B93C6B17D1DAB20005D98A /* M80AttributedLabelURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabelURL.m; sourceTree = "<group>"; };
-		86B93C6D17D1DAC50005D98A /* M80AttributedLabelImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelImage.h; sourceTree = "<group>"; };
-		86B93C6E17D1DAC50005D98A /* M80AttributedLabelImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabelImage.m; sourceTree = "<group>"; };
+		86B93C6D17D1DAC50005D98A /* M80AttributedLabelAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelAttachment.h; sourceTree = "<group>"; };
+		86B93C6E17D1DAC50005D98A /* M80AttributedLabelAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabelAttachment.m; sourceTree = "<group>"; };
 		86B9412317D20C580005D98A /* M80AttributedLabelDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelDefines.h; sourceTree = "<group>"; };
 		86B9A52D17D2E19B00256F4D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		86B9A52F17D2ECF700256F4D /* M80AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabel.h; sourceTree = "<group>"; };
@@ -143,8 +143,8 @@
 				86B93C6517D1D9470005D98A /* NSMutableAttributedString+M80.m */,
 				86B93C6A17D1DAB10005D98A /* M80AttributedLabelURL.h */,
 				86B93C6B17D1DAB20005D98A /* M80AttributedLabelURL.m */,
-				86B93C6D17D1DAC50005D98A /* M80AttributedLabelImage.h */,
-				86B93C6E17D1DAC50005D98A /* M80AttributedLabelImage.m */,
+				86B93C6D17D1DAC50005D98A /* M80AttributedLabelAttachment.h */,
+				86B93C6E17D1DAC50005D98A /* M80AttributedLabelAttachment.m */,
 				86B9412317D20C580005D98A /* M80AttributedLabelDefines.h */,
 				86B9A52F17D2ECF700256F4D /* M80AttributedLabel.h */,
 				86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */,
@@ -232,7 +232,7 @@
 				86B93C5917D1D6480005D98A /* ViewController.m in Sources */,
 				86B93C6617D1D9470005D98A /* NSMutableAttributedString+M80.m in Sources */,
 				86B93C6C17D1DAB20005D98A /* M80AttributedLabelURL.m in Sources */,
-				86B93C6F17D1DAC50005D98A /* M80AttributedLabelImage.m in Sources */,
+				86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */,
 				86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,18 +14,19 @@ CGFloat ascentCallback(void *ref);
 CGFloat descentCallback(void *ref);
 CGFloat widthCallback(void* ref);
 
-@interface M80AttributedLabelImage : NSObject
-@property (nonatomic,retain)    UIImage             *image;
+@interface M80AttributedLabelAttachment : NSObject
+@property (nonatomic,retain)    id                  content;
 @property (nonatomic,assign)    UIEdgeInsets        margin;
 @property (nonatomic,assign)    M80ImageAlignment   alignment;
 @property (nonatomic,assign)    CGFloat             fontAscent;
 @property (nonatomic,assign)    CGFloat             fontDescent;
 @property (nonatomic,assign)    CGSize              maxSize;
 
-+ (M80AttributedLabelImage *)imageWithImage: (UIImage *)image
-                                     margin: (UIEdgeInsets)margin
-                                  alignment: (M80ImageAlignment)alignment
-                                    maxSize: (CGSize)maxSize;
+
++ (M80AttributedLabelAttachment *)attachmentWith: (id)content
+                                          margin: (UIEdgeInsets)margin
+                                       alignment: (M80ImageAlignment)alignment
+                                         maxSize: (CGSize)maxSize;
 
 - (CGSize)boxSize;
 
