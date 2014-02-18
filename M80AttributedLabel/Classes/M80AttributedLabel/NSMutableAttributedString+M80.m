@@ -43,7 +43,7 @@
         CTFontRef fontRef = CTFontCreateWithName((CFStringRef)font.fontName, font.pointSize, nil);
         if (nil != fontRef)
         {
-            [self addAttribute:(NSString *)kCTFontAttributeName value:(id)fontRef range:range];
+            [self addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)fontRef range:range];
             CFRelease(fontRef);
         }
     }

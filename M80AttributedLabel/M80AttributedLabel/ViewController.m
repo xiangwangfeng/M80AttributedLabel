@@ -10,7 +10,7 @@
 #import "M80AttributedLabel.h"
 
 @interface ViewController ()
-@property (retain, nonatomic) IBOutlet M80AttributedLabel *attributedLabel;
+@property (strong, nonatomic) IBOutlet M80AttributedLabel *attributedLabel;
 - (IBAction)onRefreshButtonPressed:(id)sender;
 - (IBAction)onResetButtonPressed:(id)sender;
 - (void)resetLabelContent;
@@ -30,11 +30,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc
-{
-    [_attributedLabel release];
-    [super dealloc];
-}
 - (IBAction)onRefreshButtonPressed:(id)sender
 {
     [_attributedLabel setNeedsDisplay];
@@ -68,7 +63,6 @@
                 [string setTextColor:[UIColor redColor]];
                 [string setFont:[UIFont systemFontOfSize:15]];
                 [_attributedLabel appendAttributedText:string];
-                [string release];
             }
                 break;
             case 4:

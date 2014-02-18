@@ -30,8 +30,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CGFloat                     _fontDescent;
     BOOL                        _linkDetected;
 }
-@property (nonatomic,retain)    NSMutableAttributedString *attributedString;
-@property (nonatomic,retain)    M80AttributedLabelURL *touchedLink;
+@property (nonatomic,strong)    NSMutableAttributedString *attributedString;
+@property (nonatomic,strong)    M80AttributedLabelURL *touchedLink;
 //初始化
 - (void)initDatas;
 - (void)cleanAll;
@@ -95,15 +95,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         CFRelease(_textFrame);
     }
-    [_touchedLink release];
-    [_highlightColor release];
-    [_font release];
-    [_textColor release];
-    [_linkColor release];
-    [_attributedString release];
-    [_attachments release];
-    [_linkLocations release];
-    [super dealloc];
     
 }
 
@@ -169,8 +160,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     if (font && _font != font)
     {
-        [_font release];
-        _font = [font retain];
+        _font = font;
         
         [_attributedString setFont:_font];
         [self resetFont];
@@ -187,8 +177,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     if (textColor && _textColor != textColor)
     {
-        [_textColor release];
-        _textColor = [textColor retain];
+        _textColor = textColor;
         
         [self resetTextFrame];
     }
@@ -198,8 +187,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     if (highlightColor && _highlightColor != highlightColor)
     {
-        [_highlightColor release];
-        _highlightColor = [highlightColor retain];
+        _highlightColor = highlightColor;
         
         [self resetTextFrame];
     }
@@ -209,8 +197,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     if (_linkColor != linkColor)
     {
-        [_linkColor release];
-        _linkColor = [linkColor retain];
+        _linkColor = linkColor;
         
         [self resetTextFrame];
     }
@@ -246,11 +233,11 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithString:text];
         [string setFont:self.font];
         [string setTextColor:self.textColor];
-        return [string autorelease];
+        return string;
     }
     else
     {
-        return [[[NSAttributedString alloc]init] autorelease];
+        return [[NSAttributedString alloc]init];
     }
 }
 
@@ -273,7 +260,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         };
         CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings,sizeof(settings) / sizeof(settings[0]));
         [drawString addAttribute:(id)kCTParagraphStyleAttributeName
-                           value:(id)paragraphStyle
+                           value:(__bridge id)paragraphStyle
                            range:NSMakeRange(0, [drawString length])];
         CFRelease(paragraphStyle);
 
@@ -291,7 +278,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                  modifier:kCTUnderlinePatternSolid
                                     range:url.range];
         }
-        return [drawString autorelease];
+        return drawString;
     }
     else
     {
@@ -446,14 +433,13 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     callbacks.getWidth      = widthCallback;
     callbacks.dealloc       = deallocCallback;
     
-    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (void *)[attachment retain]);
-    NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:(id)delegate,kCTRunDelegateAttributeName, nil];
+    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (void *)attachment);
+    NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)delegate,kCTRunDelegateAttributeName, nil];
     [attachText setAttributes:attr range:NSMakeRange(0, 1)];
     CFRelease(delegate);
     
     [_attachments addObject:attachment];
     [self appendAttributedText:attachText];
-    [attachText release];
 }
 
 
@@ -466,7 +452,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 
 - (void)setAttributedText:(NSAttributedString *)attributedText
 {
-    [_attributedString release];
     _attributedString = [[NSMutableAttributedString alloc]initWithAttributedString:attributedText];
     [self cleanAll];
 }
@@ -578,7 +563,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         return CGSizeZero;
     }
-    CFAttributedStringRef attributedStringRef = (CFAttributedStringRef)drawString;
+    CFAttributedStringRef attributedStringRef = (__bridge CFAttributedStringRef)drawString;
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attributedStringRef);
     CFRange range = CFRangeMake(0, 0);
     if (_numberOfLines > 0 && framesetter)
@@ -761,8 +746,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         CTLineDraw(truncatedLine, context);
                         CFRelease(truncatedLine);
                         
-                        [tokenString release];
-                        [truncationString release];
                         
                         shouldDrawLine = NO;
                     }
@@ -816,7 +799,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         {
             CTRunRef run = CFArrayGetValueAtIndex(runs, k);
             NSDictionary *runAttributes = (NSDictionary *)CTRunGetAttributes(run);
-            CTRunDelegateRef delegate = (CTRunDelegateRef)[runAttributes valueForKey:(id)kCTRunDelegateAttributeName];
+            CTRunDelegateRef delegate = (__bridge CTRunDelegateRef)[runAttributes valueForKey:(id)kCTRunDelegateAttributeName];
             if (nil == delegate)
             {
                 continue;

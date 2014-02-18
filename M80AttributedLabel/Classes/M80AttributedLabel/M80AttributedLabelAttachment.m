@@ -10,12 +10,12 @@
 
 void deallocCallback(void* ref)
 {
-    [(id)ref release];
+    NSLog(@"Callback Dealloc");
 }
 
 CGFloat ascentCallback(void *ref)
 {
-    M80AttributedLabelAttachment *image = (M80AttributedLabelAttachment *)ref;
+    M80AttributedLabelAttachment *image = (__bridge M80AttributedLabelAttachment *)ref;
     CGFloat ascent = 0;
     CGFloat height = [image boxSize].height;
     switch (image.alignment)
@@ -42,7 +42,7 @@ CGFloat ascentCallback(void *ref)
 
 CGFloat descentCallback(void *ref)
 {
-    M80AttributedLabelAttachment *image = (M80AttributedLabelAttachment *)ref;
+    M80AttributedLabelAttachment *image = (__bridge M80AttributedLabelAttachment *)ref;
     CGFloat descent = 0;
     CGFloat height = [image boxSize].height;
     switch (image.alignment)
@@ -75,7 +75,7 @@ CGFloat descentCallback(void *ref)
 
 CGFloat widthCallback(void* ref)
 {
-    M80AttributedLabelAttachment *image  = (M80AttributedLabelAttachment *)ref;
+    M80AttributedLabelAttachment *image  = (__bridge M80AttributedLabelAttachment *)ref;
     return [image boxSize].width;
 }
 
@@ -87,11 +87,6 @@ CGFloat widthCallback(void* ref)
 
 @implementation M80AttributedLabelAttachment
 
-- (void)dealloc
-{
-    [_content release];
-    [super dealloc];
-}
 
 
 
@@ -105,7 +100,7 @@ CGFloat widthCallback(void* ref)
     attachment.margin                           = margin;
     attachment.alignment                        = alignment;
     attachment.maxSize                          = maxSize;
-    return [attachment autorelease];
+    return attachment;
 }
 
 

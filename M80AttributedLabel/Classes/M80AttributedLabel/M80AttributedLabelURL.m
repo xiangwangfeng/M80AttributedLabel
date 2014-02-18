@@ -12,12 +12,6 @@ static NSString *urlExpression = @"((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\
 
 @implementation M80AttributedLabelURL
 
-- (void)dealloc
-{
-    [_linkData release];
-    [_color release];
-    [super dealloc];
-}
 
 + (M80AttributedLabelURL *)urlWithLinkData: (id)linkData
                                      range: (NSRange)range
@@ -27,7 +21,7 @@ static NSString *urlExpression = @"((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\
     url.linkData                = linkData;
     url.range                   = range;
     url.color                   = color;
-    return [url autorelease];
+    return url;
     
 }
 

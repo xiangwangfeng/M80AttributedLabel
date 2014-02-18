@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface M80AttributedLabelURL : NSObject
-@property (nonatomic,retain)    id      linkData;
+@property (nonatomic,strong)    id      linkData;
 @property (nonatomic,assign)    NSRange range;
-@property (nonatomic,retain)    UIColor *color;
+@property (nonatomic,strong)    UIColor *color;
 
 + (M80AttributedLabelURL *)urlWithLinkData: (id)linkData
                                      range: (NSRange)range

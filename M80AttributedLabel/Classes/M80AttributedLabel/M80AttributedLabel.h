@@ -17,11 +17,11 @@
 @interface M80AttributedLabel : UIView
 
 
-@property (nonatomic,assign)    id<M80AttributedLabelDelegate> delegate;
-@property (nonatomic,retain)    UIFont *font;                   //字体
-@property (nonatomic,retain)    UIColor *textColor;             //文字颜色
-@property (nonatomic,retain)    UIColor *highlightColor;        //链接点击时背景高亮色
-@property (nonatomic,retain)    UIColor *linkColor;             //链接色
+@property (nonatomic,weak)    id<M80AttributedLabelDelegate> delegate;
+@property (nonatomic,strong)    UIFont *font;                   //字体
+@property (nonatomic,strong)    UIColor *textColor;             //文字颜色
+@property (nonatomic,strong)    UIColor *highlightColor;        //链接点击时背景高亮色
+@property (nonatomic,strong)    UIColor *linkColor;             //链接色
 @property (nonatomic,assign)    BOOL    underLineForLink;       //链接是否带下划线
 @property (nonatomic,assign)    BOOL    autoDetectLinks;        //自动检测
 @property (nonatomic,assign)    NSInteger   numberOfLines;      //行数
