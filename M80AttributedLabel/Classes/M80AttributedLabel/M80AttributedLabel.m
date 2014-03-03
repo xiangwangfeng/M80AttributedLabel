@@ -28,6 +28,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CTFrameRef                  _textFrame;
     CGFloat                     _fontAscent;
     CGFloat                     _fontDescent;
+    CGFloat                     _fontHeight;
     BOOL                        _linkDetected;
 }
 @property (nonatomic,strong)    NSMutableAttributedString *attributedString;
@@ -150,8 +151,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CTFontRef fontRef = CTFontCreateWithName((CFStringRef)self.font.fontName, self.font.pointSize, NULL);
     if (fontRef)
     {
-        _fontAscent = CTFontGetAscent(fontRef);
-        _fontDescent = CTFontGetDescent(fontRef);
+        _fontAscent     = CTFontGetAscent(fontRef);
+        _fontDescent    = CTFontGetDescent(fontRef);
+        _fontHeight     = CTFontGetSize(fontRef);
         CFRelease(fontRef);
     }
 }
@@ -593,8 +595,27 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         CFRelease(framesetter);
     }
-    //计算出结果可能会有一点点的偏差,额外加上2个像素,使得极端情况下也可以显示出全部的文字
-    return CGSizeMake(ceilf(newSize.width) + 2.0, ceilf(newSize.height) + 2.0);
+    
+    //hack:
+    //1.需要加上额外的一部分size,有些情况下计算出来的像素点并不是那么精准
+    //2.ios7的CTFramesetterSuggestFrameSizeWithConstraints方法比较残,需要多加一部分height
+    //3.ios7多行中如果首行带有很多空格，会导致返回的suggestionWidth远小于真是width,那么多行情况下就是用传入的width
+    if (M80IOS7)
+    {
+        if (newSize.height < _fontHeight * 2)   //单行
+        {
+            return CGSizeMake(ceilf(newSize.width) + 2.0, ceilf(newSize.height) + 4.0);
+        }
+        else
+        {
+            return CGSizeMake(size.width, ceilf(newSize.height) + 4.0);
+        }
+    }
+    else
+    {
+        return CGSizeMake(ceilf(newSize.width) + 2.0, ceilf(newSize.height) + 2.0);
+    }
+
 }
 
 #pragma mark - 绘制方法

@@ -10,7 +10,7 @@
 
 void deallocCallback(void* ref)
 {
-    NSLog(@"Callback Dealloc");
+    
 }
 
 CGFloat ascentCallback(void *ref)
