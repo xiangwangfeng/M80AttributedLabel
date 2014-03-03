@@ -63,6 +63,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 //链接处理
 - (void)recomputeLinksIfNeeded;
 - (void)addAutoDetectedLink: (M80AttributedLabelURL *)link;
+- (void)computeLink: (NSString *)text
+               sync: (BOOL)sync;
 
 
 @end
@@ -607,6 +609,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CGAffineTransform transform = [self transformForCoreText];
     CGContextConcatCTM(ctx, transform);
     
+    [self recomputeLinksIfNeeded];
+    
     NSAttributedString *drawString = [self attributedStringForDraw];
     if (drawString)
     {
@@ -616,7 +620,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         [self drawText:drawString
                   rect:rect
                context:ctx];
-        [self recomputeLinksIfNeeded];
     }
     CGContextRestoreGState(ctx);
 }
@@ -913,28 +916,52 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         return;
     }
     NSString *text = [_attributedString string];
-    if ([text length] <= kMinHttpLinkLength)
+    NSUInteger length = [text length];
+    if (length <= kMinHttpLinkLength)
     {
         return;
     }
-    dispatch_async(get_m80_attributed_label_parse_queue(), ^{
-        NSArray *links = [M80AttributedLabelURL detectLinks:text];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *plainText = [_attributedString string];
-            if ([plainText isEqualToString:text])
+    BOOL sync = length <= M80MinAsyncDetectLinkLength;
+    [self computeLink:text
+                 sync:sync];
+}
+
+- (void)computeLink:(NSString *)text
+               sync:(BOOL)sync
+{
+    typedef void (^LinkBlock) (NSArray *);
+    LinkBlock block = ^(NSArray *links)
+    {
+        _linkDetected = YES;
+        if ([links count])
+        {
+            for (M80AttributedLabelURL *link in links)
             {
-                _linkDetected = YES;
-                if ([links count])
-                {
-                    for (M80AttributedLabelURL *link in links)
-                    {
-                        [self addAutoDetectedLink:link];
-                    }
-                    [self resetTextFrame];
-                }
+                [self addAutoDetectedLink:link];
             }
+            [self resetTextFrame];
+        }
+    };
+    
+    if (sync)
+    {
+        NSArray *links = [M80AttributedLabelURL detectLinks:text];
+        block(links);
+    }
+    else
+    {
+        dispatch_sync(get_m80_attributed_label_parse_queue(), ^{
+            NSArray *links = [M80AttributedLabelURL detectLinks:text];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *plainText = [_attributedString string];
+                if ([plainText isEqualToString:text])
+                {
+                    block(links);
+                }
+            });
         });
-    });
+
+    }
 }
 
 - (void)addAutoDetectedLink: (M80AttributedLabelURL *)link

@@ -43,6 +43,8 @@
 - (void)resetLabelContent
 {
     [_attributedLabel setText:nil];
+   // [_attributedLabel setText:@"www.163.com"];
+    
     for (NSInteger i = 0; i < 100; i++)
     {
         int index = arc4random();

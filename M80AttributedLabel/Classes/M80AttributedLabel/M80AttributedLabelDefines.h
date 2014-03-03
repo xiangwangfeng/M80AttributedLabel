@@ -24,4 +24,7 @@ typedef enum
 
 @end
 
+//如果文本长度小于这个值,直接在UI线程做Link检测,否则都dispatch到共享线程
+#define M80MinAsyncDetectLinkLength 50
+
 #endif
