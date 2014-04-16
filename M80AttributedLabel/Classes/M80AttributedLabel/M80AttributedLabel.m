@@ -1004,10 +1004,13 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    self.touchedLink = [self urlForPoint:point];
-    [self setNeedsDisplay];
     
-    if (!self.touchedLink)
+    self.touchedLink = [self urlForPoint:point];
+    if (self.touchedLink)
+    {
+          [self setNeedsDisplay];
+    }
+    else
     {
         [super touchesBegan:touches withEvent:event];
     }
@@ -1018,15 +1021,23 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     [super touchesMoved:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    self.touchedLink = [self urlForPoint:point];
-    [self setNeedsDisplay];
+    
+    M80AttributedLabelURL *touchedLink = [self urlForPoint:point];
+    if (self.touchedLink != touchedLink)
+    {
+        self.touchedLink = touchedLink;
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
-    self.touchedLink = nil;
-    [self setNeedsDisplay];
+    if (self.touchedLink)
+    {
+        self.touchedLink = nil;
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -1037,9 +1048,11 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         [super touchesEnded:touches withEvent:event];
     }
-    self.touchedLink = nil;
-    [self setNeedsDisplay];
-    
+    if (self.touchedLink)
+    {
+        self.touchedLink = nil;
+        [self setNeedsDisplay];
+    }
 }
 
 
