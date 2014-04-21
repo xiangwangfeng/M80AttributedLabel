@@ -24,6 +24,12 @@
 		86B9A52E17D2E19B00256F4D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B9A52D17D2E19B00256F4D /* CoreText.framework */; };
 		86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */; };
 		86B9A54217D32C5D00256F4D /* emoji_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B9A54117D32C5D00256F4D /* emoji_0.png */; };
+		E4C163A11904DADD0083CC90 /* DemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C1639F1904DADD0083CC90 /* DemoTableViewController.m */; };
+		E4C163A21904DADD0083CC90 /* DemoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C163A01904DADD0083CC90 /* DemoTableViewController.xib */; };
+		E4C163A61904DF350083CC90 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C163A41904DF350083CC90 /* ChatViewController.m */; };
+		E4C163A71904DF350083CC90 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C163A51904DF350083CC90 /* ChatViewController.xib */; };
+		E4C163AB1904E3AB0083CC90 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C163A91904E3AB0083CC90 /* ChatCell.m */; };
+		E4C163AC1904E3AB0083CC90 /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C163AA1904E3AB0083CC90 /* ChatCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +60,15 @@
 		86B9A52F17D2ECF700256F4D /* M80AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabel.h; sourceTree = "<group>"; };
 		86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabel.m; sourceTree = "<group>"; };
 		86B9A54117D32C5D00256F4D /* emoji_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_0.png; sourceTree = "<group>"; };
+		E4C1639E1904DADD0083CC90 /* DemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTableViewController.h; sourceTree = "<group>"; };
+		E4C1639F1904DADD0083CC90 /* DemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTableViewController.m; sourceTree = "<group>"; };
+		E4C163A01904DADD0083CC90 /* DemoTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoTableViewController.xib; sourceTree = "<group>"; };
+		E4C163A31904DF350083CC90 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = M80AttributedLabel/ChatViewController.h; sourceTree = SOURCE_ROOT; };
+		E4C163A41904DF350083CC90 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = M80AttributedLabel/ChatViewController.m; sourceTree = SOURCE_ROOT; };
+		E4C163A51904DF350083CC90 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatViewController.xib; path = M80AttributedLabel/ChatViewController.xib; sourceTree = SOURCE_ROOT; };
+		E4C163A81904E3AB0083CC90 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
+		E4C163A91904E3AB0083CC90 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
+		E4C163AA1904E3AB0083CC90 /* ChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +123,15 @@
 				86B93C5717D1D6480005D98A /* ViewController.h */,
 				86B93C5817D1D6480005D98A /* ViewController.m */,
 				86B93C5A17D1D6480005D98A /* ViewController.xib */,
+				E4C1639E1904DADD0083CC90 /* DemoTableViewController.h */,
+				E4C1639F1904DADD0083CC90 /* DemoTableViewController.m */,
+				E4C163A01904DADD0083CC90 /* DemoTableViewController.xib */,
+				E4C163A31904DF350083CC90 /* ChatViewController.h */,
+				E4C163A41904DF350083CC90 /* ChatViewController.m */,
+				E4C163A51904DF350083CC90 /* ChatViewController.xib */,
+				E4C163A81904E3AB0083CC90 /* ChatCell.h */,
+				E4C163A91904E3AB0083CC90 /* ChatCell.m */,
+				E4C163AA1904E3AB0083CC90 /* ChatCell.xib */,
 				86B93C4617D1D6480005D98A /* Supporting Files */,
 			);
 			path = M80AttributedLabel;
@@ -214,8 +238,11 @@
 				86B93C4A17D1D6480005D98A /* InfoPlist.strings in Resources */,
 				86B93C5217D1D6480005D98A /* Default.png in Resources */,
 				86B93C5417D1D6480005D98A /* Default@2x.png in Resources */,
+				E4C163A21904DADD0083CC90 /* DemoTableViewController.xib in Resources */,
 				86B93C5617D1D6480005D98A /* Default-568h@2x.png in Resources */,
 				86B93C5C17D1D6480005D98A /* ViewController.xib in Resources */,
+				E4C163A71904DF350083CC90 /* ChatViewController.xib in Resources */,
+				E4C163AC1904E3AB0083CC90 /* ChatCell.xib in Resources */,
 				86B9A54217D32C5D00256F4D /* emoji_0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,13 +254,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C163A11904DADD0083CC90 /* DemoTableViewController.m in Sources */,
 				86B93C4C17D1D6480005D98A /* main.m in Sources */,
 				86B93C5017D1D6480005D98A /* AppDelegate.m in Sources */,
+				E4C163AB1904E3AB0083CC90 /* ChatCell.m in Sources */,
 				86B93C5917D1D6480005D98A /* ViewController.m in Sources */,
 				86B93C6617D1D9470005D98A /* NSMutableAttributedString+M80.m in Sources */,
 				86B93C6C17D1DAB20005D98A /* M80AttributedLabelURL.m in Sources */,
 				86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */,
 				86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */,
+				E4C163A61904DF350083CC90 /* ChatViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

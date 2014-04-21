@@ -21,6 +21,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     [self resetLabelContent];
 }
 
@@ -50,7 +52,7 @@
         int index = arc4random();
         switch (index % 5) {
             case 0:
-                [_attributedLabel appendText:[NSString stringWithFormat:@"%d",i]];
+                [_attributedLabel appendText:[NSString stringWithFormat:@"%ld",(long)i]];
                 break;
             case 1:
                 [_attributedLabel appendText:@" http://www.163.com "];
