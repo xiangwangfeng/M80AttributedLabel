@@ -863,6 +863,21 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             
             CGRect attatchmentRect = UIEdgeInsetsInsetRect(rect, flippedMargins);
             
+            if (_truncatesLastLine &&
+                i == numberOfLines - 1 &&
+                k >= runCount - 2)
+            {
+                //最后行最后的2个CTRun需要做额外判断
+                CGFloat attachmentWidth = CGRectGetWidth(attatchmentRect);
+                const CGFloat kMinEllipsesWidth = attachmentWidth;
+                if (CGRectGetWidth(self.bounds) - CGRectGetMinX(attatchmentRect) - attachmentWidth <  kMinEllipsesWidth)
+                {
+                    continue;
+                }
+            }
+            
+            
+            
             id content = attributedImage.content;
             if ([content isKindOfClass:[UIImage class]])
             {
