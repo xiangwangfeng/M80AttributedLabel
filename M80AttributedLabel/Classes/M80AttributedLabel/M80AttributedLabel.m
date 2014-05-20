@@ -260,7 +260,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         //添加排版格式
         NSMutableAttributedString *drawString = [_attributedString mutableCopy];
         
-        CTLineBreakMode lineBreakMode = [self shouldTruncatesLastLine] ? kDefaultLineBreadMode : self.lineBreakMode;
+        //如果LineBreakMode为TranncateTail,那么默认排版模式改成kCTLineBreakByCharWrapping,使得尽可能地显示所有文字
+        CTLineBreakMode lineBreakMode = [self shouldTruncatesLastLine] ? kCTLineBreakByCharWrapping : self.lineBreakMode;
         
         CTParagraphStyleSetting settings[]={
             { kCTParagraphStyleSpecifierAlignment, sizeof(_textAlignment), &_textAlignment },
