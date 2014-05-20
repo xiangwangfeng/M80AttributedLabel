@@ -11,6 +11,7 @@
 #import "M80AttributedLabelURL.h"
 
 static NSString* const kEllipsesCharacter = @"\u2026";
+static CTLineBreakMode kDefaultLineBreadMode = kCTLineBreakByCharWrapping;
 
 static dispatch_queue_t m80_attributed_label_parse_queue;
 static dispatch_queue_t get_m80_attributed_label_parse_queue() \
@@ -47,6 +48,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 - (CGAffineTransform)transformForCoreText;
 - (CGRect)getLineBounds:(CTLineRef)line point:(CGPoint) point;
 - (M80AttributedLabelURL *)linkAtIndex:(CFIndex)index;
+- (BOOL)shouldTruncatesLastLine;
 
 //绘制
 - (void)drawText: (NSAttributedString *)attributedString
@@ -115,7 +117,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                               green:0xf2/255.0
                                                blue:0xff/255.0
                                               alpha:1];
-    self.linkBreadMode      = kCTLineBreakByCharWrapping;
+    self.lineBreakMode      = kDefaultLineBreadMode;
     self.userInteractionEnabled = YES;
     _underLineForLink       = YES;
     _autoDetectLinks        = YES;
@@ -258,9 +260,11 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         //添加排版格式
         NSMutableAttributedString *drawString = [_attributedString mutableCopy];
         
+        CTLineBreakMode lineBreakMode = [self shouldTruncatesLastLine] ? kDefaultLineBreadMode : self.lineBreakMode;
+        
         CTParagraphStyleSetting settings[]={
             { kCTParagraphStyleSpecifierAlignment, sizeof(_textAlignment), &_textAlignment },
-            { kCTParagraphStyleSpecifierLineBreakMode, sizeof(_linkBreadMode), &_linkBreadMode }
+            { kCTParagraphStyleSpecifierLineBreakMode, sizeof(lineBreakMode), &lineBreakMode }
         };
         CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings,sizeof(settings) / sizeof(settings[0]));
         [drawString addAttribute:(id)kCTParagraphStyleAttributeName
@@ -369,6 +373,11 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         }
     }
     return nil;
+}
+
+- (BOOL)shouldTruncatesLastLine
+{
+    return _lineBreakMode == kCTLineBreakByTruncatingTail;
 }
 
 - (CGRect)rectForRange:(NSRange)range
@@ -736,11 +745,12 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
                 
                 BOOL shouldDrawLine = YES;
-                
-                if (_truncatesLastLine && lineIndex == numberOfLines - 1) {
+                if (lineIndex == numberOfLines - 1 && [self shouldTruncatesLastLine])
+                {
                     // Does the last line need truncation?
                     CFRange lastLineRange = CTLineGetStringRange(line);
-                    if (lastLineRange.location + lastLineRange.length < (CFIndex)attributedString.length) {
+                    if (lastLineRange.location + lastLineRange.length < (CFIndex)attributedString.length)
+                    {
                         CTLineTruncationType truncationType = kCTLineTruncationEnd;
                         NSUInteger truncationAttributePosition = lastLineRange.location + lastLineRange.length - 1;
                         
@@ -751,7 +761,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         CTLineRef truncationToken = CTLineCreateWithAttributedString((CFAttributedStringRef)tokenString);
                         
                         NSMutableAttributedString *truncationString = [[attributedString attributedSubstringFromRange:NSMakeRange(lastLineRange.location, lastLineRange.length)] mutableCopy];
-                        if (lastLineRange.length > 0) {
+                        
+                        if (lastLineRange.length > 0)
+                        {
                             // Remove last token
                             [truncationString deleteCharactersInRange:NSMakeRange(lastLineRange.length - 1, 1)];
                         }
@@ -760,7 +772,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         
                         CTLineRef truncationLine = CTLineCreateWithAttributedString((CFAttributedStringRef)truncationString);
                         CTLineRef truncatedLine = CTLineCreateTruncatedLine(truncationLine, rect.size.width, truncationType, truncationToken);
-                        if (!truncatedLine) {
+                        if (!truncatedLine)
+                        {
                             // If the line is not as wide as the truncationToken, truncatedLine is NULL
                             truncatedLine = CFRetain(truncationToken);
                         }
@@ -863,9 +876,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             
             CGRect attatchmentRect = UIEdgeInsetsInsetRect(rect, flippedMargins);
             
-            if (_truncatesLastLine &&
-                i == numberOfLines - 1 &&
-                k >= runCount - 2)
+            if (i == numberOfLines - 1 &&
+                k >= runCount - 2 &&
+                [self shouldTruncatesLastLine])
             {
                 //最后行最后的2个CTRun需要做额外判断
                 CGFloat attachmentWidth = CGRectGetWidth(attatchmentRect);
@@ -951,7 +964,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         return;
     }
-    NSString *text = [_attributedString string];
+    NSString *text = [[_attributedString string] copy];
     NSUInteger length = [text length];
     if (length <= kMinHttpLinkLength)
     {
