@@ -30,10 +30,10 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CGFloat                     _fontAscent;
     CGFloat                     _fontDescent;
     CGFloat                     _fontHeight;
-    BOOL                        _linkDetected;
 }
 @property (nonatomic,strong)    NSMutableAttributedString *attributedString;
 @property (nonatomic,strong)    M80AttributedLabelURL *touchedLink;
+@property (nonatomic,assign)    BOOL linkDetected;
 //初始化
 - (void)initDatas;
 - (void)cleanAll;
@@ -979,17 +979,18 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 - (void)computeLink:(NSString *)text
                sync:(BOOL)sync
 {
+    __weak typeof(self) weakSelf = self;
     typedef void (^LinkBlock) (NSArray *);
     LinkBlock block = ^(NSArray *links)
     {
-        _linkDetected = YES;
+        weakSelf.linkDetected = YES;
         if ([links count])
         {
             for (M80AttributedLabelURL *link in links)
             {
-                [self addAutoDetectedLink:link];
+                [weakSelf addAutoDetectedLink:link];
             }
-            [self resetTextFrame];
+            [weakSelf resetTextFrame];
         }
     };
     
@@ -1001,16 +1002,17 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     else
     {
         dispatch_sync(get_m80_attributed_label_parse_queue(), ^{
+        
             NSArray *links = [M80AttributedLabelURL detectLinks:text];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSString *plainText = [_attributedString string];
+                NSString *plainText = [[weakSelf attributedString] string];
                 if ([plainText isEqualToString:text])
                 {
                     block(links);
                 }
             });
         });
-
     }
 }
 
