@@ -11,7 +11,6 @@
 #import "M80AttributedLabelURL.h"
 
 static NSString* const kEllipsesCharacter = @"\u2026";
-static CTLineBreakMode kDefaultLineBreadMode = kCTLineBreakByCharWrapping;
 
 static dispatch_queue_t m80_attributed_label_parse_queue;
 static dispatch_queue_t get_m80_attributed_label_parse_queue() \
@@ -117,7 +116,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                               green:0xf2/255.0
                                                blue:0xff/255.0
                                               alpha:1];
-    self.lineBreakMode      = kDefaultLineBreadMode;
+    self.lineBreakMode      = kCTLineBreakByWordWrapping;
     self.userInteractionEnabled = YES;
     self.backgroundColor    = [UIColor whiteColor];
     _underLineForLink       = YES;

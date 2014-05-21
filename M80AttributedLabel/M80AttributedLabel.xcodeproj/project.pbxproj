@@ -16,22 +16,19 @@
 		86B93C5217D1D6480005D98A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B93C5117D1D6480005D98A /* Default.png */; };
 		86B93C5417D1D6480005D98A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B93C5317D1D6480005D98A /* Default@2x.png */; };
 		86B93C5617D1D6480005D98A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B93C5517D1D6480005D98A /* Default-568h@2x.png */; };
-		86B93C5917D1D6480005D98A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B93C5817D1D6480005D98A /* ViewController.m */; };
-		86B93C5C17D1D6480005D98A /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86B93C5A17D1D6480005D98A /* ViewController.xib */; };
 		86B93C6617D1D9470005D98A /* NSMutableAttributedString+M80.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B93C6517D1D9470005D98A /* NSMutableAttributedString+M80.m */; };
 		86B93C6C17D1DAB20005D98A /* M80AttributedLabelURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B93C6B17D1DAB20005D98A /* M80AttributedLabelURL.m */; };
 		86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B93C6E17D1DAC50005D98A /* M80AttributedLabelAttachment.m */; };
 		86B9A52E17D2E19B00256F4D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B9A52D17D2E19B00256F4D /* CoreText.framework */; };
 		86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */; };
-		86B9A54217D32C5D00256F4D /* emoji_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B9A54117D32C5D00256F4D /* emoji_0.png */; };
-		E4841311192C3E5A00E20149 /* BasicAttributedLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841310192C3E5A00E20149 /* BasicAttributedLabelViewController.m */; };
-		E4841316192C46E400E20149 /* BaseLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841315192C46E400E20149 /* BaseLabelViewController.m */; };
-		E4C163A11904DADD0083CC90 /* DemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C1639F1904DADD0083CC90 /* DemoTableViewController.m */; };
-		E4C163A21904DADD0083CC90 /* DemoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C163A01904DADD0083CC90 /* DemoTableViewController.xib */; };
-		E4C163A61904DF350083CC90 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C163A41904DF350083CC90 /* ChatViewController.m */; };
-		E4C163A71904DF350083CC90 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C163A51904DF350083CC90 /* ChatViewController.xib */; };
-		E4C163AB1904E3AB0083CC90 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C163A91904E3AB0083CC90 /* ChatCell.m */; };
-		E4C163AC1904E3AB0083CC90 /* ChatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C163AA1904E3AB0083CC90 /* ChatCell.xib */; };
+		86B9A54217D32C5D00256F4D /* haha.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B9A54117D32C5D00256F4D /* haha.png */; };
+		E4841332192C529C00E20149 /* BaseLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841326192C529C00E20149 /* BaseLabelViewController.m */; };
+		E4841333192C529C00E20149 /* BasicAttributedLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841328192C529C00E20149 /* BasicAttributedLabelViewController.m */; };
+		E4841334192C529C00E20149 /* CustomTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E484132A192C529C00E20149 /* CustomTextViewController.m */; };
+		E4841335192C529C00E20149 /* DemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E484132C192C529C00E20149 /* DemoTableViewController.m */; };
+		E4841336192C529C00E20149 /* DemoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E484132D192C529C00E20149 /* DemoTableViewController.xib */; };
+		E4841337192C529C00E20149 /* ImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E484132F192C529C00E20149 /* ImagesViewController.m */; };
+		E4841338192C529C00E20149 /* LinksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841331192C529C00E20149 /* LinksViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,9 +45,6 @@
 		86B93C5117D1D6480005D98A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		86B93C5317D1D6480005D98A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		86B93C5517D1D6480005D98A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		86B93C5717D1D6480005D98A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		86B93C5817D1D6480005D98A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		86B93C5B17D1D6480005D98A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		86B93C6417D1D9470005D98A /* NSMutableAttributedString+M80.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+M80.h"; sourceTree = "<group>"; };
 		86B93C6517D1D9470005D98A /* NSMutableAttributedString+M80.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+M80.m"; sourceTree = "<group>"; };
 		86B93C6A17D1DAB10005D98A /* M80AttributedLabelURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelURL.h; sourceTree = "<group>"; };
@@ -61,20 +55,20 @@
 		86B9A52D17D2E19B00256F4D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		86B9A52F17D2ECF700256F4D /* M80AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabel.h; sourceTree = "<group>"; };
 		86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabel.m; sourceTree = "<group>"; };
-		86B9A54117D32C5D00256F4D /* emoji_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_0.png; sourceTree = "<group>"; };
-		E484130F192C3E5A00E20149 /* BasicAttributedLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicAttributedLabelViewController.h; sourceTree = "<group>"; };
-		E4841310192C3E5A00E20149 /* BasicAttributedLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicAttributedLabelViewController.m; sourceTree = "<group>"; };
-		E4841314192C46E400E20149 /* BaseLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLabelViewController.h; sourceTree = "<group>"; };
-		E4841315192C46E400E20149 /* BaseLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLabelViewController.m; sourceTree = "<group>"; };
-		E4C1639E1904DADD0083CC90 /* DemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTableViewController.h; sourceTree = "<group>"; };
-		E4C1639F1904DADD0083CC90 /* DemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTableViewController.m; sourceTree = "<group>"; };
-		E4C163A01904DADD0083CC90 /* DemoTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoTableViewController.xib; sourceTree = "<group>"; };
-		E4C163A31904DF350083CC90 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = M80AttributedLabel/ChatViewController.h; sourceTree = SOURCE_ROOT; };
-		E4C163A41904DF350083CC90 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = M80AttributedLabel/ChatViewController.m; sourceTree = SOURCE_ROOT; };
-		E4C163A51904DF350083CC90 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatViewController.xib; path = M80AttributedLabel/ChatViewController.xib; sourceTree = SOURCE_ROOT; };
-		E4C163A81904E3AB0083CC90 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
-		E4C163A91904E3AB0083CC90 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
-		E4C163AA1904E3AB0083CC90 /* ChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCell.xib; sourceTree = "<group>"; };
+		86B9A54117D32C5D00256F4D /* haha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = haha.png; sourceTree = "<group>"; };
+		E4841325192C529C00E20149 /* BaseLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLabelViewController.h; sourceTree = "<group>"; };
+		E4841326192C529C00E20149 /* BaseLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLabelViewController.m; sourceTree = "<group>"; };
+		E4841327192C529C00E20149 /* BasicAttributedLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicAttributedLabelViewController.h; sourceTree = "<group>"; };
+		E4841328192C529C00E20149 /* BasicAttributedLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicAttributedLabelViewController.m; sourceTree = "<group>"; };
+		E4841329192C529C00E20149 /* CustomTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextViewController.h; sourceTree = "<group>"; };
+		E484132A192C529C00E20149 /* CustomTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextViewController.m; sourceTree = "<group>"; };
+		E484132B192C529C00E20149 /* DemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTableViewController.h; sourceTree = "<group>"; };
+		E484132C192C529C00E20149 /* DemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTableViewController.m; sourceTree = "<group>"; };
+		E484132D192C529C00E20149 /* DemoTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoTableViewController.xib; sourceTree = "<group>"; };
+		E484132E192C529C00E20149 /* ImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagesViewController.h; sourceTree = "<group>"; };
+		E484132F192C529C00E20149 /* ImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesViewController.m; sourceTree = "<group>"; };
+		E4841330192C529C00E20149 /* LinksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinksViewController.h; sourceTree = "<group>"; };
+		E4841331192C529C00E20149 /* LinksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinksViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,22 +117,9 @@
 		86B93C4517D1D6480005D98A /* M80AttributedLabel */ = {
 			isa = PBXGroup;
 			children = (
-				E484130E192C3E1B00E20149 /* Demo */,
 				86B93C6217D1D9390005D98A /* Classes */,
 				86B93C4E17D1D6480005D98A /* AppDelegate.h */,
 				86B93C4F17D1D6480005D98A /* AppDelegate.m */,
-				86B93C5717D1D6480005D98A /* ViewController.h */,
-				86B93C5817D1D6480005D98A /* ViewController.m */,
-				86B93C5A17D1D6480005D98A /* ViewController.xib */,
-				E4C1639E1904DADD0083CC90 /* DemoTableViewController.h */,
-				E4C1639F1904DADD0083CC90 /* DemoTableViewController.m */,
-				E4C163A01904DADD0083CC90 /* DemoTableViewController.xib */,
-				E4C163A31904DF350083CC90 /* ChatViewController.h */,
-				E4C163A41904DF350083CC90 /* ChatViewController.m */,
-				E4C163A51904DF350083CC90 /* ChatViewController.xib */,
-				E4C163A81904E3AB0083CC90 /* ChatCell.h */,
-				E4C163A91904E3AB0083CC90 /* ChatCell.m */,
-				E4C163AA1904E3AB0083CC90 /* ChatCell.xib */,
 				86B93C4617D1D6480005D98A /* Supporting Files */,
 			);
 			path = M80AttributedLabel;
@@ -162,6 +143,7 @@
 		86B93C6217D1D9390005D98A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E4841324192C529C00E20149 /* Demo */,
 				86B93C6317D1D9390005D98A /* M80AttributedLabel */,
 			);
 			path = Classes;
@@ -186,18 +168,27 @@
 		86B9A54017D32C5D00256F4D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				86B9A54117D32C5D00256F4D /* emoji_0.png */,
+				86B9A54117D32C5D00256F4D /* haha.png */,
 			);
 			path = Resource;
 			sourceTree = SOURCE_ROOT;
 		};
-		E484130E192C3E1B00E20149 /* Demo */ = {
+		E4841324192C529C00E20149 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				E4841314192C46E400E20149 /* BaseLabelViewController.h */,
-				E4841315192C46E400E20149 /* BaseLabelViewController.m */,
-				E484130F192C3E5A00E20149 /* BasicAttributedLabelViewController.h */,
-				E4841310192C3E5A00E20149 /* BasicAttributedLabelViewController.m */,
+				E484132B192C529C00E20149 /* DemoTableViewController.h */,
+				E484132C192C529C00E20149 /* DemoTableViewController.m */,
+				E484132D192C529C00E20149 /* DemoTableViewController.xib */,
+				E4841325192C529C00E20149 /* BaseLabelViewController.h */,
+				E4841326192C529C00E20149 /* BaseLabelViewController.m */,
+				E4841327192C529C00E20149 /* BasicAttributedLabelViewController.h */,
+				E4841328192C529C00E20149 /* BasicAttributedLabelViewController.m */,
+				E4841329192C529C00E20149 /* CustomTextViewController.h */,
+				E484132A192C529C00E20149 /* CustomTextViewController.m */,
+				E484132E192C529C00E20149 /* ImagesViewController.h */,
+				E484132F192C529C00E20149 /* ImagesViewController.m */,
+				E4841330192C529C00E20149 /* LinksViewController.h */,
+				E4841331192C529C00E20149 /* LinksViewController.m */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -256,12 +247,9 @@
 				86B93C4A17D1D6480005D98A /* InfoPlist.strings in Resources */,
 				86B93C5217D1D6480005D98A /* Default.png in Resources */,
 				86B93C5417D1D6480005D98A /* Default@2x.png in Resources */,
-				E4C163A21904DADD0083CC90 /* DemoTableViewController.xib in Resources */,
 				86B93C5617D1D6480005D98A /* Default-568h@2x.png in Resources */,
-				86B93C5C17D1D6480005D98A /* ViewController.xib in Resources */,
-				E4C163A71904DF350083CC90 /* ChatViewController.xib in Resources */,
-				E4C163AC1904E3AB0083CC90 /* ChatCell.xib in Resources */,
-				86B9A54217D32C5D00256F4D /* emoji_0.png in Resources */,
+				E4841336192C529C00E20149 /* DemoTableViewController.xib in Resources */,
+				86B9A54217D32C5D00256F4D /* haha.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,18 +260,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4C163A11904DADD0083CC90 /* DemoTableViewController.m in Sources */,
-				E4841311192C3E5A00E20149 /* BasicAttributedLabelViewController.m in Sources */,
-				E4841316192C46E400E20149 /* BaseLabelViewController.m in Sources */,
+				E4841333192C529C00E20149 /* BasicAttributedLabelViewController.m in Sources */,
+				E4841332192C529C00E20149 /* BaseLabelViewController.m in Sources */,
+				E4841335192C529C00E20149 /* DemoTableViewController.m in Sources */,
+				E4841337192C529C00E20149 /* ImagesViewController.m in Sources */,
 				86B93C4C17D1D6480005D98A /* main.m in Sources */,
 				86B93C5017D1D6480005D98A /* AppDelegate.m in Sources */,
-				E4C163AB1904E3AB0083CC90 /* ChatCell.m in Sources */,
-				86B93C5917D1D6480005D98A /* ViewController.m in Sources */,
 				86B93C6617D1D9470005D98A /* NSMutableAttributedString+M80.m in Sources */,
 				86B93C6C17D1DAB20005D98A /* M80AttributedLabelURL.m in Sources */,
+				E4841338192C529C00E20149 /* LinksViewController.m in Sources */,
 				86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */,
 				86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */,
-				E4C163A61904DF350083CC90 /* ChatViewController.m in Sources */,
+				E4841334192C529C00E20149 /* CustomTextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,14 +284,6 @@
 				86B93C4917D1D6480005D98A /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		86B93C5A17D1D6480005D98A /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				86B93C5B17D1D6480005D98A /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
