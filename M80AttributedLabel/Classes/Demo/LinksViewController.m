@@ -44,8 +44,8 @@
 
 }
 
-- (void)attributedLabel:(M80AttributedLabel *)label
-          clickedOnLink:(id)linkData
+- (void)m80AttributedLabel:(M80AttributedLabel *)label
+             clickedOnLink:(id)linkData
 {
     NSString *message = [NSString stringWithFormat:@"LinkData is %@:%@",[[linkData class] description],linkData];
     

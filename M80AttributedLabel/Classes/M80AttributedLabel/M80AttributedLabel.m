@@ -926,9 +926,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     id linkData = [self linkDataForPoint:point];
     if (linkData)
     {
-        if (_delegate && [_delegate respondsToSelector:@selector(attributedLabel:clickedOnLink:)])
+        if (_delegate && [_delegate respondsToSelector:@selector(m80AttributedLabel:clickedOnLink:)])
         {
-            [_delegate attributedLabel:self clickedOnLink:linkData];
+            [_delegate m80AttributedLabel:self clickedOnLink:linkData];
         }
         else
         {
