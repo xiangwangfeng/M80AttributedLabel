@@ -68,6 +68,10 @@
                                subTitle:@"Different line break modes"
                                  vcName:@"LineBreakModeViewController"],
                
+               [TableItem itemWithTitle:@"TextAlignment"
+                               subTitle:@"Different test alignments"
+                                 vcName:@"TextAlignmentViewController"]
+               
                ];
 }
 
