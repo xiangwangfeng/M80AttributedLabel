@@ -30,8 +30,6 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Long Text";
-    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"test"
                                                      ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:path
@@ -48,8 +46,8 @@
     [self.view addSubview:scrollView];
     
     CGSize labelSize = [label sizeThatFits:CGSizeMake(CGRectGetWidth(self.view.bounds) - 40, CGFLOAT_MAX)];
-    [label setFrame:CGRectMake(20, 0, labelSize.width, labelSize.height)];
-    scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), labelSize.height);
+    [label setFrame:CGRectMake(20, 10, labelSize.width, labelSize.height)];
+    scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), labelSize.height + 20);
 
 }
 

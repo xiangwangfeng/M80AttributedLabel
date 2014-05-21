@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"M80AttributedLabel Demo";
+    self.title = @"M80AttributedLabel";
     
     _items = @[[TableItem itemWithTitle:@"Basic"
                                subTitle:@"How to create a simple M80AttributedLabel"
@@ -65,7 +65,7 @@
                                  vcName:@"AttachmentViewController"],
                
                [TableItem itemWithTitle:@"LineBreakMode"
-                               subTitle:@"Different line break mode"
+                               subTitle:@"Different line break modes"
                                  vcName:@"LineBreakModeViewController"],
                
                ];
@@ -111,6 +111,7 @@
     TableItem *item = [_items objectAtIndex:[indexPath row]];
     NSString *vcName= [item vcName];
     UIViewController *controller = [[NSClassFromString(vcName) alloc] init];
+    controller.title = [item title];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

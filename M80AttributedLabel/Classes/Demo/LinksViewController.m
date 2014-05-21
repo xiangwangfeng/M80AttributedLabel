@@ -28,8 +28,6 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Links";
-    
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
     
     NSString *text  = @"The game which I current play is hearthstone,and its website is www.hearthstone.com.cn";

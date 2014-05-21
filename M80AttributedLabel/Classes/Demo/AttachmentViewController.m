@@ -27,8 +27,6 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Attachment";
-    
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
     
     for (NSInteger i = 0; i < 3; i++)
@@ -62,7 +60,7 @@
 
 - (void)buttonClicked:(id)sender
 {
-    NSString *message = [NSString stringWithFormat:@"Button tag is %d",[(UIButton *)sender tag]];
+    NSString *message = [NSString stringWithFormat:@"Button tag is %ld",(long)[(UIButton *)sender tag]];
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"U click a button"
                                                    message:message
                                                   delegate:nil

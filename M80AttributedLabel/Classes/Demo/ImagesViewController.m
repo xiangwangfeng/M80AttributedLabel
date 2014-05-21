@@ -28,8 +28,6 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Images";
-    
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
     
     NSString *text  = @"Your[haha] Magic[haha] is Mine~~~~~";
