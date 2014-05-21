@@ -26,6 +26,7 @@
 		E47FBA28192C73B1004CE6F6 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = E47FBA27192C73B1004CE6F6 /* test.txt */; };
 		E47FBA2B192C7653004CE6F6 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47FBA2A192C7653004CE6F6 /* AttachmentViewController.m */; };
 		E47FBA2E192C779E004CE6F6 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E47FBA2C192C779E004CE6F6 /* play@2x.png */; };
+		E47FBA32192C7AE0004CE6F6 /* LineBreakModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47FBA31192C7AE0004CE6F6 /* LineBreakModeViewController.m */; };
 		E4841332192C529C00E20149 /* BaseLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841326192C529C00E20149 /* BaseLabelViewController.m */; };
 		E4841333192C529C00E20149 /* BasicAttributedLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841328192C529C00E20149 /* BasicAttributedLabelViewController.m */; };
 		E4841334192C529C00E20149 /* CustomTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E484132A192C529C00E20149 /* CustomTextViewController.m */; };
@@ -66,6 +67,8 @@
 		E47FBA29192C7653004CE6F6 /* AttachmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentViewController.h; sourceTree = "<group>"; };
 		E47FBA2A192C7653004CE6F6 /* AttachmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
 		E47FBA2C192C779E004CE6F6 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		E47FBA30192C7AE0004CE6F6 /* LineBreakModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineBreakModeViewController.h; sourceTree = "<group>"; };
+		E47FBA31192C7AE0004CE6F6 /* LineBreakModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineBreakModeViewController.m; sourceTree = "<group>"; };
 		E4841325192C529C00E20149 /* BaseLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLabelViewController.h; sourceTree = "<group>"; };
 		E4841326192C529C00E20149 /* BaseLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLabelViewController.m; sourceTree = "<group>"; };
 		E4841327192C529C00E20149 /* BasicAttributedLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicAttributedLabelViewController.h; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 				E47FBA25192C6FF7004CE6F6 /* LongTextViewController.m */,
 				E47FBA29192C7653004CE6F6 /* AttachmentViewController.h */,
 				E47FBA2A192C7653004CE6F6 /* AttachmentViewController.m */,
+				E47FBA30192C7AE0004CE6F6 /* LineBreakModeViewController.h */,
+				E47FBA31192C7AE0004CE6F6 /* LineBreakModeViewController.m */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E47FBA32192C7AE0004CE6F6 /* LineBreakModeViewController.m in Sources */,
 				E4841333192C529C00E20149 /* BasicAttributedLabelViewController.m in Sources */,
 				E4841332192C529C00E20149 /* BaseLabelViewController.m in Sources */,
 				E47FBA26192C6FF7004CE6F6 /* LongTextViewController.m in Sources */,

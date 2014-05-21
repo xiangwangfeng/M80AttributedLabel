@@ -64,6 +64,10 @@
                                subTitle:@"Add UIView as attachment instead of UIImage"
                                  vcName:@"AttachmentViewController"],
                
+               [TableItem itemWithTitle:@"LineBreakMode"
+                               subTitle:@"Different line break mode"
+                                 vcName:@"LineBreakModeViewController"],
+               
                ];
 }
 
