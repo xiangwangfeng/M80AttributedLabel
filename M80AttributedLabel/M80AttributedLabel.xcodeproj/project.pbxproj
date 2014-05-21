@@ -22,6 +22,10 @@
 		86B9A52E17D2E19B00256F4D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B9A52D17D2E19B00256F4D /* CoreText.framework */; };
 		86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */; };
 		86B9A54217D32C5D00256F4D /* haha.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B9A54117D32C5D00256F4D /* haha.png */; };
+		E47FBA26192C6FF7004CE6F6 /* LongTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47FBA25192C6FF7004CE6F6 /* LongTextViewController.m */; };
+		E47FBA28192C73B1004CE6F6 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = E47FBA27192C73B1004CE6F6 /* test.txt */; };
+		E47FBA2B192C7653004CE6F6 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47FBA2A192C7653004CE6F6 /* AttachmentViewController.m */; };
+		E47FBA2E192C779E004CE6F6 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E47FBA2C192C779E004CE6F6 /* play@2x.png */; };
 		E4841332192C529C00E20149 /* BaseLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841326192C529C00E20149 /* BaseLabelViewController.m */; };
 		E4841333192C529C00E20149 /* BasicAttributedLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841328192C529C00E20149 /* BasicAttributedLabelViewController.m */; };
 		E4841334192C529C00E20149 /* CustomTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E484132A192C529C00E20149 /* CustomTextViewController.m */; };
@@ -56,6 +60,12 @@
 		86B9A52F17D2ECF700256F4D /* M80AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabel.h; sourceTree = "<group>"; };
 		86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabel.m; sourceTree = "<group>"; };
 		86B9A54117D32C5D00256F4D /* haha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = haha.png; sourceTree = "<group>"; };
+		E47FBA24192C6FF7004CE6F6 /* LongTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongTextViewController.h; sourceTree = "<group>"; };
+		E47FBA25192C6FF7004CE6F6 /* LongTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongTextViewController.m; sourceTree = "<group>"; };
+		E47FBA27192C73B1004CE6F6 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
+		E47FBA29192C7653004CE6F6 /* AttachmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttachmentViewController.h; sourceTree = "<group>"; };
+		E47FBA2A192C7653004CE6F6 /* AttachmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
+		E47FBA2C192C779E004CE6F6 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 		E4841325192C529C00E20149 /* BaseLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLabelViewController.h; sourceTree = "<group>"; };
 		E4841326192C529C00E20149 /* BaseLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLabelViewController.m; sourceTree = "<group>"; };
 		E4841327192C529C00E20149 /* BasicAttributedLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicAttributedLabelViewController.h; sourceTree = "<group>"; };
@@ -168,6 +178,8 @@
 		86B9A54017D32C5D00256F4D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E47FBA2C192C779E004CE6F6 /* play@2x.png */,
+				E47FBA27192C73B1004CE6F6 /* test.txt */,
 				86B9A54117D32C5D00256F4D /* haha.png */,
 			);
 			path = Resource;
@@ -189,6 +201,10 @@
 				E484132F192C529C00E20149 /* ImagesViewController.m */,
 				E4841330192C529C00E20149 /* LinksViewController.h */,
 				E4841331192C529C00E20149 /* LinksViewController.m */,
+				E47FBA24192C6FF7004CE6F6 /* LongTextViewController.h */,
+				E47FBA25192C6FF7004CE6F6 /* LongTextViewController.m */,
+				E47FBA29192C7653004CE6F6 /* AttachmentViewController.h */,
+				E47FBA2A192C7653004CE6F6 /* AttachmentViewController.m */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -249,6 +265,8 @@
 				86B93C5417D1D6480005D98A /* Default@2x.png in Resources */,
 				86B93C5617D1D6480005D98A /* Default-568h@2x.png in Resources */,
 				E4841336192C529C00E20149 /* DemoTableViewController.xib in Resources */,
+				E47FBA28192C73B1004CE6F6 /* test.txt in Resources */,
+				E47FBA2E192C779E004CE6F6 /* play@2x.png in Resources */,
 				86B9A54217D32C5D00256F4D /* haha.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +280,7 @@
 			files = (
 				E4841333192C529C00E20149 /* BasicAttributedLabelViewController.m in Sources */,
 				E4841332192C529C00E20149 /* BaseLabelViewController.m in Sources */,
+				E47FBA26192C6FF7004CE6F6 /* LongTextViewController.m in Sources */,
 				E4841335192C529C00E20149 /* DemoTableViewController.m in Sources */,
 				E4841337192C529C00E20149 /* ImagesViewController.m in Sources */,
 				86B93C4C17D1D6480005D98A /* main.m in Sources */,
@@ -270,6 +289,7 @@
 				86B93C6C17D1DAB20005D98A /* M80AttributedLabelURL.m in Sources */,
 				E4841338192C529C00E20149 /* LinksViewController.m in Sources */,
 				86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */,
+				E47FBA2B192C7653004CE6F6 /* AttachmentViewController.m in Sources */,
 				86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */,
 				E4841334192C529C00E20149 /* CustomTextViewController.m in Sources */,
 			);

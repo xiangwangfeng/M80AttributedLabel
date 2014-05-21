@@ -43,6 +43,7 @@
                                subTitle:@"How to create a simple M80AttributedLabel"
                                  vcName:@"BasicAttributedLabelViewController"],
                
+               
                [TableItem itemWithTitle:@"Customizing Text"
                                subTitle:@"How to use NSAttributedString"
                                  vcName:@"CustomTextViewController"],
@@ -53,7 +54,15 @@
                
                [TableItem  itemWithTitle:@"Images"
                                 subTitle:@"How to display images using M80AttributedLabel"
-                                  vcName:@"ImagesViewController"]
+                                  vcName:@"ImagesViewController"],
+               
+               [TableItem itemWithTitle:@"LongText"
+                               subTitle:@"Performance for displaying long text"
+                                 vcName:@"LongTextViewController"],
+               
+               [TableItem itemWithTitle:@"Attachment"
+                               subTitle:@"Add UIView as attachment instead of UIImage"
+                                 vcName:@"AttachmentViewController"],
                
                ];
 }

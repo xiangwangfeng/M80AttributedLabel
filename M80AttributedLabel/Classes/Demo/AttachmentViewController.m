@@ -1,19 +1,18 @@
 //
-//  LinksViewController.m
+//  AttachmentViewController.m
 //  M80AttributedLabel
 //
 //  Created by amao on 5/21/14.
 //  Copyright (c) 2014 Netease. All rights reserved.
 //
 
-#import "LinksViewController.h"
+#import "AttachmentViewController.h"
 #import "M80AttributedLabel.h"
 
-@interface LinksViewController ()<M80AttributedLabelDelegate>
-
+@interface AttachmentViewController ()
 @end
 
-@implementation LinksViewController
+@implementation AttachmentViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,41 +27,48 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Links";
+    self.title = @"Attachment";
     
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
     
-    NSString *text  = @"The game which I current play is hearthstone,and its website is www.hearthstone.com.cn";
-    NSRange range   = [text rangeOfString:@"hearthstone"];
-    label.text      = text;
-    [label addCustomLink:[NSValue valueWithRange:range]
-                forRange:range];
-    label.delegate = self;
+    for (NSInteger i = 0; i < 3; i++)
+    {
+        [label appendText:@"Click the icon to fire event"];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+        [button addTarget:self
+                   action:@selector(buttonClicked:)
+         forControlEvents:UIControlEventTouchUpInside];
+        [button setBounds:CGRectMake(0, 0, 30, 30)];
+        [button setTag:i];
+        [label appendView:button];
+        
+        [label appendText:@"\n\n\n"];
+    }
     
+
     
     label.frame     = CGRectInset(self.view.bounds,20,20);
-    
     [self.view addSubview:label];
 
-}
-
-- (void)attributedLabel:(M80AttributedLabel *)label
-          clickedOnLink:(id)linkData
-{
-    NSString *message = [NSString stringWithFormat:@"LinkData is %@:%@",[[linkData class] description],linkData];
-    
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"U click a link"
-                                                   message:message
-                                                  delegate:nil
-                                         cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil, nil];
-    [alert show];
+  
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)buttonClicked:(id)sender
+{
+    NSString *message = [NSString stringWithFormat:@"Button tag is %d",[(UIButton *)sender tag]];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"U click a button"
+                                                   message:message
+                                                  delegate:nil
+                                         cancelButtonTitle:@"OK"
+                                         otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 /*
