@@ -119,6 +119,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                               alpha:1];
     self.lineBreakMode      = kDefaultLineBreadMode;
     self.userInteractionEnabled = YES;
+    self.backgroundColor    = [UIColor whiteColor];
     _underLineForLink       = YES;
     _autoDetectLinks        = YES;
     [self resetFont];
@@ -184,7 +185,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if (textColor && _textColor != textColor)
     {
         _textColor = textColor;
-        
+        [_attributedString setTextColor:textColor];
         [self resetTextFrame];
     }
 }

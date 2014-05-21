@@ -24,6 +24,8 @@
 		86B9A52E17D2E19B00256F4D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B9A52D17D2E19B00256F4D /* CoreText.framework */; };
 		86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */; };
 		86B9A54217D32C5D00256F4D /* emoji_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B9A54117D32C5D00256F4D /* emoji_0.png */; };
+		E4841311192C3E5A00E20149 /* BasicAttributedLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841310192C3E5A00E20149 /* BasicAttributedLabelViewController.m */; };
+		E4841316192C46E400E20149 /* BaseLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841315192C46E400E20149 /* BaseLabelViewController.m */; };
 		E4C163A11904DADD0083CC90 /* DemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C1639F1904DADD0083CC90 /* DemoTableViewController.m */; };
 		E4C163A21904DADD0083CC90 /* DemoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4C163A01904DADD0083CC90 /* DemoTableViewController.xib */; };
 		E4C163A61904DF350083CC90 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C163A41904DF350083CC90 /* ChatViewController.m */; };
@@ -60,6 +62,10 @@
 		86B9A52F17D2ECF700256F4D /* M80AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabel.h; sourceTree = "<group>"; };
 		86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabel.m; sourceTree = "<group>"; };
 		86B9A54117D32C5D00256F4D /* emoji_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_0.png; sourceTree = "<group>"; };
+		E484130F192C3E5A00E20149 /* BasicAttributedLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicAttributedLabelViewController.h; sourceTree = "<group>"; };
+		E4841310192C3E5A00E20149 /* BasicAttributedLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicAttributedLabelViewController.m; sourceTree = "<group>"; };
+		E4841314192C46E400E20149 /* BaseLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLabelViewController.h; sourceTree = "<group>"; };
+		E4841315192C46E400E20149 /* BaseLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLabelViewController.m; sourceTree = "<group>"; };
 		E4C1639E1904DADD0083CC90 /* DemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTableViewController.h; sourceTree = "<group>"; };
 		E4C1639F1904DADD0083CC90 /* DemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTableViewController.m; sourceTree = "<group>"; };
 		E4C163A01904DADD0083CC90 /* DemoTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemoTableViewController.xib; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 		86B93C4517D1D6480005D98A /* M80AttributedLabel */ = {
 			isa = PBXGroup;
 			children = (
+				E484130E192C3E1B00E20149 /* Demo */,
 				86B93C6217D1D9390005D98A /* Classes */,
 				86B93C4E17D1D6480005D98A /* AppDelegate.h */,
 				86B93C4F17D1D6480005D98A /* AppDelegate.m */,
@@ -183,6 +190,17 @@
 			);
 			path = Resource;
 			sourceTree = SOURCE_ROOT;
+		};
+		E484130E192C3E1B00E20149 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				E4841314192C46E400E20149 /* BaseLabelViewController.h */,
+				E4841315192C46E400E20149 /* BaseLabelViewController.m */,
+				E484130F192C3E5A00E20149 /* BasicAttributedLabelViewController.h */,
+				E4841310192C3E5A00E20149 /* BasicAttributedLabelViewController.m */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -255,6 +273,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4C163A11904DADD0083CC90 /* DemoTableViewController.m in Sources */,
+				E4841311192C3E5A00E20149 /* BasicAttributedLabelViewController.m in Sources */,
+				E4841316192C46E400E20149 /* BaseLabelViewController.m in Sources */,
 				86B93C4C17D1D6480005D98A /* main.m in Sources */,
 				86B93C5017D1D6480005D98A /* AppDelegate.m in Sources */,
 				E4C163AB1904E3AB0083CC90 /* ChatCell.m in Sources */,
