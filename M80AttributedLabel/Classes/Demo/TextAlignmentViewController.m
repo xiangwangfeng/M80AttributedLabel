@@ -44,7 +44,7 @@
         M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
         label.text = text;
         [label setTextAlignment:i];
-        [label setFrame:CGRectMake(20, 20 + i * 60, 280, 40)];
+        [label setFrame:CGRectMake(20, 20 + i * 60, 280, 25)];
         
         [label.layer setBorderColor:[UIColor orangeColor].CGColor];
         [label.layer setBorderWidth:1];
