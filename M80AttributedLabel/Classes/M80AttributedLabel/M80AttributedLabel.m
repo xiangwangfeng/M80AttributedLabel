@@ -47,7 +47,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 - (CGAffineTransform)transformForCoreText;
 - (CGRect)getLineBounds:(CTLineRef)line point:(CGPoint) point;
 - (M80AttributedLabelURL *)linkAtIndex:(CFIndex)index;
-- (BOOL)shouldTruncatesLastLine;
 
 //绘制
 - (void)drawText: (NSAttributedString *)attributedString
@@ -261,8 +260,12 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         NSMutableAttributedString *drawString = [_attributedString mutableCopy];
         
         //如果LineBreakMode为TranncateTail,那么默认排版模式改成kCTLineBreakByCharWrapping,使得尽可能地显示所有文字
-        CTLineBreakMode lineBreakMode = [self shouldTruncatesLastLine] ? kCTLineBreakByCharWrapping : self.lineBreakMode;
-        
+        CTLineBreakMode lineBreakMode = self.lineBreakMode;
+        if (self.lineBreakMode == kCTLineBreakByTruncatingTail)
+        {
+            lineBreakMode = _numberOfLines == 1 ? kCTLineBreakByCharWrapping : kCTLineBreakByWordWrapping;
+
+        }
         CTParagraphStyleSetting settings[]={
             { kCTParagraphStyleSpecifierAlignment, sizeof(_textAlignment), &_textAlignment },
             { kCTParagraphStyleSpecifierLineBreakMode, sizeof(lineBreakMode), &lineBreakMode }
@@ -376,10 +379,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     return nil;
 }
 
-- (BOOL)shouldTruncatesLastLine
-{
-    return _lineBreakMode == kCTLineBreakByTruncatingTail;
-}
 
 - (CGRect)rectForRange:(NSRange)range
                 inLine:(CTLineRef)line
@@ -746,7 +745,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
                 
                 BOOL shouldDrawLine = YES;
-                if (lineIndex == numberOfLines - 1 && [self shouldTruncatesLastLine])
+                if (lineIndex == numberOfLines - 1 &&
+                    _lineBreakMode == kCTLineBreakByTruncatingTail)
                 {
                     // Does the last line need truncation?
                     CFRange lastLineRange = CTLineGetStringRange(line);
@@ -879,7 +879,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             
             if (i == numberOfLines - 1 &&
                 k >= runCount - 2 &&
-                [self shouldTruncatesLastLine])
+                 _lineBreakMode == kCTLineBreakByTruncatingTail)
             {
                 //最后行最后的2个CTRun需要做额外判断
                 CGFloat attachmentWidth = CGRectGetWidth(attatchmentRect);
