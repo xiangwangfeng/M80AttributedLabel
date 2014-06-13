@@ -30,7 +30,12 @@
     
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
     
-    NSString *text  = @"Your[haha] Magic[haha] is Mine~~~~~";
+    [label appendImage:[UIImage imageNamed:@"avatar"
+                        ] maxSize:CGSizeMake(40, 40)
+                margin:UIEdgeInsetsZero
+             alignment:M80ImageAlignmentBottom];
+    
+    NSString *text  = @"say:[haha] [haha] Your magic is Mine.[haha] [haha]";
     NSArray *components = [text componentsSeparatedByString:@"[haha]"];
     NSUInteger count = [components count];
     for (NSUInteger i = 0; i < count; i++)
@@ -41,7 +46,7 @@
             [label appendImage:[UIImage imageNamed:@"haha"]
                        maxSize:CGSizeMake(13, 13)
                         margin:UIEdgeInsetsZero
-                     alignment:M80ImageAlignmentCenter];
+                     alignment:M80ImageAlignmentBottom];
         }
     }
     

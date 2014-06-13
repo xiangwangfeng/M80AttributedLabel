@@ -35,6 +35,7 @@
 		E4841336192C529C00E20149 /* DemoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E484132D192C529C00E20149 /* DemoTableViewController.xib */; };
 		E4841337192C529C00E20149 /* ImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E484132F192C529C00E20149 /* ImagesViewController.m */; };
 		E4841338192C529C00E20149 /* LinksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841331192C529C00E20149 /* LinksViewController.m */; };
+		E4C9343A194AC9C600A82403 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = E4C93439194AC9C600A82403 /* avatar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		E484132F192C529C00E20149 /* ImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesViewController.m; sourceTree = "<group>"; };
 		E4841330192C529C00E20149 /* LinksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinksViewController.h; sourceTree = "<group>"; };
 		E4841331192C529C00E20149 /* LinksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinksViewController.m; sourceTree = "<group>"; };
+		E4C93439194AC9C600A82403 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 		86B9A54017D32C5D00256F4D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E4C93439194AC9C600A82403 /* avatar.png */,
 				E47FBA2C192C779E004CE6F6 /* play@2x.png */,
 				E47FBA27192C73B1004CE6F6 /* test.txt */,
 				86B9A54117D32C5D00256F4D /* haha.png */,
@@ -270,6 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C9343A194AC9C600A82403 /* avatar.png in Resources */,
 				86B93C4A17D1D6480005D98A /* InfoPlist.strings in Resources */,
 				86B93C5217D1D6480005D98A /* Default.png in Resources */,
 				86B93C5417D1D6480005D98A /* Default@2x.png in Resources */,

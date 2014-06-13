@@ -37,6 +37,8 @@
                                                      error:nil];
     
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
+    label.lineSpacing = 5.0;
+    label.paragraphSpacing = 10.0;
     label.text = content;
 
     UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:self.view.bounds];

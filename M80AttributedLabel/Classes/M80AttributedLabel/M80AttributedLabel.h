@@ -27,6 +27,8 @@
 @property (nonatomic,assign)    NSInteger   numberOfLines;      //行数
 @property (nonatomic,assign)    CTTextAlignment textAlignment;  //文字排版样式
 @property (nonatomic,assign)    CTLineBreakMode lineBreakMode;  //LineBreakMode
+@property (nonatomic,assign)    CGFloat lineSpacing;            //行间距
+@property (nonatomic,assign)    CGFloat paragraphSpacing;       //段间距
 
 
 

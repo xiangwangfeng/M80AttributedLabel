@@ -33,41 +33,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 @property (nonatomic,strong)    NSMutableAttributedString *attributedString;
 @property (nonatomic,strong)    M80AttributedLabelURL *touchedLink;
 @property (nonatomic,assign)    BOOL linkDetected;
-//初始化
-- (void)initDatas;
-- (void)cleanAll;
-- (void)resetTextFrame;
-- (void)resetFont;
-
-//辅助方法
-- (NSAttributedString *)attributedString: (NSString *)text;
-- (NSAttributedString *)attributedStringForDraw;
-- (void)prepareTextFrame: (NSAttributedString *)string rect: (CGRect)rect;
-- (NSInteger)numberOfDisplayedLines;
-- (CGAffineTransform)transformForCoreText;
-- (CGRect)getLineBounds:(CTLineRef)line point:(CGPoint) point;
-- (M80AttributedLabelURL *)linkAtIndex:(CFIndex)index;
-
-//绘制
-- (void)drawText: (NSAttributedString *)attributedString
-            rect: (CGRect)rect
-         context: (CGContextRef)context;
-- (void)drawHighlightWithRect: (CGRect)rect;
-- (void)drawAttachments;
-
-//点击处理
-- (void)fireTouchEvent: (CGPoint)point;
-- (id)linkDataForPoint: (CGPoint)point;
-- (M80AttributedLabelURL *)urlForPoint: (CGPoint)point;
-- (BOOL)onLabelClick:(CGPoint)point;
-
-//链接处理
-- (void)recomputeLinksIfNeeded;
-- (void)addAutoDetectedLink: (M80AttributedLabelURL *)link;
-- (void)computeLink: (NSString *)text
-               sync: (BOOL)sync;
-
-
 @end
 
 @implementation M80AttributedLabel
@@ -120,6 +85,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     self.backgroundColor    = [UIColor whiteColor];
     _underLineForLink       = YES;
     _autoDetectLinks        = YES;
+    _lineSpacing            = 0.0;
+    _paragraphSpacing       = 0.0;
     [self resetFont];
 }
 
@@ -267,8 +234,11 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 
         }
         CTParagraphStyleSetting settings[]={
-            { kCTParagraphStyleSpecifierAlignment, sizeof(_textAlignment), &_textAlignment },
-            { kCTParagraphStyleSpecifierLineBreakMode, sizeof(lineBreakMode), &lineBreakMode }
+            {kCTParagraphStyleSpecifierAlignment,sizeof(_textAlignment),&_textAlignment},
+            {kCTParagraphStyleSpecifierLineBreakMode,sizeof(lineBreakMode),&lineBreakMode},
+            {kCTParagraphStyleSpecifierMaximumLineSpacing,sizeof(_lineSpacing),&_lineSpacing},
+            {kCTParagraphStyleSpecifierMinimumLineSpacing,sizeof(_lineSpacing),&_lineSpacing},
+            {kCTParagraphStyleSpecifierParagraphSpacing,sizeof(_paragraphSpacing),&_paragraphSpacing},
         };
         CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings,sizeof(settings) / sizeof(settings[0]));
         [drawString addAttribute:(id)kCTParagraphStyleAttributeName
@@ -750,7 +720,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 {
                     // Does the last line need truncation?
                     CFRange lastLineRange = CTLineGetStringRange(line);
-                    if (lastLineRange.location + lastLineRange.length < (CFIndex)attributedString.length)
+                    if (lastLineRange.location + lastLineRange.length < attributedString.length)
                     {
                         CTLineTruncationType truncationType = kCTLineTruncationEnd;
                         NSUInteger truncationAttributePosition = lastLineRange.location + lastLineRange.length - 1;
@@ -952,10 +922,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     return NO;
 }
 
-- (void)fireTouchEvent: (CGPoint)point
-{
-    [self onLabelClick:point];
-}
 
 #pragma mark - 链接处理
 - (void)recomputeLinksIfNeeded
