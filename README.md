@@ -17,6 +17,7 @@ Another attributed label using CoreText
     * `numbersOfLines` (Truncates Last Line Supported)
     * `textAligment`
     * `lineBreadMode`
+    * `lineSpacing`
 
     
 
@@ -25,9 +26,16 @@ Another attributed label using CoreText
 * ARC required
 
 # Installation
+### Podfile
+```ruby
+pod 'M80AttributedLabel'
+```
+### Manually
 * `git clone https://github.com/xiangwangfeng/M80AttributedLabel.git`
 * Copy files in `Class/M80AttributedLabel` to your project
 * Add `CoreText.framework` to your target
+
+
 
 # Contact
 * https://github.com/xiangwangfeng
