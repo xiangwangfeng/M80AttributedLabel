@@ -9,6 +9,7 @@
 #import "LinksViewController.h"
 #import "M80AttributedLabel.h"
 
+
 @interface LinksViewController ()<M80AttributedLabelDelegate>
 
 @end
@@ -27,6 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //使用自定义的链接检测方法
+    /*
+    [M80AttributedLabel setCustomDetectMethod:^NSArray *(NSString *text) {
+        NSMutableArray *links = [NSMutableArray array];
+        return links;
+    }];*/
     
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
     

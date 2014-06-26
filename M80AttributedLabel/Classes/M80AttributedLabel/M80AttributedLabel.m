@@ -594,7 +594,12 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         return CGSizeMake(ceilf(newSize.width) + 2.0, ceilf(newSize.height) + 2.0);
     }
+}
 
+#pragma mark - 
++ (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block
+{
+    [M80AttributedLabelURL setCustomDetectMethod:block];
 }
 
 #pragma mark - 绘制方法

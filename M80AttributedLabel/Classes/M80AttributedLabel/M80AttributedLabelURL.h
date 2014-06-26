@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "M80AttributedLabelDefines.h"
+
 
 @interface M80AttributedLabelURL : NSObject
 @property (nonatomic,strong)    id      linkData;
@@ -20,6 +22,7 @@
 
 + (NSArray *)detectLinks: (NSString *)plainText;
 
++ (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block;
 @end
 
 

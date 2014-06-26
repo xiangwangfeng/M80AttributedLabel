@@ -11,12 +11,9 @@
 #import "M80AttributedLabelDefines.h"
 #import "NSMutableAttributedString+M80.h"
 
-
 @class M80AttributedLabelURL;
 
 @interface M80AttributedLabel : UIView
-
-
 @property (nonatomic,weak)    id<M80AttributedLabelDelegate> delegate;
 @property (nonatomic,strong)    UIFont *font;                   //字体
 @property (nonatomic,strong)    UIColor *textColor;             //文字颜色
@@ -72,5 +69,8 @@
 
 //大小
 - (CGSize)sizeThatFits:(CGSize)size;
+
+//设置全局的自定义Link检测Block(详见M80AttributedLabelURL)
++ (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block;
 
 @end
