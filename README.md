@@ -18,6 +18,7 @@ Another attributed label using CoreText
     * `textAligment`
     * `lineBreadMode`
     * `lineSpacing`
+    * `paragraphSpacing`
 
     
 
