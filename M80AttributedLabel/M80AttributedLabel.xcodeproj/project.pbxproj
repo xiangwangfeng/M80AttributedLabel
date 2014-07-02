@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D093BA71963DFFE00F563BD /* M80RichTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D093BA61963DFFE00F563BD /* M80RichTableViewController.m */; };
 		86B93C4017D1D6480005D98A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B93C3F17D1D6480005D98A /* UIKit.framework */; };
 		86B93C4217D1D6480005D98A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B93C4117D1D6480005D98A /* Foundation.framework */; };
 		86B93C4417D1D6480005D98A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B93C4317D1D6480005D98A /* CoreGraphics.framework */; };
@@ -39,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D093BA51963DFFE00F563BD /* M80RichTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80RichTableViewController.h; sourceTree = "<group>"; };
+		7D093BA61963DFFE00F563BD /* M80RichTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80RichTableViewController.m; sourceTree = "<group>"; };
 		86B93C3C17D1D6480005D98A /* M80AttributedLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M80AttributedLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B93C3F17D1D6480005D98A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		86B93C4117D1D6480005D98A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -218,6 +221,8 @@
 				E47FBA31192C7AE0004CE6F6 /* LineBreakModeViewController.m */,
 				E47FBA3F192CA5EA004CE6F6 /* TextAlignmentViewController.h */,
 				E47FBA40192CA5EA004CE6F6 /* TextAlignmentViewController.m */,
+				7D093BA51963DFFE00F563BD /* M80RichTableViewController.h */,
+				7D093BA61963DFFE00F563BD /* M80RichTableViewController.m */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				86B93C6C17D1DAB20005D98A /* M80AttributedLabelURL.m in Sources */,
 				E4841338192C529C00E20149 /* LinksViewController.m in Sources */,
 				E47FBA41192CA5EA004CE6F6 /* TextAlignmentViewController.m in Sources */,
+				7D093BA71963DFFE00F563BD /* M80RichTableViewController.m in Sources */,
 				86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */,
 				E47FBA2B192C7653004CE6F6 /* AttachmentViewController.m in Sources */,
 				86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */,
