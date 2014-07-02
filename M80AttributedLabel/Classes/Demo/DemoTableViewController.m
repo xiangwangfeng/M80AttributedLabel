@@ -70,7 +70,11 @@
                
                [TableItem itemWithTitle:@"TextAlignment"
                                subTitle:@"Different test alignments"
-                                 vcName:@"TextAlignmentViewController"]
+                                 vcName:@"TextAlignmentViewController"],
+               
+               [TableItem itemWithTitle:@"ReuseRichLabelTableView"
+                               subTitle:@"Cache Cell Height"
+                                 vcName:@"M80RichTableViewController"]
                
                ];
 }
