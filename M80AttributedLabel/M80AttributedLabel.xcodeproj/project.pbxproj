@@ -36,6 +36,7 @@
 		E4841337192C529C00E20149 /* ImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E484132F192C529C00E20149 /* ImagesViewController.m */; };
 		E4841338192C529C00E20149 /* LinksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4841331192C529C00E20149 /* LinksViewController.m */; };
 		E4C9343A194AC9C600A82403 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = E4C93439194AC9C600A82403 /* avatar.png */; };
+		E4DA7210196E89A3006F4D1C /* TextTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4DA720F196E89A3006F4D1C /* TextTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,8 @@
 		E4841330192C529C00E20149 /* LinksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinksViewController.h; sourceTree = "<group>"; };
 		E4841331192C529C00E20149 /* LinksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinksViewController.m; sourceTree = "<group>"; };
 		E4C93439194AC9C600A82403 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
+		E4DA720E196E89A3006F4D1C /* TextTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextTableViewController.h; sourceTree = "<group>"; };
+		E4DA720F196E89A3006F4D1C /* TextTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +221,8 @@
 				E47FBA31192C7AE0004CE6F6 /* LineBreakModeViewController.m */,
 				E47FBA3F192CA5EA004CE6F6 /* TextAlignmentViewController.h */,
 				E47FBA40192CA5EA004CE6F6 /* TextAlignmentViewController.m */,
+				E4DA720E196E89A3006F4D1C /* TextTableViewController.h */,
+				E4DA720F196E89A3006F4D1C /* TextTableViewController.m */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 				86B93C5017D1D6480005D98A /* AppDelegate.m in Sources */,
 				86B93C6617D1D9470005D98A /* NSMutableAttributedString+M80.m in Sources */,
 				86B93C6C17D1DAB20005D98A /* M80AttributedLabelURL.m in Sources */,
+				E4DA7210196E89A3006F4D1C /* TextTableViewController.m in Sources */,
 				E4841338192C529C00E20149 /* LinksViewController.m in Sources */,
 				E47FBA41192CA5EA004CE6F6 /* TextAlignmentViewController.m in Sources */,
 				86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */,
@@ -386,6 +392,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "M80AttributedLabel/M80AttributedLabel-Prefix.pch";
 				INFOPLIST_FILE = "M80AttributedLabel/M80AttributedLabel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -398,6 +405,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "M80AttributedLabel/M80AttributedLabel-Prefix.pch";
 				INFOPLIST_FILE = "M80AttributedLabel/M80AttributedLabel-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

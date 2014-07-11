@@ -70,7 +70,11 @@
                
                [TableItem itemWithTitle:@"TextAlignment"
                                subTitle:@"Different test alignments"
-                                 vcName:@"TextAlignmentViewController"]
+                                 vcName:@"TextAlignmentViewController"],
+               
+               [TableItem itemWithTitle:@"TableViewCell"
+                               subTitle:@"AttributedLabel in tableviewcell"
+                                 vcName:@"TextTableViewController"],
                
                ];
 }
