@@ -128,7 +128,7 @@ static dispatch_queue_t shared_queue()
             [self.refreshControl endRefreshing];
             NSLog(@"begin reload");
             [self.tableView reloadData];
-            NSLog(@"end reload %ld",[_messages count]);
+            NSLog(@"end reload %u",[_messages count]);
         });
     });
 }
@@ -137,7 +137,7 @@ static dispatch_queue_t shared_queue()
 {
     NSLog(@"begin reload");
     [self.tableView reloadData];
-    NSLog(@"end reload %ld",[_messages count]);
+    NSLog(@"end reload %u",[_messages count]);
 }
 
 #pragma mark - Table view Helper
