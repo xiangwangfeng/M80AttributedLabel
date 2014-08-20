@@ -946,22 +946,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         {
             [_delegate m80AttributedLabel:self longPressOnLink:linkData];
         }
-        else
-        {
-            NSURL *url = nil;
-            if ([linkData isKindOfClass:[NSString class]])
-            {
-                url = [NSURL URLWithString:linkData];
-            }
-            else if([linkData isKindOfClass:[NSURL class]])
-            {
-                url = linkData;
-            }
-            if (url)
-            {
-                [[UIApplication sharedApplication] openURL:url];
-            }
-        }
         return YES;
     }
 
