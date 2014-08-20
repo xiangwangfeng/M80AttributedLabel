@@ -11,14 +11,17 @@
 
 @interface NSMutableAttributedString (M80)
 
-- (void)setTextColor:(UIColor*)color;
-- (void)setTextColor:(UIColor*)color range:(NSRange)range;
+- (void)setTextColor:(UIColor *)color;
 
-- (void)setFont:(UIFont*)font;
-- (void)setFont:(UIFont*)font range:(NSRange)range;
+- (void)setTextColor:(UIColor *)color range:(NSRange)range;
+
+- (void)setFont:(UIFont *)font;
+
+- (void)setFont:(UIFont *)font range:(NSRange)range;
 
 - (void)setUnderlineStyle:(CTUnderlineStyle)style
                  modifier:(CTUnderlineStyleModifiers)modifier;
+
 - (void)setUnderlineStyle:(CTUnderlineStyle)style
                  modifier:(CTUnderlineStyleModifiers)modifier
                     range:(NSRange)range;

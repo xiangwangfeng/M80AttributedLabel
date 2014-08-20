@@ -37,8 +37,8 @@
     }];*/
     
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
-    
-    NSString *text  = @"The game which I current play is hearthstone,and its website is www.hearthstone.com.cn";
+    //todo 这个变粗貌似除了改字体别无他法了？PO主帮忙看一下？
+    NSString *text  = @"😌中文变粗了 The game which I current play is hearthstone,and its website is www.hearthstone.com.cnccc";   //使用新正则，识别出   www.hearthstone.com.cn 旧的正则 识别出的是   www.hearthstone.com.cnccc
     NSRange range   = [text rangeOfString:@"hearthstone"];
     label.text      = text;
     [label addCustomLink:[NSValue valueWithRange:range]
@@ -64,6 +64,20 @@
                                          otherButtonTitles:nil, nil];
     [alert show];
 }
+
+
+- (void)m80AttributedLabel:(M80AttributedLabel *)label longPressOnLink:(id)linkData
+{
+    NSString *message = [NSString stringWithFormat:@"LinkData is %@:%@",[[linkData class] description],linkData];
+
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"U LongPress a link"
+            message:message
+            delegate:nil
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil, nil];
+    [alert show];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

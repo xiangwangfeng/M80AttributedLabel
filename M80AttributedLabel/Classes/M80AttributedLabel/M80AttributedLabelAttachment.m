@@ -8,14 +8,12 @@
 
 #import "M80AttributedLabelAttachment.h"
 
-void deallocCallback(void* ref)
-{
-    
+void deallocCallback(void *ref) {
+
 }
 
-CGFloat ascentCallback(void *ref)
-{
-    M80AttributedLabelAttachment *image = (__bridge M80AttributedLabelAttachment *)ref;
+CGFloat ascentCallback(void *ref) {
+    M80AttributedLabelAttachment *image = (__bridge M80AttributedLabelAttachment *) ref;
     CGFloat ascent = 0;
     CGFloat height = [image boxSize].height;
     switch (image.alignment)
@@ -25,7 +23,7 @@ CGFloat ascentCallback(void *ref)
             break;
         case M80ImageAlignmentCenter:
         {
-            CGFloat fontAscent  = image.fontAscent;
+            CGFloat fontAscent = image.fontAscent;
             CGFloat fontDescent = image.fontDescent;
             CGFloat baseLine = (fontAscent + fontDescent) / 2 - fontDescent;
             ascent = height / 2 + baseLine;
@@ -40,9 +38,8 @@ CGFloat ascentCallback(void *ref)
     return ascent;
 }
 
-CGFloat descentCallback(void *ref)
-{
-    M80AttributedLabelAttachment *image = (__bridge M80AttributedLabelAttachment *)ref;
+CGFloat descentCallback(void *ref) {
+    M80AttributedLabelAttachment *image = (__bridge M80AttributedLabelAttachment *) ref;
     CGFloat descent = 0;
     CGFloat height = [image boxSize].height;
     switch (image.alignment)
@@ -54,7 +51,7 @@ CGFloat descentCallback(void *ref)
         }
         case M80ImageAlignmentCenter:
         {
-            CGFloat fontAscent  = image.fontAscent;
+            CGFloat fontAscent = image.fontAscent;
             CGFloat fontDescent = image.fontDescent;
             CGFloat baseLine = (fontAscent + fontDescent) / 2 - fontDescent;
             descent = height / 2 - baseLine;
@@ -68,38 +65,37 @@ CGFloat descentCallback(void *ref)
         default:
             break;
     }
-    
+
     return descent;
 
 }
 
-CGFloat widthCallback(void* ref)
-{
-    M80AttributedLabelAttachment *image  = (__bridge M80AttributedLabelAttachment *)ref;
+CGFloat widthCallback(void *ref) {
+    M80AttributedLabelAttachment *image = (__bridge M80AttributedLabelAttachment *) ref;
     return [image boxSize].width;
 }
 
 #pragma mark - M80AttributedLabelImage
+
 @interface M80AttributedLabelAttachment ()
 - (CGSize)calculateContentSize;
+
 - (CGSize)attachmentSize;
 @end
 
 @implementation M80AttributedLabelAttachment
 
 
-
-
-+ (M80AttributedLabelAttachment *)attachmentWith: (id)content
-                                          margin: (UIEdgeInsets)margin
-                                       alignment: (M80ImageAlignment)alignment
-                                         maxSize: (CGSize)maxSize
++ (M80AttributedLabelAttachment *)attachmentWith:(id)content
+                                          margin:(UIEdgeInsets)margin
+                                       alignment:(M80ImageAlignment)alignment
+                                         maxSize:(CGSize)maxSize
 {
-    M80AttributedLabelAttachment *attachment    = [[M80AttributedLabelAttachment alloc]init];
-    attachment.content                          = content;
-    attachment.margin                           = margin;
-    attachment.alignment                        = alignment;
-    attachment.maxSize                          = maxSize;
+    M80AttributedLabelAttachment *attachment = [[M80AttributedLabelAttachment alloc] init];
+    attachment.content = content;
+    attachment.margin = margin;
+    attachment.alignment = alignment;
+    attachment.maxSize = maxSize;
     return attachment;
 }
 
@@ -107,26 +103,27 @@ CGFloat widthCallback(void* ref)
 - (CGSize)boxSize
 {
     CGSize contentSize = [self attachmentSize];
-    if (_maxSize.width > 0 &&_maxSize.height > 0 &&
-        contentSize.width > 0 && contentSize.height > 0)
+    if (_maxSize.width > 0 && _maxSize.height > 0 &&
+            contentSize.width > 0 && contentSize.height > 0)
     {
         contentSize = [self calculateContentSize];
     }
     return CGSizeMake(contentSize.width + _margin.left + _margin.right,
-                      contentSize.height+ _margin.top  + _margin.bottom);
+            contentSize.height + _margin.top + _margin.bottom);
 }
 
 
 #pragma mark - 辅助方法
+
 - (CGSize)calculateContentSize
 {
-    CGSize attachmentSize   = [self attachmentSize];
-    CGFloat width           = attachmentSize.width;
-    CGFloat height          = attachmentSize.height;
-    CGFloat newWidth        = _maxSize.width;
-    CGFloat newHeight       = _maxSize.height;
+    CGSize attachmentSize = [self attachmentSize];
+    CGFloat width = attachmentSize.width;
+    CGFloat height = attachmentSize.height;
+    CGFloat newWidth = _maxSize.width;
+    CGFloat newHeight = _maxSize.height;
     if (width <= newWidth &&
-        height<= newHeight)
+            height <= newHeight)
     {
         return attachmentSize;
     }
@@ -147,11 +144,11 @@ CGFloat widthCallback(void* ref)
     CGSize size = CGSizeZero;
     if ([_content isKindOfClass:[UIImage class]])
     {
-        size = [((UIImage *)_content) size];
+        size = [((UIImage *) _content) size];
     }
     else if ([_content isKindOfClass:[UIView class]])
     {
-        size = [((UIView *)_content) bounds].size;
+        size = [((UIView *) _content) bounds].size;
     }
     return size;
 }

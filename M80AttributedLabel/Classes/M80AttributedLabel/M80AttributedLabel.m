@@ -21,7 +21,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     return m80_attributed_label_parse_queue;
 }
 
-@interface M80AttributedLabel ()
+@interface M80AttributedLabel () <UIGestureRecognizerDelegate>
 {
     NSMutableArray              *_attachments;
     NSMutableArray              *_linkLocations;
@@ -33,6 +33,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 @property (nonatomic,strong)    NSMutableAttributedString *attributedString;
 @property (nonatomic,strong)    M80AttributedLabelURL *touchedLink;
 @property (nonatomic,assign)    BOOL linkDetected;
+@property  (nonatomic, strong)UILongPressGestureRecognizer *linkLongPressGestureRecognizer;
 @end
 
 @implementation M80AttributedLabel
@@ -63,7 +64,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         CFRelease(_textFrame);
     }
-    
+
 }
 
 #pragma mark - 初始化
@@ -90,9 +91,12 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         self.backgroundColor = [UIColor whiteColor];
     }
-    
+
     self.userInteractionEnabled = YES;
     [self resetFont];
+    self.linkLongPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    _linkLongPressGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:_linkLongPressGestureRecognizer];
 }
 
 - (void)cleanAll
@@ -121,7 +125,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 
 - (void)resetFont
 {
-    CTFontRef fontRef = CTFontCreateWithName((CFStringRef)self.font.fontName, self.font.pointSize, NULL);
+    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName, self.font.pointSize, NULL);
     if (fontRef)
     {
         _fontAscent     = CTFontGetAscent(fontRef);
@@ -138,7 +142,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if (font && _font != font)
     {
         _font = font;
-        
+
         [_attributedString setFont:_font];
         [self resetFont];
         for (M80AttributedLabelAttachment *attachment in _attachments)
@@ -165,7 +169,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if (highlightColor && _highlightColor != highlightColor)
     {
         _highlightColor = highlightColor;
-        
+
         [self resetTextFrame];
     }
 }
@@ -175,7 +179,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if (_linkColor != linkColor)
     {
         _linkColor = linkColor;
-        
+
         [self resetTextFrame];
     }
 }
@@ -184,7 +188,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     CGRect oldRect = self.bounds;
     [super setFrame:frame];
-    
+
     if (!CGRectEqualToRect(self.bounds, oldRect)) {
         [self resetTextFrame];
     }
@@ -194,7 +198,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     CGRect oldRect = self.bounds;
     [super setBounds:bounds];
-    
+
     if (!CGRectEqualToRect(self.bounds, oldRect))
     {
         [self resetTextFrame];
@@ -230,7 +234,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         //添加排版格式
         NSMutableAttributedString *drawString = [_attributedString mutableCopy];
-        
+
         //如果LineBreakMode为TranncateTail,那么默认排版模式改成kCTLineBreakByCharWrapping,使得尽可能地显示所有文字
         CTLineBreakMode lineBreakMode = self.lineBreakMode;
         if (self.lineBreakMode == kCTLineBreakByTruncatingTail)
@@ -251,8 +255,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                            range:NSMakeRange(0, [drawString length])];
         CFRelease(paragraphStyle);
 
-        
-        
+
+
         for (M80AttributedLabelURL *url in _linkLocations)
         {
             if (url.range.location + url.range.length >[_attributedString length])
@@ -281,29 +285,29 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         return nil;
     }
-    
+
     CFArrayRef lines = CTFrameGetLines(_textFrame);
     if (!lines)
         return nil;
     CFIndex count = CFArrayGetCount(lines);
-    
+
     CGPoint origins[count];
     CTFrameGetLineOrigins(_textFrame, CFRangeMake(0,0), origins);
-    
+
     CGAffineTransform transform = [self transformForCoreText];
     CGFloat verticalOffset = 0; //不像Nimbus一样设置文字的对齐方式，都统一是TOP,那么offset就为0
-    
+
     for (int i = 0; i < count; i++)
     {
         CGPoint linePoint = origins[i];
-        
+
         CTLineRef line = CFArrayGetValueAtIndex(lines, i);
         CGRect flippedRect = [self getLineBounds:line point:linePoint];
         CGRect rect = CGRectApplyAffineTransform(flippedRect, transform);
-        
+
         rect = CGRectInset(rect, 0, -kVMargin);
         rect = CGRectOffset(rect, 0, verticalOffset);
-        
+
         if (CGRectContainsPoint(rect, point))
         {
             CGPoint relativePoint = CGPointMake(point.x-CGRectGetMinX(rect),
@@ -338,7 +342,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CGFloat leading = 0.0f;
     CGFloat width = (CGFloat)CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
     CGFloat height = ascent + descent;
-    
+
     return CGRectMake(point.x, point.y - descent, width, height);
 }
 
@@ -362,27 +366,27 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CGRect rectForRange = CGRectZero;
     CFArrayRef runs = CTLineGetGlyphRuns(line);
     CFIndex runCount = CFArrayGetCount(runs);
-    
+
     // Iterate through each of the "runs" (i.e. a chunk of text) and find the runs that
     // intersect with the range.
     for (CFIndex k = 0; k < runCount; k++)
     {
         CTRunRef run = CFArrayGetValueAtIndex(runs, k);
-        
+
         CFRange stringRunRange = CTRunGetStringRange(run);
         NSRange lineRunRange = NSMakeRange(stringRunRange.location, stringRunRange.length);
         NSRange intersectedRunRange = NSIntersectionRange(lineRunRange, range);
-        
+
         if (intersectedRunRange.length == 0)
         {
             // This run doesn't intersect the range, so skip it.
             continue;
         }
-        
+
         CGFloat ascent = 0.0f;
         CGFloat descent = 0.0f;
         CGFloat leading = 0.0f;
-        
+
         // Use of 'leading' doesn't properly highlight Japanese-character link.
         CGFloat width = (CGFloat)CTRunGetTypographicBounds(run,
                                                            CFRangeMake(0, 0),
@@ -390,19 +394,19 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                                            &descent,
                                                            NULL); //&leading);
         CGFloat height = ascent + descent;
-        
+
         CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil);
-        
+
         CGRect linkRect = CGRectMake(lineOrigin.x + xOffset - leading, lineOrigin.y - descent, width + leading, height);
-        
+
         linkRect.origin.y = roundf(linkRect.origin.y);
         linkRect.origin.x = roundf(linkRect.origin.x);
         linkRect.size.width = roundf(linkRect.size.width);
         linkRect.size.height = roundf(linkRect.size.height);
-        
+
         rectForRange = CGRectIsEmpty(rectForRange) ? linkRect : CGRectUnion(rectForRange, linkRect);
     }
-    
+
     return rectForRange;
 }
 
@@ -413,19 +417,19 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     unichar objectReplacementChar           = 0xFFFC;
     NSString *objectReplacementString       = [NSString stringWithCharacters:&objectReplacementChar length:1];
     NSMutableAttributedString *attachText   = [[NSMutableAttributedString alloc]initWithString:objectReplacementString];
-    
+
     CTRunDelegateCallbacks callbacks;
     callbacks.version       = kCTRunDelegateVersion1;
     callbacks.getAscent     = ascentCallback;
     callbacks.getDescent    = descentCallback;
     callbacks.getWidth      = widthCallback;
     callbacks.dealloc       = deallocCallback;
-    
-    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (void *)attachment);
+
+    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)attachment);
     NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)delegate,kCTRunDelegateAttributeName, nil];
     [attachText setAttributes:attr range:NSMakeRange(0, 1)];
     CFRelease(delegate);
-    
+
     [_attachments addObject:attachment];
     [self appendAttributedText:attachText];
 }
@@ -529,7 +533,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     [self addCustomLink:linkData
                forRange:range
               linkColor:self.linkColor];
-    
+
 }
 
 - (void)addCustomLink: (id)linkData
@@ -560,26 +564,26 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CGPathAddRect(path, NULL, CGRectMake(0, 0, size.width, size.height));
         CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
         CFArrayRef lines = CTFrameGetLines(frame);
-        
+
         if (nil != lines && CFArrayGetCount(lines) > 0)
         {
             NSInteger lastVisibleLineIndex = MIN(_numberOfLines, CFArrayGetCount(lines)) - 1;
             CTLineRef lastVisibleLine = CFArrayGetValueAtIndex(lines, lastVisibleLineIndex);
-            
+
             CFRange rangeToLayout = CTLineGetStringRange(lastVisibleLine);
             range = CFRangeMake(0, rangeToLayout.location + rangeToLayout.length);
         }
         CFRelease(frame);
         CFRelease(path);
     }
-    
+
     CFRange fitCFRange = CFRangeMake(0, 0);
     CGSize newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, range, NULL, size, &fitCFRange);
     if (framesetter)
     {
         CFRelease(framesetter);
     }
-    
+
     //hack:
     //1.需要加上额外的一部分size,有些情况下计算出来的像素点并不是那么精准
     //2.ios7的CTFramesetterSuggestFrameSizeWithConstraints方法比较残,需要多加一部分height
@@ -618,9 +622,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CGContextSaveGState(ctx);
     CGAffineTransform transform = [self transformForCoreText];
     CGContextConcatCTM(ctx, transform);
-    
+
     [self recomputeLinksIfNeeded];
-    
+
     NSAttributedString *drawString = [self attributedStringForDraw];
     if (drawString)
     {
@@ -639,7 +643,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     if (_textFrame == nil)
     {
-        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
+        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)string);
         CGMutablePathRef path = CGPathCreateMutable();
         CGPathAddRect(path, nil,rect);
         _textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
@@ -654,26 +658,26 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         [self.highlightColor setFill];
         NSRange linkRange = self.touchedLink.range;
-        
+
         CFArrayRef lines = CTFrameGetLines(_textFrame);
         CFIndex count = CFArrayGetCount(lines);
         CGPoint lineOrigins[count];
         CTFrameGetLineOrigins(_textFrame, CFRangeMake(0, 0), lineOrigins);
         NSInteger numberOfLines = [self numberOfDisplayedLines];
-        
+
         CGContextRef ctx = UIGraphicsGetCurrentContext();
-        
+
         for (CFIndex i = 0; i < numberOfLines; i++)
         {
             CTLineRef line = CFArrayGetValueAtIndex(lines, i);
-            
+
             CFRange stringRange = CTLineGetStringRange(line);
             NSRange lineRange = NSMakeRange(stringRange.location, stringRange.length);
             NSRange intersectedRange = NSIntersectionRange(lineRange, linkRange);
             if (intersectedRange.length == 0) {
                 continue;
             }
-            
+
             CGRect highlightRect = [self rectForRange:linkRange
                                                inLine:line
                                            lineOrigin:lineOrigins[i]];
@@ -681,7 +685,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             if (!CGRectIsEmpty(highlightRect))
             {
                 CGFloat pi = (CGFloat)M_PI;
-                
+
                 CGFloat radius = 1.0f;
                 CGContextMoveToPoint(ctx, highlightRect.origin.x, highlightRect.origin.y + radius);
                 CGContextAddLineToPoint(ctx, highlightRect.origin.x, highlightRect.origin.y + highlightRect.size.height - radius);
@@ -700,7 +704,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 CGContextFillPath(ctx);
             }
         }
-        
+
     }
 }
 
@@ -714,16 +718,16 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         {
             CFArrayRef lines = CTFrameGetLines(_textFrame);
             NSInteger numberOfLines = [self numberOfDisplayedLines];
-            
+
             CGPoint lineOrigins[numberOfLines];
             CTFrameGetLineOrigins(_textFrame, CFRangeMake(0, numberOfLines), lineOrigins);
-            
+
             for (CFIndex lineIndex = 0; lineIndex < numberOfLines; lineIndex++)
             {
                 CGPoint lineOrigin = lineOrigins[lineIndex];
                 CGContextSetTextPosition(context, lineOrigin.x, lineOrigin.y);
                 CTLineRef line = CFArrayGetValueAtIndex(lines, lineIndex);
-                
+
                 BOOL shouldDrawLine = YES;
                 if (lineIndex == numberOfLines - 1 &&
                     _lineBreakMode == kCTLineBreakByTruncatingTail)
@@ -734,15 +738,15 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                     {
                         CTLineTruncationType truncationType = kCTLineTruncationEnd;
                         NSUInteger truncationAttributePosition = lastLineRange.location + lastLineRange.length - 1;
-                        
+
                         NSDictionary *tokenAttributes = [attributedString attributesAtIndex:truncationAttributePosition
                                                                              effectiveRange:NULL];
                         NSAttributedString *tokenString = [[NSAttributedString alloc] initWithString:kEllipsesCharacter
                                                                                           attributes:tokenAttributes];
-                        CTLineRef truncationToken = CTLineCreateWithAttributedString((CFAttributedStringRef)tokenString);
-                        
+                        CTLineRef truncationToken = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)tokenString);
+
                         NSMutableAttributedString *truncationString = [[attributedString attributedSubstringFromRange:NSMakeRange(lastLineRange.location, lastLineRange.length)] mutableCopy];
-                        
+
                         if (lastLineRange.length > 0)
                         {
                             // Remove last token
@@ -750,8 +754,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         }
                         [truncationString appendAttributedString:tokenString];
 
-                        
-                        CTLineRef truncationLine = CTLineCreateWithAttributedString((CFAttributedStringRef)truncationString);
+
+                        CTLineRef truncationLine = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)truncationString);
                         CTLineRef truncatedLine = CTLineCreateTruncatedLine(truncationLine, rect.size.width, truncationType, truncationToken);
                         if (!truncatedLine)
                         {
@@ -760,11 +764,11 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         }
                         CFRelease(truncationLine);
                         CFRelease(truncationToken);
-                        
+
                         CTLineDraw(truncatedLine, context);
                         CFRelease(truncatedLine);
-                        
-                        
+
+
                         shouldDrawLine = NO;
                     }
                 }
@@ -793,7 +797,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         return;
     }
-    
+
     CFArrayRef lines = CTFrameGetLines(_textFrame);
     CFIndex lineCount = CFArrayGetCount(lines);
     CGPoint lineOrigins[lineCount];
@@ -810,7 +814,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CTLineGetTypographicBounds(line, &lineAscent, &lineDescent, NULL);
         CGFloat lineHeight = lineAscent + lineDescent;
         CGFloat lineBottomY = lineOrigin.y - lineDescent;
-        
+
         // Iterate through each of the "runs" (i.e. a chunk of text) and find the runs that
         // intersect with the range.
         for (CFIndex k = 0; k < runCount; k++)
@@ -823,7 +827,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 continue;
             }
             M80AttributedLabelAttachment* attributedImage = (M80AttributedLabelAttachment *)CTRunDelegateGetRefCon(delegate);
-            
+
             CGFloat ascent = 0.0f;
             CGFloat descent = 0.0f;
             CGFloat width = (CGFloat)CTRunGetTypographicBounds(run,
@@ -831,10 +835,10 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                                                &ascent,
                                                                &descent,
                                                                NULL);
-            
+
             CGFloat imageBoxHeight = [attributedImage boxSize].height;
             CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil);
-            
+
             CGFloat imageBoxOriginY = 0.0f;
             switch (attributedImage.alignment)
             {
@@ -848,15 +852,15 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                     imageBoxOriginY = lineBottomY;
                     break;
             }
-            
+
             CGRect rect = CGRectMake(lineOrigin.x + xOffset, imageBoxOriginY, width, imageBoxHeight);
             UIEdgeInsets flippedMargins = attributedImage.margin;
             CGFloat top = flippedMargins.top;
             flippedMargins.top = flippedMargins.bottom;
             flippedMargins.bottom = top;
-            
+
             CGRect attatchmentRect = UIEdgeInsetsInsetRect(rect, flippedMargins);
-            
+
             if (i == numberOfLines - 1 &&
                 k >= runCount - 2 &&
                  _lineBreakMode == kCTLineBreakByTruncatingTail)
@@ -869,9 +873,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                     continue;
                 }
             }
-            
-            
-            
+
+
+
             id content = attributedImage.content;
             if ([content isKindOfClass:[UIImage class]])
             {
@@ -894,7 +898,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             {
                 NSLog(@"Attachment Content Not Supported %@",content);
             }
-            
+
         }
     }
 }
@@ -928,7 +932,39 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         }
         return YES;
     }
-    
+
+    return NO;
+}
+
+#pragma mark - 长按事件处理
+- (BOOL)onLabelLongPress:(CGPoint)point
+{
+    id linkData = [self linkDataForPoint:point];
+    if (linkData)
+    {
+        if (_delegate && [_delegate respondsToSelector:@selector(m80AttributedLabel:longPressOnLink:)])
+        {
+            [_delegate m80AttributedLabel:self longPressOnLink:linkData];
+        }
+        else
+        {
+            NSURL *url = nil;
+            if ([linkData isKindOfClass:[NSString class]])
+            {
+                url = [NSURL URLWithString:linkData];
+            }
+            else if([linkData isKindOfClass:[NSURL class]])
+            {
+                url = linkData;
+            }
+            if (url)
+            {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }
+        return YES;
+    }
+
     return NO;
 }
 
@@ -969,7 +1005,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             [weakSelf resetTextFrame];
         }
     };
-    
+
     if (sync)
     {
         NSArray *links = [M80AttributedLabelURL detectLinks:text];
@@ -978,9 +1014,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     else
     {
         dispatch_sync(get_m80_attributed_label_parse_queue(), ^{
-        
+
             NSArray *links = [M80AttributedLabelURL detectLinks:text];
-            
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSString *plainText = [[weakSelf attributedString] string];
                 if ([plainText isEqualToString:text])
@@ -1011,7 +1047,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    
+
     self.touchedLink = [self urlForPoint:point];
     if (self.touchedLink)
     {
@@ -1028,7 +1064,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     [super touchesMoved:touches withEvent:event];
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    
+
     M80AttributedLabelURL *touchedLink = [self urlForPoint:point];
     if (self.touchedLink != touchedLink)
     {
@@ -1062,5 +1098,44 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     }
 }
 
+#pragma mark LongPress
+
+- (void)setLinkLongPressEnable:(BOOL)linkLongPressEnable
+{
+    _linkLongPressEnable = linkLongPressEnable;
+    [self removeGestureRecognizer:_linkLongPressGestureRecognizer];
+    if (_linkLongPressEnable)
+    {
+        [self addGestureRecognizer:_linkLongPressGestureRecognizer];
+    }
+}
+
+
+- (void)longPress:(UILongPressGestureRecognizer *)longPressGestureRecognizer
+{
+    if (longPressGestureRecognizer.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint point = [longPressGestureRecognizer locationInView:self];
+        [self onLabelLongPress:point];
+        if (self.touchedLink)
+        {
+            self.touchedLink = nil;
+            [self setNeedsDisplay];
+        }
+    }
+}
+
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]])
+    {
+        //只有当point在URL上时才return YES，其他情况return NO，这样做不影响superView的长按手势。
+        CGPoint point = [touch locationInView:self];
+        id linkData = [self linkDataForPoint:point];
+        return linkData != nil;
+    }
+    return YES;
+}
 
 @end

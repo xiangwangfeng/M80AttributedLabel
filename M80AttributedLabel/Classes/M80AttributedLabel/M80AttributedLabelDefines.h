@@ -19,8 +19,12 @@ typedef enum
 @class M80AttributedLabel;
 
 @protocol M80AttributedLabelDelegate <NSObject>
-- (void)m80AttributedLabel:(M80AttributedLabel *)label
-             clickedOnLink:(id)linkData;
+- (void)m80AttributedLabel:(M80AttributedLabel *)label clickedOnLink:(id)linkData;
+
+/**
+*   @brief  长按
+*/
+- (void)m80AttributedLabel:(M80AttributedLabel *)label longPressOnLink:(id)linkData;
 
 @end
 
