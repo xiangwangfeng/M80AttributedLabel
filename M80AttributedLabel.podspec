@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.authors = {'Xiang Wangfeng' => 'xiangwangfeng@gmail.com'}
   s.homepage = 'https://github.com/xiangwangfeng/M80AttributedLabel/'
   s.summary = 'Another attributed label using CoreText'
-  s.source = {:git => 'https://github.com/xiangwangfeng/M80AttributedLabel.git', :tag => '1.0.1'}
+  s.source = {:git => 'https://github.com/xiangwangfeng/M80AttributedLabel.git', :tag => '1.0.2'}
   s.license = 'MIT'
 
   s.requires_arc = true
