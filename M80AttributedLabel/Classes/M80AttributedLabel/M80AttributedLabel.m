@@ -601,6 +601,12 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     }
 }
 
+
+- (CGSize)intrinsicContentSize
+{
+    return [self sizeThatFits:CGSizeMake(CGRectGetWidth(self.bounds), CGFLOAT_MAX)];
+}
+
 #pragma mark - 
 + (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block
 {

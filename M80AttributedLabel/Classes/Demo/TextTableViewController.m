@@ -8,6 +8,7 @@
 
 #import "TextTableViewController.h"
 #import "M80AttributedLabel.h"
+#import "AutoLayoutTableViewCell.h"
 
 static dispatch_queue_t shared_queue()
 {
@@ -24,6 +25,7 @@ static dispatch_queue_t shared_queue()
 @interface Messsage : NSObject
 @property (nonatomic,strong)    NSString    *messageID;
 @property (nonatomic,strong)    NSString    *text;
+@property (nonatomic,assign)    BOOL        autoLayout;
 @end
 
 @implementation Messsage
@@ -32,6 +34,7 @@ static dispatch_queue_t shared_queue()
     Messsage *message = [[Messsage alloc]init];
     message.messageID = [[NSUUID UUID] UUIDString];
     message.text      = [Messsage ramdomText];
+    message.autoLayout= arc4random() % 2 == 0;
     return message;
 }
 
@@ -73,7 +76,6 @@ static dispatch_queue_t shared_queue()
 @property (nonatomic,strong)    UIRefreshControl        *refreshControl;
 @property (nonatomic,strong)    NSMutableArray          *messages;
 @property (nonatomic,strong)    NSMutableDictionary     *cellHeights;
-@property (nonatomic,strong)    NSCache                 *cachedLabels;
 @end
 
 @implementation TextTableViewController
@@ -99,7 +101,6 @@ static dispatch_queue_t shared_queue()
     
     _messages = [NSMutableArray array];
     _cellHeights = [NSMutableDictionary dictionary];
-    _cachedLabels = [[NSCache alloc]init];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Reload"
                                                                              style:UIBarButtonItemStyleBordered
@@ -117,7 +118,7 @@ static dispatch_queue_t shared_queue()
 {
     dispatch_async(shared_queue(), ^{
         NSMutableArray *messages = [NSMutableArray array];
-        for (NSInteger i = 0; i < 200; i++) //提高加载数量，可迫使Cache内Label回收
+        for (NSInteger i = 0; i < 200; i++)
         {
             Messsage *message = [Messsage message];
             [messages addObject:message];
@@ -126,9 +127,7 @@ static dispatch_queue_t shared_queue()
             [_messages insertObjects:messages
                            atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [messages count])]];
             [self.refreshControl endRefreshing];
-            NSLog(@"begin reload");
             [self.tableView reloadData];
-            NSLog(@"end reload %u",[_messages count]);
         });
     });
 }
@@ -137,7 +136,7 @@ static dispatch_queue_t shared_queue()
 {
     NSLog(@"begin reload");
     [self.tableView reloadData];
-    NSLog(@"end reload %u",[_messages count]);
+    NSLog(@"end reload %lu",(unsigned long)[_messages count]);
 }
 
 #pragma mark - Table view Helper
@@ -147,28 +146,28 @@ static dispatch_queue_t shared_queue()
     CGFloat height = [[_cellHeights objectForKey:messageID] floatValue];
     if (height == 0)
     {
-        M80AttributedLabel *label = [self labelForMessage:message];
-        CGSize size = label.bounds.size;
-        
-        height = size.height + 20 + 20;
+        if (message.autoLayout)
+        {
+            AutoLayoutTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"AutoLayoutTableViewCell"
+                                                                          owner:nil
+                                                                         options:nil] lastObject];
+            [self updateLabel:cell.autoLayoutLabel
+                         text:message.text];
+            CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+            height = size.height + 1;
+        }
+        else
+        {
+            M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
+            [self updateLabel:label
+                         text:message.text];
+            CGSize size = [label sizeThatFits:CGSizeMake(270, CGFLOAT_MAX)];
+            height = size.height + 20 + 20;
+        }
         [_cellHeights setObject:@(height)
                          forKey:messageID];
-        
-        [_cachedLabels setObject:label
-                          forKey:messageID];
     }
     return height;
-}
-
-
-- (M80AttributedLabel *)labelForMessage:(Messsage *)message
-{
-    M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
-    [self updateLabel:label
-                 text:message.text];
-    CGSize size = [label sizeThatFits:CGSizeMake(270, CGFLOAT_MAX)];
-    [label setBounds:CGRectMake(0, 0, size.width, size.height)];
-    return label;
 }
 
 
@@ -206,41 +205,49 @@ static dispatch_queue_t shared_queue()
     return [_messages count];
 }
 
-
+static const NSInteger labelTag = 10;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Messsage *message = [_messages objectAtIndex:[indexPath row]];
-    NSString *messageID = message.messageID;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message_cell"];
-    if (cell == nil)
+    if (message.autoLayout)
     {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault
-                                     reuseIdentifier:@"message_cell"];
+        AutoLayoutTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"auto_message_cell"];
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"AutoLayoutTableViewCell"
+                                                  owner:nil
+                                                options:nil] lastObject];
+        }
+        [self updateLabel:cell.autoLayoutLabel
+                     text:message.text];
+        return cell;
     }
-    
-    const NSInteger tag = 10;
-    M80AttributedLabel *label = (M80AttributedLabel *)[cell viewWithTag:tag];
-    if (label)
+    else
     {
-        [label removeFromSuperview];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message_cell"];
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault
+                                         reuseIdentifier:@"message_cell"];
+            M80AttributedLabel *label = [[M80AttributedLabel alloc] initWithFrame:CGRectZero];
+            [cell.contentView addSubview:label];
+            [label setTag:labelTag];
+        }
+        M80AttributedLabel *label = (M80AttributedLabel *)[cell viewWithTag:labelTag];
+        [self updateLabel:label
+                     text:message.text];
+        return cell;
     }
-    
-    
-    label = [_cachedLabels objectForKey:messageID];
-    if (label == nil)
-    {
-        label = [self labelForMessage:message];
-        [_cachedLabels setObject:label
-                          forKey:messageID];
-    }
-    
+}
 
-    [cell addSubview:label];
-    [label setTag:tag];
-    CGRect frame = CGRectMake(25, 20, label.bounds.size.width, label.bounds.size.height);
-    [label setFrame:frame];
-    
-    return cell;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Messsage *message = [_messages objectAtIndex:[indexPath row]];
+    if (!message.autoLayout)
+    {
+        M80AttributedLabel *label = (M80AttributedLabel *)[cell viewWithTag:labelTag];
+        [label setFrame:CGRectMake(25, 20, cell.bounds.size.width - 25 * 2, cell.bounds.size.height - 20 * 2)];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -261,53 +268,5 @@ static dispatch_queue_t shared_queue()
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

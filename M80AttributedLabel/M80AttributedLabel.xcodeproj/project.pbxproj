@@ -22,6 +22,8 @@
 		86B9A52E17D2E19B00256F4D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86B9A52D17D2E19B00256F4D /* CoreText.framework */; };
 		86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */; };
 		86B9A54217D32C5D00256F4D /* haha.png in Resources */ = {isa = PBXBuildFile; fileRef = 86B9A54117D32C5D00256F4D /* haha.png */; };
+		E47856F419C9333200B34B57 /* AutoLayoutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E47856F219C9333200B34B57 /* AutoLayoutTableViewCell.m */; };
+		E47856F519C9333200B34B57 /* AutoLayoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E47856F319C9333200B34B57 /* AutoLayoutTableViewCell.xib */; };
 		E47FBA26192C6FF7004CE6F6 /* LongTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47FBA25192C6FF7004CE6F6 /* LongTextViewController.m */; };
 		E47FBA28192C73B1004CE6F6 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = E47FBA27192C73B1004CE6F6 /* test.txt */; };
 		E47FBA2B192C7653004CE6F6 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E47FBA2A192C7653004CE6F6 /* AttachmentViewController.m */; };
@@ -64,6 +66,9 @@
 		86B9A52F17D2ECF700256F4D /* M80AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabel.h; sourceTree = "<group>"; };
 		86B9A53017D2ECF700256F4D /* M80AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabel.m; sourceTree = "<group>"; };
 		86B9A54117D32C5D00256F4D /* haha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = haha.png; sourceTree = "<group>"; };
+		E47856F119C9333200B34B57 /* AutoLayoutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLayoutTableViewCell.h; sourceTree = "<group>"; };
+		E47856F219C9333200B34B57 /* AutoLayoutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLayoutTableViewCell.m; sourceTree = "<group>"; };
+		E47856F319C9333200B34B57 /* AutoLayoutTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoLayoutTableViewCell.xib; sourceTree = "<group>"; };
 		E47FBA24192C6FF7004CE6F6 /* LongTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongTextViewController.h; sourceTree = "<group>"; };
 		E47FBA25192C6FF7004CE6F6 /* LongTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongTextViewController.m; sourceTree = "<group>"; };
 		E47FBA27192C73B1004CE6F6 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
@@ -223,6 +228,9 @@
 				E47FBA40192CA5EA004CE6F6 /* TextAlignmentViewController.m */,
 				E4DA720E196E89A3006F4D1C /* TextTableViewController.h */,
 				E4DA720F196E89A3006F4D1C /* TextTableViewController.m */,
+				E47856F119C9333200B34B57 /* AutoLayoutTableViewCell.h */,
+				E47856F219C9333200B34B57 /* AutoLayoutTableViewCell.m */,
+				E47856F319C9333200B34B57 /* AutoLayoutTableViewCell.xib */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -280,6 +288,7 @@
 			files = (
 				E4C9343A194AC9C600A82403 /* avatar.png in Resources */,
 				86B93C4A17D1D6480005D98A /* InfoPlist.strings in Resources */,
+				E47856F519C9333200B34B57 /* AutoLayoutTableViewCell.xib in Resources */,
 				86B93C5217D1D6480005D98A /* Default.png in Resources */,
 				86B93C5417D1D6480005D98A /* Default@2x.png in Resources */,
 				86B93C5617D1D6480005D98A /* Default-568h@2x.png in Resources */,
@@ -313,6 +322,7 @@
 				86B93C6F17D1DAC50005D98A /* M80AttributedLabelAttachment.m in Sources */,
 				E47FBA2B192C7653004CE6F6 /* AttachmentViewController.m in Sources */,
 				86B9A53117D2ECF700256F4D /* M80AttributedLabel.m in Sources */,
+				E47856F419C9333200B34B57 /* AutoLayoutTableViewCell.m in Sources */,
 				E4841334192C529C00E20149 /* CustomTextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
