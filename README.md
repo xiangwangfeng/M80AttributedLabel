@@ -1,8 +1,6 @@
 M80AttributedLabel
 ==================
 
-[![Version](https://cocoapod-badges.herokuapp.com/v/M80AttributedLabel/badge.png)](http://cocoadocs.org/docsets/M80AttributedLabel) [![Platform](https://cocoapod-badges.herokuapp.com/p/M80AttributedLabel/badge.png)](http://cocoadocs.org/docsets/M80AttributedLabel) 
-
 
 Another attributed label using CoreText
 
