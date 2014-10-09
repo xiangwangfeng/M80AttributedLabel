@@ -236,14 +236,18 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         if (self.lineBreakMode == kCTLineBreakByTruncatingTail)
         {
             lineBreakMode = _numberOfLines == 1 ? kCTLineBreakByCharWrapping : kCTLineBreakByWordWrapping;
-
         }
-        CTParagraphStyleSetting settings[]={
+        CGFloat fontLineHeight = self.font.lineHeight;  //使用全局fontHeight作为最小lineHeight
+        
+        
+        CTParagraphStyleSetting settings[] =
+        {
             {kCTParagraphStyleSpecifierAlignment,sizeof(_textAlignment),&_textAlignment},
             {kCTParagraphStyleSpecifierLineBreakMode,sizeof(lineBreakMode),&lineBreakMode},
             {kCTParagraphStyleSpecifierMaximumLineSpacing,sizeof(_lineSpacing),&_lineSpacing},
             {kCTParagraphStyleSpecifierMinimumLineSpacing,sizeof(_lineSpacing),&_lineSpacing},
             {kCTParagraphStyleSpecifierParagraphSpacing,sizeof(_paragraphSpacing),&_paragraphSpacing},
+            {kCTParagraphStyleSpecifierMinimumLineHeight,sizeof(fontLineHeight),&fontLineHeight},
         };
         CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings,sizeof(settings) / sizeof(settings[0]));
         [drawString addAttribute:(id)kCTParagraphStyleAttributeName
