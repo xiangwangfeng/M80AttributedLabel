@@ -17,7 +17,7 @@ Another attributed label using CoreText
     * `underLineForLink`
     * `numbersOfLines` (Truncates Last Line Supported)
     * `textAligment`
-    * `lineBreadMode`
+    * `lineBreakMode`
     * `lineSpacing`
     * `paragraphSpacing`
 
