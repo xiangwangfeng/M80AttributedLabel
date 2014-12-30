@@ -33,6 +33,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 @property (nonatomic,strong)    NSMutableAttributedString *attributedString;
 @property (nonatomic,strong)    M80AttributedLabelURL *touchedLink;
 @property (nonatomic,assign)    BOOL linkDetected;
+@property (nonatomic,assign)    BOOL ignoreRedraw;
 @end
 
 @implementation M80AttributedLabel
@@ -97,6 +98,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 
 - (void)cleanAll
 {
+    _ignoreRedraw = NO;
     _linkDetected = NO;
     [_attachments removeAllObjects];
     [_linkLocations removeAllObjects];
@@ -116,7 +118,10 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CFRelease(_textFrame);
         _textFrame = nil;
     }
-    [self setNeedsDisplay];
+    if ([NSThread isMainThread] && !_ignoreRedraw)
+    {
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)resetFont
@@ -982,8 +987,10 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     
     if (sync)
     {
+        _ignoreRedraw = YES;
         NSArray *links = [M80AttributedLabelURL detectLinks:text];
         block(links);
+        _ignoreRedraw = NO;
     }
     else
     {
