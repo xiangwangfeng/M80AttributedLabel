@@ -3,7 +3,7 @@
 //  M80AttributedLabel
 //
 //  Created by amao on 13-8-31.
-//  Copyright (c) 2013年 Netease. All rights reserved.
+//  Copyright (c) 2013年 www.xiangwangfeng.com. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -14,9 +14,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];    
     DemoTableViewController *demoVC = [[DemoTableViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:demoVC];
     self.window.rootViewController = nav;

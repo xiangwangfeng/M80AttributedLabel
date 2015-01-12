@@ -1,9 +1,9 @@
 //
-//  M80AttributedLabelImage.h
+//  M80AttributedLabelAttachment.h
 //  M80AttributedLabel
 //
 //  Created by amao on 13-8-31.
-//  Copyright (c) 2013年 Netease. All rights reserved.
+//  Copyright (c) 2013年 www.xiangwangfeng.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

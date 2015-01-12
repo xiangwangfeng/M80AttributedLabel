@@ -3,7 +3,7 @@
 //  M80AttributedLabel
 //
 //  Created by amao on 4/21/14.
-//  Copyright (c) 2014 Netease. All rights reserved.
+//  Copyright (c) 2014 www.xiangwangfeng.com. All rights reserved.
 //
 
 #import "DemoTableViewController.h"
@@ -38,6 +38,7 @@
     [super viewDidLoad];
     
     self.title = @"M80AttributedLabel";
+    self.navigationController.view.backgroundColor = [UIColor whiteColor];
     
     _items = @[[TableItem itemWithTitle:@"Basic"
                                subTitle:@"How to create a simple M80AttributedLabel"
