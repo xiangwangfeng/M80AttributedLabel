@@ -1026,10 +1026,14 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 #pragma mark - 点击事件相应
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint point = [touch locationInView:self];
+    if (self.touchedLink == nil)
+    {
+        UITouch *touch = [touches anyObject];
+        CGPoint point = [touch locationInView:self];
+        self.touchedLink =  [self urlForPoint:point];
+    }
     
-    self.touchedLink = [self urlForPoint:point];
+    
     if (self.touchedLink)
     {
           [self setNeedsDisplay];
@@ -1076,6 +1080,32 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         self.touchedLink = nil;
         [self setNeedsDisplay];
+    }
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    M80AttributedLabelURL *touchedLink = [self urlForPoint:point];
+    if (touchedLink == nil)
+    {
+        NSArray *subViews = [self subviews];
+        for (UIView *view in subViews)
+        {
+            CGPoint hitPoint = [view convertPoint:point
+                                         fromView:self];
+            
+            UIView *hitTestView = [view hitTest:hitPoint
+                                      withEvent:event];
+            if (hitTestView)
+            {
+                return hitTestView;
+            }
+        }
+        return nil;
+    }
+    else
+    {
+        return self;
     }
 }
 
