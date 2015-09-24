@@ -37,6 +37,8 @@
 - (void)setAttributedText:(NSAttributedString *)attributedText;
 - (void)appendAttributedText: (NSAttributedString *)attributedText;
 
+- (NSAttributedString*)getAttributedText;
+
 //图片
 - (void)appendImage: (UIImage *)image;
 - (void)appendImage: (UIImage *)image
@@ -48,6 +50,18 @@
             maxSize: (CGSize)maxSize
              margin: (UIEdgeInsets)margin
           alignment: (M80ImageAlignment)alignment;
+
+- (void)insertImage: (UIImage*)image
+			maxSize: (CGSize)maxSize
+			 margin: (UIEdgeInsets)margin
+		  alignment: (M80ImageAlignment)alignment
+		   location: (NSUInteger)location;
+
+- (void)replaceWithImage: (UIImage*)image
+				 maxSize: (CGSize)maxSize
+				  margin: (UIEdgeInsets)margin
+			   alignment: (M80ImageAlignment)alignment
+				   range: (NSRange)range;
 
 //UI控件
 - (void)appendView: (UIView *)view;
