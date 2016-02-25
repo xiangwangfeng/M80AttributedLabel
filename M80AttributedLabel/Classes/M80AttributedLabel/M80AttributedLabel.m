@@ -440,6 +440,29 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 }
 
 
+- (void)insertAttachment: (M80AttributedLabelAttachment*)attachment range:(NSRange)range {
+	attachment.fontAscent                   = _fontAscent;
+	attachment.fontDescent                  = _fontDescent;
+	unichar objectReplacementChar           = 0xFFFC;
+	NSString *objectReplacementString       = [NSString stringWithCharacters:&objectReplacementChar length:1];
+	NSMutableAttributedString *attachText   = [[NSMutableAttributedString alloc]initWithString:objectReplacementString];
+	
+	CTRunDelegateCallbacks callbacks;
+	callbacks.version       = kCTRunDelegateVersion1;
+	callbacks.getAscent     = ascentCallback;
+	callbacks.getDescent    = descentCallback;
+	callbacks.getWidth      = widthCallback;
+	callbacks.dealloc       = deallocCallback;
+	
+	CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (void *)attachment);
+	NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)delegate,kCTRunDelegateAttributeName, nil];
+	[attachText setAttributes:attr range:NSMakeRange(0, 1)];
+	CFRelease(delegate);
+	
+	[_attachments addObject:attachment];
+	[self insertAttributedText:attachText range:range];
+}
+
 #pragma mark - 设置文本
 - (void)setText:(NSString *)text
 {
@@ -451,6 +474,10 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 {
     _attributedString = [[NSMutableAttributedString alloc]initWithAttributedString:attributedText];
     [self cleanAll];
+}
+
+- (NSAttributedString*)getAttributedText {
+	return _attributedString;
 }
 
 #pragma mark - 添加文本
@@ -466,6 +493,10 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     [self resetTextFrame];
 }
 
+- (void)insertAttributedText: (NSAttributedString*)attributedText range:(NSRange)range {
+	[_attributedString replaceCharactersInRange:range withAttributedString:attributedText];
+	[self resetTextFrame];
+}
 
 #pragma mark - 添加图片
 - (void)appendImage: (UIImage *)image
@@ -502,6 +533,30 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                                                                              alignment:alignment
                                                                                maxSize:maxSize];
     [self appendAttachment:attachment];
+}
+
+
+- (void)insertImage: (UIImage*)image
+			maxSize: (CGSize)maxSize
+			 margin: (UIEdgeInsets)margin
+		  alignment: (M80ImageAlignment)alignment
+		   location: (NSUInteger)location {
+	M80AttributedLabelAttachment *attachment = [M80AttributedLabelAttachment attachmentWith:image
+																					 margin:margin
+																				  alignment:alignment
+																					maxSize:maxSize];
+	[self insertAttachment:attachment range:NSMakeRange(location, 0)];
+}
+- (void)replaceWithImage: (UIImage*)image
+				 maxSize: (CGSize)maxSize
+				  margin: (UIEdgeInsets)margin
+			   alignment: (M80ImageAlignment)alignment
+				   range: (NSRange)range {
+	M80AttributedLabelAttachment *attachment = [M80AttributedLabelAttachment attachmentWith:image
+																					 margin:margin
+																				  alignment:alignment
+																					maxSize:maxSize];
+	[self insertAttachment:attachment range:range];
 }
 
 #pragma mark - 添加UI控件

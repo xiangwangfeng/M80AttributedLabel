@@ -50,8 +50,14 @@
                      alignment:M80ImageAlignmentCenter];
         }
     }
-    
-    
+	
+	[label appendText:@"\n"];
+	[label appendText:@"[haha][haha]"];
+	NSLog(@" %@ ", [label getAttributedText]);
+	NSUInteger len = [label getAttributedText].length;
+	[label replaceWithImage:[UIImage imageNamed:@"haha"] maxSize:CGSizeMake(20, 20) margin:UIEdgeInsetsZero alignment:M80ImageAlignmentCenter range:NSMakeRange(len- [@"[haha]" length], [@"[haha]" length])];
+	
+	
     label.frame     = CGRectInset(self.view.bounds,20,20);
     
     [self.view addSubview:label];
