@@ -45,7 +45,7 @@
         label.text = textMoreThanTwoLines;
         [label setLineBreakMode:i];
         [label setNumberOfLines:2];
-        [label setFrame:CGRectMake(20, 20 + i * 60, 280, 40)];
+        [label setFrame:CGRectMake(20, 20 + i * 60, 280, 50)];
         
         [label.layer setBorderColor:[UIColor orangeColor].CGColor];
         [label.layer setBorderWidth:1];
