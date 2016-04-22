@@ -10,7 +10,7 @@
 #import "M80AttributedLabelAttachment.h"
 #import "M80AttributedLabelURL.h"
 
-static NSString* const kEllipsesCharacter = @"\u2026";
+static NSString* const M80EllipsesCharacter = @"\u2026";
 
 static dispatch_queue_t m80_attributed_label_parse_queue;
 static dispatch_queue_t get_m80_attributed_label_parse_queue() \
@@ -144,7 +144,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         _font = font;
         
-        [_attributedString setFont:_font];
+        [_attributedString m80_setFont:_font];
         [self resetFont];
         for (M80AttributedLabelAttachment *attachment in _attachments)
         {
@@ -160,7 +160,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if (textColor && _textColor != textColor)
     {
         _textColor = textColor;
-        [_attributedString setTextColor:textColor];
+        [_attributedString m80_setTextColor:textColor];
         [self resetTextFrame];
     }
 }
@@ -180,7 +180,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if (_linkColor != linkColor)
     {
         _linkColor = linkColor;
-        
         [self resetTextFrame];
     }
 }
@@ -190,7 +189,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CGRect oldRect = self.bounds;
     [super setFrame:frame];
     
-    if (!CGRectEqualToRect(self.bounds, oldRect)) {
+    if (!CGRectEqualToRect(self.bounds, oldRect))
+    {
         [self resetTextFrame];
     }
 }
@@ -206,6 +206,32 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     }
 }
 
+- (void)setShadowColor:(UIColor *)shadowColor
+{
+    if (_shadowColor != shadowColor)
+    {
+        _shadowColor = shadowColor;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setShadowOffset:(CGSize)shadowOffset
+{
+    if (!CGSizeEqualToSize(_shadowOffset, shadowOffset))
+    {
+        _shadowOffset = shadowOffset;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setShadowBlur:(CGFloat)shadowBlur
+{
+    if (shadowBlur != shadowBlur)
+    {
+        shadowBlur = shadowBlur;
+        [self resetTextFrame];
+    }
+}
 
 #pragma mark - 辅助方法
 - (NSAttributedString *)attributedString:(NSString *)text
@@ -213,8 +239,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if ([text length])
     {
         NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithString:text];
-        [string setFont:self.font];
-        [string setTextColor:self.textColor];
+        [string m80_setFont:self.font];
+        [string m80_setTextColor:self.textColor];
         return string;
     }
     else
@@ -269,8 +295,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 continue;
             }
             UIColor *drawLinkColor = url.color ? : self.linkColor;
-            [drawString setTextColor:drawLinkColor range:url.range];
-            [drawString setUnderlineStyle:_underLineForLink ? kCTUnderlineStyleSingle : kCTUnderlineStyleNone
+            [drawString m80_setTextColor:drawLinkColor range:url.range];
+            [drawString m80_setUnderlineStyle:_underLineForLink ? kCTUnderlineStyleSingle : kCTUnderlineStyleNone
                                  modifier:kCTUnderlinePatternSolid
                                     range:url.range];
         }
@@ -282,7 +308,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     }
 }
 
-- (M80AttributedLabelURL *)urlForPoint: (CGPoint)point
+- (M80AttributedLabelURL *)urlForPoint:(CGPoint)point
 {
     static const CGFloat kVMargin = 5;
     if (!CGRectContainsPoint(CGRectInset(self.bounds, 0, -kVMargin), point)
@@ -415,7 +441,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     return rectForRange;
 }
 
-- (void)appendAttachment: (M80AttributedLabelAttachment *)attachment
+- (void)appendAttachment:(M80AttributedLabelAttachment *)attachment
 {
     attachment.fontAscent                   = _fontAscent;
     attachment.fontDescent                  = _fontDescent;
@@ -453,6 +479,16 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     [self cleanAll];
 }
 
+- (NSString *)text
+{
+    return [_attributedString string];
+}
+
+- (NSAttributedString *)attributedText
+{
+    return [_attributedString copy];
+}
+
 #pragma mark - 添加文本
 - (void)appendText:(NSString *)text
 {
@@ -460,7 +496,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     [self appendAttributedText:attributedText];
 }
 
-- (void)appendAttributedText: (NSAttributedString *)attributedText
+- (void)appendAttributedText:(NSAttributedString *)attributedText
 {
     [_attributedString appendAttributedString:attributedText];
     [self resetTextFrame];
@@ -468,23 +504,23 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 
 
 #pragma mark - 添加图片
-- (void)appendImage: (UIImage *)image
+- (void)appendImage:(UIImage *)image
 {
     [self appendImage:image
               maxSize:image.size];
 }
 
-- (void)appendImage: (UIImage *)image
-            maxSize: (CGSize)maxSize
+- (void)appendImage:(UIImage *)image
+            maxSize:(CGSize)maxSize
 {
     [self appendImage:image
               maxSize:maxSize
                margin:UIEdgeInsetsZero];
 }
 
-- (void)appendImage: (UIImage *)image
-            maxSize: (CGSize)maxSize
-             margin: (UIEdgeInsets)margin
+- (void)appendImage:(UIImage *)image
+            maxSize:(CGSize)maxSize
+             margin:(UIEdgeInsets)margin
 {
     [self appendImage:image
               maxSize:maxSize
@@ -492,10 +528,10 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             alignment:M80ImageAlignmentBottom];
 }
 
-- (void)appendImage: (UIImage *)image
-            maxSize: (CGSize)maxSize
-             margin: (UIEdgeInsets)margin
-          alignment: (M80ImageAlignment)alignment
+- (void)appendImage:(UIImage *)image
+            maxSize:(CGSize)maxSize
+             margin:(UIEdgeInsets)margin
+          alignment:(M80ImageAlignment)alignment
 {
     M80AttributedLabelAttachment *attachment = [M80AttributedLabelAttachment attachmentWith:image
                                                                                      margin:margin
@@ -505,14 +541,14 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 }
 
 #pragma mark - 添加UI控件
-- (void)appendView: (UIView *)view
+- (void)appendView:(UIView *)view
 {
     [self appendView:view
               margin:UIEdgeInsetsZero];
 }
 
-- (void)appendView: (UIView *)view
-            margin: (UIEdgeInsets)margin
+- (void)appendView:(UIView *)view
+            margin:(UIEdgeInsets)margin
 {
     [self appendView:view
               margin:margin
@@ -520,9 +556,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 }
 
 
-- (void)appendView: (UIView *)view
-            margin: (UIEdgeInsets)margin
-         alignment: (M80ImageAlignment)alignment
+- (void)appendView:(UIView *)view
+            margin:(UIEdgeInsets)margin
+         alignment:(M80ImageAlignment)alignment
 {
     M80AttributedLabelAttachment *attachment = [M80AttributedLabelAttachment attachmentWith:view
                                                                                      margin:margin
@@ -532,8 +568,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 }
 
 #pragma mark - 添加链接
-- (void)addCustomLink: (id)linkData
-             forRange: (NSRange)range
+- (void)addCustomLink:(id)linkData
+             forRange:(NSRange)range
 {
     [self addCustomLink:linkData
                forRange:range
@@ -541,9 +577,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     
 }
 
-- (void)addCustomLink: (id)linkData
-             forRange: (NSRange)range
-            linkColor: (UIColor *)color
+- (void)addCustomLink:(id)linkData
+             forRange:(NSRange)range
+            linkColor:(UIColor *)color
 {
     M80AttributedLabelURL *url = [M80AttributedLabelURL urlWithLinkData:linkData
                                                                   range:range
@@ -616,11 +652,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     return [self sizeThatFits:CGSizeMake(CGRectGetWidth(self.bounds), CGFLOAT_MAX)];
 }
 
-#pragma mark - 
-+ (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block
-{
-    [M80AttributedLabelURL setCustomDetectMethod:block];
-}
 
 #pragma mark - 绘制方法
 - (void)drawRect:(CGRect)rect
@@ -642,6 +673,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         [self prepareTextFrame:drawString rect:rect];
         [self drawHighlightWithRect:rect];
         [self drawAttachments];
+        [self drawShadow:ctx];
         [self drawText:drawString
                   rect:rect
                context:ctx];
@@ -649,8 +681,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CGContextRestoreGState(ctx);
 }
 
-- (void)prepareTextFrame: (NSAttributedString *)string
-                    rect: (CGRect)rect
+- (void)prepareTextFrame:(NSAttributedString *)string
+                    rect:(CGRect)rect
 {
     if (_textFrame == nil)
     {
@@ -663,7 +695,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     }
 }
 
-- (void)drawHighlightWithRect: (CGRect)rect
+- (void)drawHighlightWithRect:(CGRect)rect
 {
     if (self.touchedLink && self.highlightColor)
     {
@@ -719,9 +751,17 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     }
 }
 
-- (void)drawText: (NSAttributedString *)attributedString
-            rect: (CGRect)rect
-         context: (CGContextRef)context
+- (void)drawShadow:(CGContextRef)ctx
+{
+    if (self.shadowColor)
+    {
+        CGContextSetShadowWithColor(ctx, self.shadowOffset, self.shadowBlur, self.shadowColor.CGColor);
+    }
+}
+
+- (void)drawText:(NSAttributedString *)attributedString
+            rect:(CGRect)rect
+         context:(CGContextRef)context
 {
     if (_textFrame)
     {
@@ -743,7 +783,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                 if (lineIndex == numberOfLines - 1 &&
                     _lineBreakMode == kCTLineBreakByTruncatingTail)
                 {
-                    // Does the last line need truncation?
+                    //找到最后一行并检查是否需要 truncatingTail
                     CFRange lastLineRange = CTLineGetStringRange(line);
                     if (lastLineRange.location + lastLineRange.length < attributedString.length)
                     {
@@ -752,7 +792,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         
                         NSDictionary *tokenAttributes = [attributedString attributesAtIndex:truncationAttributePosition
                                                                              effectiveRange:NULL];
-                        NSAttributedString *tokenString = [[NSAttributedString alloc] initWithString:kEllipsesCharacter
+                        NSAttributedString *tokenString = [[NSAttributedString alloc] initWithString:M80EllipsesCharacter
                                                                                           attributes:tokenAttributes];
                         CTLineRef truncationToken = CTLineCreateWithAttributedString((CFAttributedStringRef)tokenString);
                         
@@ -760,7 +800,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         
                         if (lastLineRange.length > 0)
                         {
-                            // Remove last token
+                            //移除掉最后一个对象...（其实这个地方有点问题,也有可能需要移除最后 2 个对象，因为 attachment 宽度的关系）
                             [truncationString deleteCharactersInRange:NSMakeRange(lastLineRange.length - 1, 1)];
                         }
                         [truncationString appendAttributedString:tokenString];
@@ -770,7 +810,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         CTLineRef truncatedLine = CTLineCreateTruncatedLine(truncationLine, rect.size.width, truncationType, truncationToken);
                         if (!truncatedLine)
                         {
-                            // If the line is not as wide as the truncationToken, truncatedLine is NULL
                             truncatedLine = CFRetain(truncationToken);
                         }
                         CFRelease(truncationLine);
@@ -826,8 +865,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CGFloat lineHeight = lineAscent + lineDescent;
         CGFloat lineBottomY = lineOrigin.y - lineDescent;
         
-        // Iterate through each of the "runs" (i.e. a chunk of text) and find the runs that
-        // intersect with the range.
+        //遍历以找到对应的 attachment 进行绘制
         for (CFIndex k = 0; k < runCount; k++)
         {
             CTRunRef run = CFArrayGetValueAtIndex(runs, k);
@@ -1009,7 +1047,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     }
 }
 
-- (void)addAutoDetectedLink: (M80AttributedLabelURL *)link
+- (void)addAutoDetectedLink:(M80AttributedLabelURL *)link
 {
     NSRange range = link.range;
     for (M80AttributedLabelURL *url in _linkLocations)
@@ -1107,6 +1145,12 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         return self;
     }
+}
+
+#pragma mark - 设置自定义的连接检测block
++ (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block
+{
+    [M80AttributedLabelURL setCustomDetectMethod:block];
 }
 
 

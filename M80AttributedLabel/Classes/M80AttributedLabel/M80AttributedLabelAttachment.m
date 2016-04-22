@@ -90,10 +90,10 @@ CGFloat widthCallback(void* ref)
 
 
 
-+ (M80AttributedLabelAttachment *)attachmentWith: (id)content
-                                          margin: (UIEdgeInsets)margin
-                                       alignment: (M80ImageAlignment)alignment
-                                         maxSize: (CGSize)maxSize
++ (M80AttributedLabelAttachment *)attachmentWith:(id)content
+                                          margin:(UIEdgeInsets)margin
+                                       alignment:(M80ImageAlignment)alignment
+                                         maxSize:(CGSize)maxSize
 {
     M80AttributedLabelAttachment *attachment    = [[M80AttributedLabelAttachment alloc]init];
     attachment.content                          = content;

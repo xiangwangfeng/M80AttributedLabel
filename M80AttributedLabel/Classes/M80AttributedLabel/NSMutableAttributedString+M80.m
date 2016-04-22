@@ -10,12 +10,12 @@
 
 @implementation NSMutableAttributedString (M80)
 
-- (void)setTextColor:(UIColor*)color
+- (void)m80_setTextColor:(UIColor*)color
 {
-    [self setTextColor:color range:NSMakeRange(0, [self length])];
+    [self m80_setTextColor:color range:NSMakeRange(0, [self length])];
 }
 
-- (void)setTextColor:(UIColor*)color range:(NSRange)range
+- (void)m80_setTextColor:(UIColor*)color range:(NSRange)range
 {
     if (color.CGColor)
     {
@@ -29,12 +29,12 @@
 }
 
 
-- (void)setFont:(UIFont*)font
+- (void)m80_setFont:(UIFont*)font
 {
-    [self setFont:font range:NSMakeRange(0, [self length])];
+    [self m80_setFont:font range:NSMakeRange(0, [self length])];
 }
 
-- (void)setFont:(UIFont*)font range:(NSRange)range
+- (void)m80_setFont:(UIFont*)font range:(NSRange)range
 {
     if (font)
     {
@@ -49,15 +49,15 @@
     }
 }
 
-- (void)setUnderlineStyle:(CTUnderlineStyle)style
+- (void)m80_setUnderlineStyle:(CTUnderlineStyle)style
                  modifier:(CTUnderlineStyleModifiers)modifier
 {
-    [self setUnderlineStyle:style
+    [self m80_setUnderlineStyle:style
                    modifier:modifier
                       range:NSMakeRange(0, self.length)];
 }
 
-- (void)setUnderlineStyle:(CTUnderlineStyle)style
+- (void)m80_setUnderlineStyle:(CTUnderlineStyle)style
                  modifier:(CTUnderlineStyleModifiers)modifier
                     range:(NSRange)range
 {

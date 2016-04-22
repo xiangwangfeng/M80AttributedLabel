@@ -73,7 +73,6 @@ static dispatch_queue_t shared_queue()
 
 
 @interface TextTableViewController ()
-@property (nonatomic,strong)    UIRefreshControl        *refreshControl;
 @property (nonatomic,strong)    NSMutableArray          *messages;
 @property (nonatomic,strong)    NSMutableDictionary     *cellHeights;
 @end

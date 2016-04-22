@@ -23,10 +23,10 @@ CGFloat widthCallback(void* ref);
 @property (nonatomic,assign)    CGSize              maxSize;
 
 
-+ (M80AttributedLabelAttachment *)attachmentWith: (id)content
-                                          margin: (UIEdgeInsets)margin
-                                       alignment: (M80ImageAlignment)alignment
-                                         maxSize: (CGSize)maxSize;
++ (M80AttributedLabelAttachment *)attachmentWith:(id)content
+                                          margin:(UIEdgeInsets)margin
+                                       alignment:(M80ImageAlignment)alignment
+                                         maxSize:(CGSize)maxSize;
 
 - (CGSize)boxSize;
 

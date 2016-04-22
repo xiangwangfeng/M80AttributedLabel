@@ -40,8 +40,8 @@
     {
         NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]initWithString:text];
         NSInteger index = arc4random() % 4;
-        [attributedText setFont:[fonts objectAtIndex:index]];
-        [attributedText setTextColor:[colors objectAtIndex:index]];
+        [attributedText m80_setFont:[fonts objectAtIndex:index]];
+        [attributedText m80_setTextColor:[colors objectAtIndex:index]];
         
         [label appendAttributedText:attributedText];
         [label appendText:@" "];

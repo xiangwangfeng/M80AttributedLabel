@@ -33,26 +33,20 @@
     label.text      = @"Hello M80AttributedLabel";
     label.font      = [UIFont fontWithName:@"Zapfino" size:25];
     label.textColor = UIColorFromRGB(0xFF9F00);
-    label.frame     = CGRectInset(self.view.bounds,20,20);
+    label.shadowColor = [UIColor grayColor];
+    label.shadowOffset= CGSizeMake(1, 1);
+    label.shadowBlur = 1;
     
+    label.frame     = CGRectInset(self.view.bounds,20,20);
+
     [self.view addSubview:label];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
