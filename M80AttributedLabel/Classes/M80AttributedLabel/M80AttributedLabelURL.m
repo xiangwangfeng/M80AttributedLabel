@@ -14,9 +14,9 @@ static M80CustomDetectLinkBlock customDetectBlock = nil;
 
 @implementation M80AttributedLabelURL
 
-+ (M80AttributedLabelURL *)urlWithLinkData: (id)linkData
-                                     range: (NSRange)range
-                                     color: (UIColor *)color
++ (M80AttributedLabelURL *)urlWithLinkData:(id)linkData
+                                     range:(NSRange)range
+                                     color:(UIColor *)color
 {
     M80AttributedLabelURL *url  = [[M80AttributedLabelURL alloc]init];
     url.linkData                = linkData;
@@ -27,7 +27,7 @@ static M80CustomDetectLinkBlock customDetectBlock = nil;
 }
 
 
-+ (NSArray *)detectLinks: (NSString *)plainText
++ (NSArray *)detectLinks:(NSString *)plainText
 {
     //提供一个自定义的解析接口给
     if (customDetectBlock)

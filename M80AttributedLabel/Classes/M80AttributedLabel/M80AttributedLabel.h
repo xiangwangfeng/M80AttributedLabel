@@ -35,8 +35,8 @@
 
 
 //添加文本
-- (void)appendText: (NSString *)text;
-- (void)appendAttributedText: (NSAttributedString *)attributedText;
+- (void)appendText:(NSString *)text;
+- (void)appendAttributedText:(NSAttributedString *)attributedText;
 
 //图片
 - (void)appendImage:(UIImage *)image;

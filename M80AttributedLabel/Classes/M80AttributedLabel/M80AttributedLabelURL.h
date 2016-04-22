@@ -15,12 +15,12 @@
 @property (nonatomic,assign)    NSRange range;
 @property (nonatomic,strong)    UIColor *color;
 
-+ (M80AttributedLabelURL *)urlWithLinkData: (id)linkData
-                                     range: (NSRange)range
-                                     color: (UIColor *)color;
++ (M80AttributedLabelURL *)urlWithLinkData:(id)linkData
+                                     range:(NSRange)range
+                                     color:(UIColor *)color;
 
 
-+ (NSArray *)detectLinks: (NSString *)plainText;
++ (NSArray *)detectLinks:(NSString *)plainText;
 
 + (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block;
 @end
