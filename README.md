@@ -20,6 +20,9 @@ Another attributed label using CoreText
     * `lineBreakMode`
     * `lineSpacing`
     * `paragraphSpacing`
+    * `shadowColor`
+    * `shadowOffset`
+    * `shadowBlur`
 
     
 
