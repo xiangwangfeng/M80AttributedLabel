@@ -226,9 +226,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 
 - (void)setShadowBlur:(CGFloat)shadowBlur
 {
-    if (shadowBlur != shadowBlur)
+    if (_shadowBlur != shadowBlur)
     {
-        shadowBlur = shadowBlur;
+        _shadowBlur = shadowBlur;
         [self resetTextFrame];
     }
 }
