@@ -266,7 +266,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CTLineBreakMode lineBreakMode = self.lineBreakMode;
         if (self.lineBreakMode == kCTLineBreakByTruncatingTail)
         {
-            lineBreakMode = _numberOfLines == 1 ? kCTLineBreakByCharWrapping : kCTLineBreakByWordWrapping;
+            lineBreakMode = _numberOfLines == 1 ? kCTLineBreakByTruncatingTail : kCTLineBreakByWordWrapping;
         }
         CGFloat fontLineHeight = self.font.lineHeight;  //使用全局fontHeight作为最小lineHeight
         
