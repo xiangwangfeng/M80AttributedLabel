@@ -13,12 +13,13 @@
 #import <CoreText/CoreText.h>
 #import <Foundation/Foundation.h>
 
-typedef enum
-{
+NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_OPTIONS(NSUInteger, M80ImageAlignment) {
     M80ImageAlignmentTop,
     M80ImageAlignmentCenter,
     M80ImageAlignmentBottom
-} M80ImageAlignment;
+};
 
 @class M80AttributedLabel;
 
@@ -28,9 +29,11 @@ typedef enum
 
 @end
 
-typedef NSArray *(^M80CustomDetectLinkBlock)(NSString *text);
+typedef NSArray * _Nullable (^M80CustomDetectLinkBlock)(NSString * _Nullable text);
 
 //如果文本长度小于这个值,直接在UI线程做Link检测,否则都dispatch到共享线程
 #define M80MinAsyncDetectLinkLength 50
+
+NS_ASSUME_NONNULL_END
 
 #endif

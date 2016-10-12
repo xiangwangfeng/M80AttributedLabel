@@ -26,8 +26,15 @@ struct Item {
 class DemoTableViewController: UITableViewController {
     
     let items : [Item] = [Item("Basic","How to create a simple M80AttributedLabel","BasicAttributedLabelViewController"),
-                          Item("Customizing Text","How to use NSAttributedString","CustomTextViewController")]
-    
+                          Item("Customizing Text","How to use NSAttributedString","CustomTextViewController"),
+                          Item("Links","Automatic and explicit Links","LinksViewController"),
+                          Item("Images","How to display images using M80AttributedLabel","ImagesViewController"),
+                          Item("LongText","Performance for displaying long text","LongTextViewController"),
+                          Item("Attachment","Add UIView as attachment instead of UIImag","AttachmentViewController"),
+                          Item("LineBreakMode","Different line break modes","LineBreakModeViewController"),
+                          Item("TextAlignment","Different test alignments","TextAlignmentViewController"),
+                          Item("TableViewCell","AttributedLabel in tableviewcell","TextTableViewController")]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "M80AttribtuedLabel"
