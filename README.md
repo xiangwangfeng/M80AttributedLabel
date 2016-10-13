@@ -27,7 +27,7 @@ Another attributed label using CoreText
     
 
 # System Requirement
-* iOS5 or later
+* iOS 7.0 or later
 * ARC required
 
 # Installation
