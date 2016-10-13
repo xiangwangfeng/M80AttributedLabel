@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E40951AE1DAF27E300773E64 /* LineBreakModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40951AD1DAF27E300773E64 /* LineBreakModeViewController.swift */; };
+		E40951B01DAF2ACC00773E64 /* TextAlignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40951AF1DAF2ACC00773E64 /* TextAlignmentViewController.swift */; };
 		E4A331A81DAE0B3D00B59A16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A331A71DAE0B3D00B59A16 /* AppDelegate.swift */; };
 		E4A331AA1DAE0B3D00B59A16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A331A91DAE0B3D00B59A16 /* ViewController.swift */; };
 		E4A331AD1DAE0B3D00B59A16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4A331AB1DAE0B3D00B59A16 /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E40951AD1DAF27E300773E64 /* LineBreakModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineBreakModeViewController.swift; sourceTree = "<group>"; };
+		E40951AF1DAF2ACC00773E64 /* TextAlignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAlignmentViewController.swift; sourceTree = "<group>"; };
 		E4A331A41DAE0B3D00B59A16 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4A331A71DAE0B3D00B59A16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4A331A91DAE0B3D00B59A16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 				E4D22BD31DAE227700EB8F7E /* LinksViewController.swift */,
 				E4D22BD91DAE325500EB8F7E /* AttachmentViewController.swift */,
 				E4D22BDB1DAE348500EB8F7E /* LongTextViewController.swift */,
+				E40951AD1DAF27E300773E64 /* LineBreakModeViewController.swift */,
+				E40951AF1DAF2ACC00773E64 /* TextAlignmentViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
@@ -246,11 +252,13 @@
 				E4D22BD41DAE227700EB8F7E /* LinksViewController.swift in Sources */,
 				E4D22BDC1DAE348500EB8F7E /* LongTextViewController.swift in Sources */,
 				E4A331DF1DAE0DC400B59A16 /* M80AttributedLabelURL.m in Sources */,
+				E40951AE1DAF27E300773E64 /* LineBreakModeViewController.swift in Sources */,
 				E4D22BC01DAE180100EB8F7E /* CustomTextViewController.swift in Sources */,
 				E4A331E61DAE14CB00B59A16 /* BaseViewController.swift in Sources */,
 				E4D22BC91DAE191C00EB8F7E /* Util.swift in Sources */,
 				E4D22BD81DAE315300EB8F7E /* ImagesViewController.swift in Sources */,
 				E4A331DE1DAE0DC400B59A16 /* M80AttributedLabelAttachment.m in Sources */,
+				E40951B01DAF2ACC00773E64 /* TextAlignmentViewController.swift in Sources */,
 				E4D22BDA1DAE325500EB8F7E /* AttachmentViewController.swift in Sources */,
 				E4A331E21DAE0FDD00B59A16 /* DemoTableViewController.swift in Sources */,
 				E4D22BBE1DAE166C00EB8F7E /* BasicAttributedLabelViewController.swift in Sources */,

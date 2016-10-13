@@ -160,7 +160,7 @@ static dispatch_queue_t shared_queue()
             M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
             [self updateLabel:label
                          text:message.text];
-            CGSize size = [label sizeThatFits:CGSizeMake(270, CGFLOAT_MAX)];
+            CGSize size = [label sizeThatFits:CGSizeMake(self.view.bounds.size.width, CGFLOAT_MAX)];
             height = size.height + 20 + 20;
         }
         [_cellHeights setObject:@(height)

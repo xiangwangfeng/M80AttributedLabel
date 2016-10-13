@@ -32,7 +32,7 @@
     
     label.text      = @"Hello M80AttributedLabel";
     label.font      = [UIFont fontWithName:@"Zapfino" size:25];
-    label.textColor = UIColorFromRGB(0xFF9F00);
+    label.textColor = M80RGB(0xFF9F00);
     label.shadowColor = [UIColor grayColor];
     label.shadowOffset= CGSizeMake(1, 1);
     label.shadowBlur = 1;

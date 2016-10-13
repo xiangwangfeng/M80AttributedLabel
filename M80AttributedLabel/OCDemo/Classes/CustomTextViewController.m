@@ -29,7 +29,7 @@
     [super viewDidLoad];
     
     NSArray *fonts = @[[UIFont systemFontOfSize:12],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:17],[UIFont systemFontOfSize:25]];
-    NSArray *colors= @[UIColorFromRGB(0x000000),UIColorFromRGB(0x0000FF),UIColorFromRGB(0x00FF00),UIColorFromRGB(0xFF0000)];
+    NSArray *colors= @[M80RGB(0x000000),M80RGB(0x0000FF),M80RGB(0x00FF00),M80RGB(0xFF0000)];
     
     
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
@@ -57,16 +57,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

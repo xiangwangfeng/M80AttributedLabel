@@ -48,7 +48,7 @@
 - (void)m80AttributedLabel:(M80AttributedLabel *)label
              clickedOnLink:(id)linkData
 {
-    NSString *message = [NSString stringWithFormat:@"LinkData is %@:%@",[[linkData class] description],linkData];
+    NSString *message = [NSString stringWithFormat:@"link data is %@:%@",[[linkData class] description],linkData];
     
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"you click a link"
                                                                         message:message

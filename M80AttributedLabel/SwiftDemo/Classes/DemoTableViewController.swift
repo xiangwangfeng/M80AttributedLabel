@@ -32,8 +32,7 @@ class DemoTableViewController: UITableViewController {
                           Item("LongText","Performance for displaying long text","LongTextViewController"),
                           Item("Attachment","Add UIView as attachment instead of UIImag","AttachmentViewController"),
                           Item("LineBreakMode","Different line break modes","LineBreakModeViewController"),
-                          Item("TextAlignment","Different test alignments","TextAlignmentViewController"),
-                          Item("TableViewCell","AttributedLabel in tableviewcell","TextTableViewController")]
+                          Item("TextAlignment","Different test alignments","TextAlignmentViewController")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
