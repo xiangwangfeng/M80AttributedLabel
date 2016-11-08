@@ -1025,7 +1025,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     }
     else
     {
-        dispatch_sync(get_m80_attributed_label_parse_queue(), ^{
+        dispatch_async(get_m80_attributed_label_parse_queue(), ^{
         
             NSArray *links = [M80AttributedLabelURL detectLinks:text];
             
