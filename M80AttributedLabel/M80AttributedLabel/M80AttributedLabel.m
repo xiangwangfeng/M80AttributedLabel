@@ -428,7 +428,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         
         CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil);
         
-        CGRect linkRect = CGRectMake(lineOrigin.x + xOffset - leading, lineOrigin.y - descent, width + leading, height);
+        CGRect linkRect = CGRectMake(lineOrigin.x + xOffset, lineOrigin.y - descent - leading, width, height + leading);
         
         linkRect.origin.y = roundf(linkRect.origin.y);
         linkRect.origin.x = roundf(linkRect.origin.x);
