@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FB94F06796F3C9E19E46DEB /* libPods-SwiftDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D0D40D9991462264CA89E7 /* libPods-SwiftDemo.a */; };
 		E40951AE1DAF27E300773E64 /* LineBreakModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40951AD1DAF27E300773E64 /* LineBreakModeViewController.swift */; };
 		E40951B01DAF2ACC00773E64 /* TextAlignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40951AF1DAF2ACC00773E64 /* TextAlignmentViewController.swift */; };
 		E4A331A81DAE0B3D00B59A16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A331A71DAE0B3D00B59A16 /* AppDelegate.swift */; };
@@ -14,10 +15,6 @@
 		E4A331AD1DAE0B3D00B59A16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4A331AB1DAE0B3D00B59A16 /* Main.storyboard */; };
 		E4A331AF1DAE0B3D00B59A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4A331AE1DAE0B3D00B59A16 /* Assets.xcassets */; };
 		E4A331B21DAE0B3D00B59A16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4A331B01DAE0B3D00B59A16 /* LaunchScreen.storyboard */; };
-		E4A331DD1DAE0DC400B59A16 /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A331D51DAE0DC400B59A16 /* M80AttributedLabel.m */; };
-		E4A331DE1DAE0DC400B59A16 /* M80AttributedLabelAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A331D71DAE0DC400B59A16 /* M80AttributedLabelAttachment.m */; };
-		E4A331DF1DAE0DC400B59A16 /* M80AttributedLabelURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A331DA1DAE0DC400B59A16 /* M80AttributedLabelURL.m */; };
-		E4A331E01DAE0DC400B59A16 /* NSMutableAttributedString+M80.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A331DC1DAE0DC400B59A16 /* NSMutableAttributedString+M80.m */; };
 		E4A331E21DAE0FDD00B59A16 /* DemoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A331E11DAE0FDD00B59A16 /* DemoTableViewController.swift */; };
 		E4A331E61DAE14CB00B59A16 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A331E51DAE14CB00B59A16 /* BaseViewController.swift */; };
 		E4D22BBE1DAE166C00EB8F7E /* BasicAttributedLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D22BBD1DAE166C00EB8F7E /* BasicAttributedLabelViewController.swift */; };
@@ -34,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01D0D40D9991462264CA89E7 /* libPods-SwiftDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BCEAB4CF3E5C6DDE3B882EA /* Pods-SwiftDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDemo/Pods-SwiftDemo.release.xcconfig"; sourceTree = "<group>"; };
+		C43C45C0E63F53F1B14DF04D /* Pods-SwiftDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftDemo/Pods-SwiftDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		E40951AD1DAF27E300773E64 /* LineBreakModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineBreakModeViewController.swift; sourceTree = "<group>"; };
 		E40951AF1DAF2ACC00773E64 /* TextAlignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAlignmentViewController.swift; sourceTree = "<group>"; };
 		E4A331A41DAE0B3D00B59A16 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,15 +44,6 @@
 		E4A331B11DAE0B3D00B59A16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4A331B31DAE0B3D00B59A16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4A331CF1DAE0DAE00B59A16 /* SwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		E4A331D41DAE0DC400B59A16 /* M80AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabel.h; sourceTree = "<group>"; };
-		E4A331D51DAE0DC400B59A16 /* M80AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabel.m; sourceTree = "<group>"; };
-		E4A331D61DAE0DC400B59A16 /* M80AttributedLabelAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelAttachment.h; sourceTree = "<group>"; };
-		E4A331D71DAE0DC400B59A16 /* M80AttributedLabelAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabelAttachment.m; sourceTree = "<group>"; };
-		E4A331D81DAE0DC400B59A16 /* M80AttributedLabelDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelDefines.h; sourceTree = "<group>"; };
-		E4A331D91DAE0DC400B59A16 /* M80AttributedLabelURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelURL.h; sourceTree = "<group>"; };
-		E4A331DA1DAE0DC400B59A16 /* M80AttributedLabelURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabelURL.m; sourceTree = "<group>"; };
-		E4A331DB1DAE0DC400B59A16 /* NSMutableAttributedString+M80.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+M80.h"; sourceTree = "<group>"; };
-		E4A331DC1DAE0DC400B59A16 /* NSMutableAttributedString+M80.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+M80.m"; sourceTree = "<group>"; };
 		E4A331E11DAE0FDD00B59A16 /* DemoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoTableViewController.swift; sourceTree = "<group>"; };
 		E4A331E51DAE14CB00B59A16 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		E4D22BBD1DAE166C00EB8F7E /* BasicAttributedLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAttributedLabelViewController.swift; sourceTree = "<group>"; };
@@ -73,17 +64,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FB94F06796F3C9E19E46DEB /* libPods-SwiftDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3427210FF04A2630E4701FC1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C43C45C0E63F53F1B14DF04D /* Pods-SwiftDemo.debug.xcconfig */,
+				4BCEAB4CF3E5C6DDE3B882EA /* Pods-SwiftDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A63A55A60449EAEBC9DC5118 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01D0D40D9991462264CA89E7 /* libPods-SwiftDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E4A3319B1DAE0B3D00B59A16 = {
 			isa = PBXGroup;
 			children = (
 				E4A331A61DAE0B3D00B59A16 /* SwiftDemo */,
 				E4A331A51DAE0B3D00B59A16 /* Products */,
+				3427210FF04A2630E4701FC1 /* Pods */,
+				A63A55A60449EAEBC9DC5118 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				E4D22BCA1DAE203C00EB8F7E /* Resource */,
-				E4A331D31DAE0DC400B59A16 /* M80AttributedLabel */,
 				E4A331CD1DAE0BB600B59A16 /* Classes */,
 				E4A331A71DAE0B3D00B59A16 /* AppDelegate.swift */,
 				E4A331A91DAE0B3D00B59A16 /* ViewController.swift */,
@@ -130,23 +140,6 @@
 			path = Classes;
 			sourceTree = SOURCE_ROOT;
 		};
-		E4A331D31DAE0DC400B59A16 /* M80AttributedLabel */ = {
-			isa = PBXGroup;
-			children = (
-				E4A331D41DAE0DC400B59A16 /* M80AttributedLabel.h */,
-				E4A331D51DAE0DC400B59A16 /* M80AttributedLabel.m */,
-				E4A331D61DAE0DC400B59A16 /* M80AttributedLabelAttachment.h */,
-				E4A331D71DAE0DC400B59A16 /* M80AttributedLabelAttachment.m */,
-				E4A331D81DAE0DC400B59A16 /* M80AttributedLabelDefines.h */,
-				E4A331D91DAE0DC400B59A16 /* M80AttributedLabelURL.h */,
-				E4A331DA1DAE0DC400B59A16 /* M80AttributedLabelURL.m */,
-				E4A331DB1DAE0DC400B59A16 /* NSMutableAttributedString+M80.h */,
-				E4A331DC1DAE0DC400B59A16 /* NSMutableAttributedString+M80.m */,
-			);
-			name = M80AttributedLabel;
-			path = ../../M80AttributedLabel;
-			sourceTree = "<group>";
-		};
 		E4D22BC31DAE188300EB8F7E /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,9 +167,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4A331B61DAE0B3D00B59A16 /* Build configuration list for PBXNativeTarget "SwiftDemo" */;
 			buildPhases = (
+				0E44B47670F8F73369558D69 /* [CP] Check Pods Manifest.lock */,
 				E4A331A01DAE0B3D00B59A16 /* Sources */,
 				E4A331A11DAE0B3D00B59A16 /* Frameworks */,
 				E4A331A21DAE0B3D00B59A16 /* Resources */,
+				B34FD804BA36B174E15C3474 /* [CP] Embed Pods Frameworks */,
+				BB426D90A057D17A19E82476 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -194,7 +190,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = amao;
 				TargetAttributes = {
 					E4A331A31DAE0B3D00B59A16 = {
@@ -240,6 +236,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0E44B47670F8F73369558D69 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B34FD804BA36B174E15C3474 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDemo/Pods-SwiftDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB426D90A057D17A19E82476 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftDemo/Pods-SwiftDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E4A331A01DAE0B3D00B59A16 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -247,17 +291,13 @@
 			files = (
 				E4A331AA1DAE0B3D00B59A16 /* ViewController.swift in Sources */,
 				E4A331A81DAE0B3D00B59A16 /* AppDelegate.swift in Sources */,
-				E4A331E01DAE0DC400B59A16 /* NSMutableAttributedString+M80.m in Sources */,
-				E4A331DD1DAE0DC400B59A16 /* M80AttributedLabel.m in Sources */,
 				E4D22BD41DAE227700EB8F7E /* LinksViewController.swift in Sources */,
 				E4D22BDC1DAE348500EB8F7E /* LongTextViewController.swift in Sources */,
-				E4A331DF1DAE0DC400B59A16 /* M80AttributedLabelURL.m in Sources */,
 				E40951AE1DAF27E300773E64 /* LineBreakModeViewController.swift in Sources */,
 				E4D22BC01DAE180100EB8F7E /* CustomTextViewController.swift in Sources */,
 				E4A331E61DAE14CB00B59A16 /* BaseViewController.swift in Sources */,
 				E4D22BC91DAE191C00EB8F7E /* Util.swift in Sources */,
 				E4D22BD81DAE315300EB8F7E /* ImagesViewController.swift in Sources */,
-				E4A331DE1DAE0DC400B59A16 /* M80AttributedLabelAttachment.m in Sources */,
 				E40951B01DAF2ACC00773E64 /* TextAlignmentViewController.swift in Sources */,
 				E4D22BDA1DAE325500EB8F7E /* AttachmentViewController.swift in Sources */,
 				E4A331E21DAE0FDD00B59A16 /* DemoTableViewController.swift in Sources */,
@@ -305,6 +345,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -354,6 +395,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -380,6 +422,7 @@
 		};
 		E4A331B71DAE0B3D00B59A16 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C43C45C0E63F53F1B14DF04D /* Pods-SwiftDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -396,6 +439,7 @@
 		};
 		E4A331B81DAE0B3D00B59A16 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BCEAB4CF3E5C6DDE3B882EA /* Pods-SwiftDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

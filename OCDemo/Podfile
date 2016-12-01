@@ -1,0 +1,7 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'OCDemo' do
+  pod 'M80AttributedLabel', :path => '../'
+
+end

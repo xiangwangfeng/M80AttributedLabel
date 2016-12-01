@@ -1,0 +1,16 @@
+PODS:
+  - M80AttributedLabel (1.6.2)
+
+DEPENDENCIES:
+  - M80AttributedLabel (from `../`)
+
+EXTERNAL SOURCES:
+  M80AttributedLabel:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  M80AttributedLabel: 1bcddc0acb6097991bb41fe17fbf947d128836d6
+
+PODFILE CHECKSUM: c204fac8364187b2bd67bb03850fcbcaad8bfd33
+
+COCOAPODS: 1.1.1
