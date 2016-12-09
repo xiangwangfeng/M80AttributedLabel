@@ -13,6 +13,8 @@ class LinksViewController: BaseViewController,M80AttributedLabelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Link"
+        
         let text = "The game which I current play is hearthstone,and its website is www.hearthstone.com.cn"
         let label = M80AttributedLabel()
         label.text = text

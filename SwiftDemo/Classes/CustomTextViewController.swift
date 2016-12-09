@@ -18,6 +18,8 @@ class CustomTextViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Custom Text"
+        
         let label = M80AttributedLabel()
         let text = "The release of iOS 7 brings a lot of new tools to the table for developers."
         let components = text.components(separatedBy: " ")

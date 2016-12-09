@@ -35,6 +35,8 @@
     kCTTextAlignmentJustified = 3,
     kCTTextAlignmentNatural = 4,*/
     
+    self.title = @"TextAlignment";
+    
     
     NSString *text = @"Hello M80AttributedLabel";
 

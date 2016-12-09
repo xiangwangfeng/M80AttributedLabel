@@ -28,6 +28,8 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Basic";
+    
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
     
     label.text      = @"Hello M80AttributedLabel";

@@ -13,6 +13,8 @@ class AttachmentViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Attachment"
+        
         let label = M80AttributedLabel()
 
         for i in 0..<3 {

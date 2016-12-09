@@ -36,7 +36,7 @@ class DemoTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "M80AttribtuedLabel"
+        self.title = "Demo"
         self.navigationController?.view.backgroundColor = UIColor.white
     }
 

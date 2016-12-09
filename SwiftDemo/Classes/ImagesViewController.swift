@@ -12,6 +12,8 @@ class ImagesViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Images"
 
         let label = M80AttributedLabel()
         label.lineSpacing = 5.0

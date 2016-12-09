@@ -13,6 +13,8 @@ class LongTextViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "LongText"
+        
         if let path = Bundle.main.path(forResource: "test", ofType: "txt"),
             let content = try? String(contentsOfFile: path) {
             

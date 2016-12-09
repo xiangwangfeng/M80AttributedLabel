@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"M80AttributedLabel";
+    self.title = @"Demo";
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
     
     _items = @[[TableItem itemWithTitle:@"Basic"

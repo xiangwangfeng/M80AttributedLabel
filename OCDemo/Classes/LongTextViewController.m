@@ -30,6 +30,8 @@
 {
     [super viewDidLoad];
     
+    self.title = @"LongText";
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:@"test"
                                                      ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:path

@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Attachment";
+    
     M80AttributedLabel *label = [[M80AttributedLabel alloc]initWithFrame:CGRectZero];
     
     for (NSInteger i = 0; i < 3; i++)

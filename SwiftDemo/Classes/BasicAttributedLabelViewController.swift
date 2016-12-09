@@ -12,6 +12,8 @@ class BasicAttributedLabelViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Basic"
 
         let label = M80AttributedLabel()
         label.text = "Hello M80AttribtuedLabel"

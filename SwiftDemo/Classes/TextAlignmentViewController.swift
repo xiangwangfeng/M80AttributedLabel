@@ -13,6 +13,8 @@ class TextAlignmentViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Text Alignment"
+        
         let text = "Hello M80AttributedLabel"
         let alignments : [CTTextAlignment] = [.left,.right,.center,.justified,.natural]
         

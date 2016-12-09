@@ -28,6 +28,8 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Custom Text";
+    
     NSArray *fonts = @[[UIFont systemFontOfSize:12],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:17],[UIFont systemFontOfSize:25]];
     NSArray *colors= @[M80RGB(0x000000),M80RGB(0x0000FF),M80RGB(0x00FF00),M80RGB(0xFF0000)];
     
