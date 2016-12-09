@@ -2,47 +2,51 @@ M80AttributedLabel
 ==================
 
 
-Another attributed label using CoreText [中文版本](./Documents/README.md)
+富文本显示组件 [中文版本](./Documents/README.md)
 
 
-# Features
-* Multi-line Rich Text Display
-* Auto Link Detection and Custom Links Supported
-* Embedding Image and Custom Views
-* Following Properties Supported:
-    * `font`
-    * `textColor`
-    * `highlightColor`
-    * `linkColor`
-    * `underLineForLink`
-    * `numbersOfLines` (Truncates Last Line Supported)
-    * `textAlignment`
-    * `lineBreakMode`
-    * `lineSpacing`
-    * `paragraphSpacing`
-    * `shadowColor`
-    * `shadowOffset`
-    * `shadowBlur`
+# 特性
+* 支持多行富文本显示
+* 支持链接自动检测和自定义链接添加
+* 支持内嵌图片和控件
+* 支持如下属性
+    * `字体`
+    * `文本颜色`
+    * `高亮颜色`
+    * `链接颜色`
+    * `链接下划线`
+    * `多行显示` (支持最后行尾部省略)
+    * `文字对齐`
+    * `换行模式`
+    * `行间距`
+    * `段落间距`
+    * `阴影色`
+    * `阴影偏移`
+    * `阴影半径`
 
     
 
-# System Requirement
-* iOS 7.0 or later
-* ARC required
+# 系统要求
+* iOS 7.0 及以上
+* 需要 ARC
 
-# Installation
+# 集成
+
 ### Podfile
+
 ```ruby
 pod 'M80AttributedLabel'
 ```
-### Manually
+
+### 手动集成
+
 * `git clone https://github.com/xiangwangfeng/M80AttributedLabel.git`
-* Copy files in `Class/M80AttributedLabel` to your project
-* Add `CoreText.framework` to your target
+* 拷贝 `Class/M80AttributedLabel` 中的源代码到你的工程中
+* 添加 `CoreText.framework` 
 
-# Usage
+# 使用方法
 
-## Basic
+## 基本使用
 
 ```objc
 
@@ -61,9 +65,9 @@ label.frame     = CGRectInset(self.view.bounds,20,20);
    
 ```
 
-<img src="./Documents/Images/Basic.png" width="320">
+<img src="./Images/Basic.png" width="320">
 
-## Link
+## 链接
 
 ```objc
 
@@ -83,10 +87,10 @@ label.frame     = CGRectInset(self.view.bounds,20,20);
 
 ```
 
-<img src="./Documents/Images/Link.png" width="320">
+<img src="./Images/Link.png" width="320">
 
 
-## Image
+## 图片
 
 ```objc
 
@@ -122,9 +126,9 @@ label.frame     = CGRectInset(self.view.bounds,20,20);
     
 ```
 
-<img src="./Documents/Images/Image.png" width="320">
+<img src="./Images/Image.png" width="320">
 
-## Attachemnt
+## 附件
 
 ```objc
 
@@ -152,9 +156,9 @@ label.frame     = CGRectInset(self.view.bounds,20,20);
 
 ```
 
-<img src="./Documents/Images/Attachment.png" width="320">
+<img src="./Images/Attachment.png" width="320">
 
-# Contact
+# 联系我
 * https://github.com/xiangwangfeng
 * http://www.xiangwangfeng.com
 * xiangwangfeng@gmail.com 
@@ -165,6 +169,6 @@ label.frame     = CGRectInset(self.view.bounds,20,20);
 [GPL]: http://www.gnu.org/licenses/gpl.html
 [BSD]: http://opensource.org/licenses/bsd-license.php
 
-# License
+# 许可证
 
-M80AttributedLabel is available under the [MIT license][MIT]. See the LICENSE file for more info.
+M80AttributedLabel 使用 [MIT license][MIT] 许可证，详情见 LICENSE 文件。
