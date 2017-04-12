@@ -8,9 +8,12 @@
 
 #import "M80AttributedLabelURL.h"
 
-static NSString *urlExpression = @"((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((:[0-9]+)?)((?:\\/[\\+~%\\/\\.\\w\\-]*)?\\??(?:[\\-\\+=&;%@\\.\\w]*)#?(?:[\\.\\!\\/\\\\\\w]*))?)";
+static NSString *M80URLExpression = @"((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((:[0-9]+)?)((?:\\/[\\+~%\\/\\.\\w\\-]*)?\\??(?:[\\-\\+=&;%@\\.\\w]*)#?(?:[\\.\\!\\/\\\\\\w]*))?)";
 
 static M80CustomDetectLinkBlock customDetectBlock = nil;
+
+static NSString *M80URLExpressionKey = @"M80URLExpressionKey";
+
 
 @implementation M80AttributedLabelURL
 
@@ -40,9 +43,7 @@ static M80CustomDetectLinkBlock customDetectBlock = nil;
         if ([plainText length])
         {
             links = [NSMutableArray array];
-            NSRegularExpression *urlRegex = [NSRegularExpression regularExpressionWithPattern:urlExpression
-                                                                                      options:NSRegularExpressionCaseInsensitive
-                                                                                        error:nil];
+            NSRegularExpression *urlRegex = [M80AttributedLabelURL urlExpression];
             [urlRegex enumerateMatchesInString:plainText
                                        options:0
                                          range:NSMakeRange(0, [plainText length])
@@ -57,6 +58,20 @@ static M80CustomDetectLinkBlock customDetectBlock = nil;
         }
         return links;
     }
+}
+
++ (NSRegularExpression *)urlExpression
+{
+    NSMutableDictionary *dict = [[NSThread currentThread] threadDictionary];
+    NSRegularExpression *exp = dict[M80URLExpressionKey];
+    if (exp == nil)
+    {
+        exp = [NSRegularExpression regularExpressionWithPattern:M80URLExpression
+                                                        options:NSRegularExpressionCaseInsensitive
+                                                          error:nil];
+        dict[M80URLExpressionKey] = exp;
+    }
+    return exp;
 }
 
 + (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block
