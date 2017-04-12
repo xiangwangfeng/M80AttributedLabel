@@ -32,7 +32,6 @@ static NSString *M80URLExpressionKey = @"M80URLExpressionKey";
 
 + (NSArray *)detectLinks:(NSString *)plainText
 {
-    //提供一个自定义的解析接口给
     if (customDetectBlock)
     {
         return customDetectBlock(plainText);
