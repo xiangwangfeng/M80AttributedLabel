@@ -137,7 +137,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 }
 
 #pragma mark - 属性设置
-//保证正常绘制，如果传入nil就直接不处理
 - (void)setFont:(UIFont *)font
 {
     if (font && _font != font)
@@ -167,10 +166,9 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
 
 - (void)setHighlightColor:(UIColor *)highlightColor
 {
-    if (highlightColor && _highlightColor != highlightColor)
+    if (_highlightColor != highlightColor)
     {
         _highlightColor = highlightColor;
-        
         [self resetTextFrame];
     }
 }
@@ -180,28 +178,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if (_linkColor != linkColor)
     {
         _linkColor = linkColor;
-        [self resetTextFrame];
-    }
-}
-
-- (void)setFrame:(CGRect)frame
-{
-    CGRect oldRect = self.bounds;
-    [super setFrame:frame];
-    
-    if (!CGRectEqualToRect(self.bounds, oldRect))
-    {
-        [self resetTextFrame];
-    }
-}
-
-- (void)setBounds:(CGRect)bounds
-{
-    CGRect oldRect = self.bounds;
-    [super setBounds:bounds];
-    
-    if (!CGRectEqualToRect(self.bounds, oldRect))
-    {
         [self resetTextFrame];
     }
 }
@@ -229,6 +205,92 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     if (_shadowBlur != shadowBlur)
     {
         _shadowBlur = shadowBlur;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setUnderLineForLink:(BOOL)underLineForLink
+{
+    if (_underLineForLink != underLineForLink)
+    {
+        _underLineForLink = underLineForLink;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setAutoDetectLinks:(BOOL)autoDetectLinks
+{
+    if (_autoDetectLinks != autoDetectLinks)
+    {
+        _autoDetectLinks = autoDetectLinks;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setNumberOfLines:(NSInteger)numberOfLines
+{
+    if (_numberOfLines != numberOfLines)
+    {
+        _numberOfLines = numberOfLines;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setTextAlignment:(CTTextAlignment)textAlignment
+{
+    if (_textAlignment != textAlignment)
+    {
+        _textAlignment = textAlignment;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setLineBreakMode:(CTLineBreakMode)lineBreakMode
+{
+    if (_lineBreakMode != lineBreakMode)
+    {
+        _lineBreakMode = lineBreakMode;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setLineSpacing:(CGFloat)lineSpacing
+{
+    if (_lineSpacing != lineSpacing)
+    {
+        _lineSpacing = lineSpacing;
+        [self resetTextFrame];
+    }
+}
+
+- (void)setParagraphSpacing:(CGFloat)paragraphSpacing
+{
+    if (_paragraphSpacing != paragraphSpacing)
+    {
+        _paragraphSpacing = paragraphSpacing;
+        [self resetTextFrame];
+    }
+}
+
+#pragma mark - frame
+- (void)setFrame:(CGRect)frame
+{
+    CGRect oldRect = self.bounds;
+    [super setFrame:frame];
+    
+    if (!CGRectEqualToRect(self.bounds, oldRect))
+    {
+        [self resetTextFrame];
+    }
+}
+
+- (void)setBounds:(CGRect)bounds
+{
+    CGRect oldRect = self.bounds;
+    [super setBounds:bounds];
+    
+    if (!CGRectEqualToRect(self.bounds, oldRect))
+    {
         [self resetTextFrame];
     }
 }

@@ -17,15 +17,15 @@
 
 - (void)m80_setTextColor:(UIColor*)color range:(NSRange)range
 {
+    [self removeAttribute:(NSString *)kCTForegroundColorAttributeName range:range];
     if (color.CGColor)
     {
-        [self removeAttribute:(NSString *)kCTForegroundColorAttributeName range:range];
+        
         
         [self addAttribute:(NSString *)kCTForegroundColorAttributeName
                      value:(id)color.CGColor
                      range:range];
     }
-    
 }
 
 
