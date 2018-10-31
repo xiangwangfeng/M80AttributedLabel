@@ -31,9 +31,6 @@ typedef NS_OPTIONS(NSUInteger, M80ImageAlignment) {
 
 typedef NSArray * _Nullable (^M80CustomDetectLinkBlock)(NSString * _Nullable text);
 
-//如果文本长度小于这个值,直接在UI线程做Link检测,否则都dispatch到共享线程
-#define M80MinAsyncDetectLinkLength 50
-
 NS_ASSUME_NONNULL_END
 
 #endif

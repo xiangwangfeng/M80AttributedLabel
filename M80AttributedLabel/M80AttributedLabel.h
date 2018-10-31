@@ -14,23 +14,24 @@ NS_ASSUME_NONNULL_BEGIN
 @class M80AttributedLabelURL;
 
 @interface M80AttributedLabel : UIView
-@property (nonatomic,weak,nullable)     id<M80AttributedLabelDelegate> delegate;
-@property (nonatomic,strong,nullable)    UIFont *font;                          //字体
-@property (nonatomic,strong,nullable)    UIColor *textColor;                    //文字颜色
-@property (nonatomic,strong,nullable)    UIColor *highlightColor;               //链接点击时背景高亮色
-@property (nonatomic,strong,nullable)    UIColor *linkColor;                    //链接色
-@property (nonatomic,strong,nullable)    UIColor *shadowColor;                  //阴影颜色
-@property (nonatomic,assign)            CGSize  shadowOffset;                   //阴影offset
-@property (nonatomic,assign)            CGFloat shadowBlur;                     //阴影半径
-@property (nonatomic,assign)            BOOL    underLineForLink;               //链接是否带下划线
-@property (nonatomic,assign)            BOOL    autoDetectLinks;                //自动检测
-@property (nonatomic,assign)            NSInteger   numberOfLines;              //行数
-@property (nonatomic,assign)            CTTextAlignment textAlignment;          //文字排版样式
-@property (nonatomic,assign)            CTLineBreakMode lineBreakMode;          //LineBreakMode
-@property (nonatomic,assign)            CGFloat lineSpacing;                    //行间距
-@property (nonatomic,assign)            CGFloat paragraphSpacing;               //段间距
-@property (nonatomic,copy,nullable)     NSString *text;                         //普通文本
-@property (nonatomic,copy,nullable)     NSAttributedString *attributedText;     //属性文本
+@property (nonatomic,weak,nullable)         id<M80AttributedLabelDelegate> delegate;
+@property (nonatomic,strong,nullable)       UIFont *font;                          //字体
+@property (nonatomic,strong,nullable)       UIColor *textColor;                    //文字颜色
+@property (nonatomic,strong,nullable)       UIColor *highlightColor;               //链接点击时背景高亮色
+@property (nonatomic,strong,nullable)       UIColor *linkColor;                    //链接色
+@property (nonatomic,strong,nullable)       UIColor *shadowColor;                  //阴影颜色
+@property (nonatomic,assign)                CGSize  shadowOffset;                   //阴影offset
+@property (nonatomic,assign)                CGFloat shadowBlur;                     //阴影半径
+@property (nonatomic,assign)                BOOL    underLineForLink;               //链接是否带下划线
+@property (nonatomic,assign)                BOOL    autoDetectLinks;                //自动检测
+@property (nonatomic,assign)                NSInteger   numberOfLines;              //行数
+@property (nonatomic,assign)                CTTextAlignment textAlignment;          //文字排版样式
+@property (nonatomic,assign)                CTLineBreakMode lineBreakMode;          //LineBreakMode
+@property (nonatomic,assign)                CGFloat lineSpacing;                    //行间距
+@property (nonatomic,assign)                CGFloat paragraphSpacing;               //段间距
+@property (nonatomic,copy,nullable)         NSString *text;                         //普通文本
+@property (nonatomic,copy,nullable)         NSAttributedString *attributedText;     //属性文本
+@property (nonatomic,assign)                NSUInteger maxSyncDetectLength;         //UI 线程做 link 检查的文字最大长度
 
 
 

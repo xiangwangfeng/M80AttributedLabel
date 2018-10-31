@@ -123,7 +123,7 @@ static dispatch_queue_t shared_queue()
             [messages addObject:message];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_messages insertObjects:messages
+            [self.messages insertObjects:messages
                            atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [messages count])]];
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
