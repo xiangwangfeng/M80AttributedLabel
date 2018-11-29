@@ -687,19 +687,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         CFRelease(framesetter);
     }
-    
-    //hack:
-    //1.需要加上额外的一部分size,有些情况下计算出来的像素点并不是那么精准
-    //2.iOS7 的 CTFramesetterSuggestFrameSizeWithConstraint s方法比较残,需要多加一部分 height
-    //3.iOS7 多行中如果首行带有很多空格，会导致返回的 suggestionWidth 远小于真实 width ,那么多行情况下就是用传入的 width
-    if (newSize.height < _fontHeight * 2)   //单行
-    {
-        return CGSizeMake(ceilf(newSize.width) + 2.0, ceilf(newSize.height) + 4.0);
-    }
-    else
-    {
-        return CGSizeMake(size.width, ceilf(newSize.height) + 4.0);
-    }
+    return CGSizeMake(MIN(ceilf(newSize.width) + 1, size.width), MIN(ceilf(newSize.height) + 1, size.height));
 }
 
 
