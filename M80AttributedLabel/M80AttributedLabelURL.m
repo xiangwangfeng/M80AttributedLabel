@@ -62,10 +62,12 @@ static M80CustomDetectLinkBlock customDetectBlock = nil;
     NSDataDetector *detector = dict[M80LinkDetectorKey];
     if (detector == nil)
     {
-        
         detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink | NSTextCheckingTypePhoneNumber
                                                    error:nil];
-        dict[M80LinkDetectorKey] = detector;
+        if (detector)
+        {
+            dict[M80LinkDetectorKey] = detector;
+        }
     }
     return detector;
 }

@@ -461,8 +461,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     CFArrayRef runs = CTLineGetGlyphRuns(line);
     CFIndex runCount = CFArrayGetCount(runs);
     
-    // Iterate through each of the "runs" (i.e. a chunk of text) and find the runs that
-    // intersect with the range.
     for (CFIndex k = 0; k < runCount; k++)
     {
         CTRunRef run = CFArrayGetValueAtIndex(runs, k);
@@ -473,7 +471,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         
         if (intersectedRunRange.length == 0)
         {
-            // This run doesn't intersect the range, so skip it.
             continue;
         }
         
@@ -481,12 +478,11 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CGFloat descent = 0.0f;
         CGFloat leading = 0.0f;
         
-        // Use of 'leading' doesn't properly highlight Japanese-character link.
         CGFloat width = (CGFloat)CTRunGetTypographicBounds(run,
                                                            CFRangeMake(0, 0),
                                                            &ascent,
                                                            &descent,
-                                                           NULL); //&leading);
+                                                           NULL);
         CGFloat height = ascent + descent;
         
         CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil);
@@ -768,6 +764,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
             CGRect highlightRect = [self rectForRange:linkRange
                                                inLine:line
                                            lineOrigin:lineOrigins[i]];
+            
             highlightRect = CGRectOffset(highlightRect, 0, -rect.origin.y);
             if (!CGRectIsEmpty(highlightRect))
             {
@@ -844,7 +841,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
                         
                         if (lastLineRange.length > 0)
                         {
-                            //移除掉最后一个对象...（其实这个地方有点问题,也有可能需要移除最后 2 个对象，因为 attachment 宽度的关系）
+                            //移除掉最后一个对象...
+                            //其实这个地方有点问题,也有可能需要移除最后 2 个对象，因为 attachment 宽度的关系
                             [truncationString deleteCharactersInRange:NSMakeRange(lastLineRange.length - 1, 1)];
                         }
                         [truncationString appendAttributedString:tokenString];
@@ -909,7 +907,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CGFloat lineHeight = lineAscent + lineDescent;
         CGFloat lineBottomY = lineOrigin.y - lineDescent;
         
-        //遍历以找到对应的 attachment 进行绘制
+        //遍历找到对应的 attachment 进行绘制
         for (CFIndex k = 0; k < runCount; k++)
         {
             CTRunRef run = CFArrayGetValueAtIndex(runs, k);
