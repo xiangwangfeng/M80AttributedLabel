@@ -683,7 +683,7 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         CFRelease(framesetter);
     }
-    return CGSizeMake(MIN(ceilf(newSize.width) + 1, size.width), MIN(ceilf(newSize.height) + 1, size.height));
+    return CGSizeMake(ceilf(newSize.width) + 1, MIN(ceilf(newSize.height) + 1, size.height));
 }
 
 
