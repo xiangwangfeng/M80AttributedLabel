@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'M80AttributedLabel'
-  s.version = '1.9.0'
+  s.version = '1.9.1'
   s.authors = {'Xiang Wangfeng' => 'xiangwangfeng@gmail.com'}
   s.homepage = 'https://github.com/xiangwangfeng/M80AttributedLabel/'
   s.summary = 'Another attributed label using CoreText'
