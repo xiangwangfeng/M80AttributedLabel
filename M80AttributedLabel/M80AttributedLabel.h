@@ -8,6 +8,8 @@
 
 #import "M80AttributedLabelDefines.h"
 #import "NSMutableAttributedString+M80.h"
+#import "M80AttributedLabelConfig.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,8 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign)                CGFloat paragraphSpacing;               //段间距
 @property (nonatomic,copy,nullable)         NSString *text;                         //普通文本
 @property (nonatomic,copy,nullable)         NSAttributedString *attributedText;     //属性文本
-@property (nonatomic,assign)                NSUInteger maxSyncDetectLength;         //UI 线程做 link 检查的文字最大长度
-
 
 
 //添加文本
@@ -71,9 +71,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 //大小
 - (CGSize)sizeThatFits:(CGSize)size;
-
-//设置全局的自定义Link检测Block(详见M80AttributedLabelURL)
-+ (void)setCustomDetectMethod:(nullable M80CustomDetectLinkBlock)block;
 
 @end
 

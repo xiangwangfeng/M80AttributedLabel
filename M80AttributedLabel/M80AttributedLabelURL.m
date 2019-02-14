@@ -7,8 +7,8 @@
 //
 
 #import "M80AttributedLabelURL.h"
+#import "M80AttributedLabelConfig.h"
 
-static M80CustomDetectLinkBlock customDetectBlock = nil;
 
 @implementation M80AttributedLabelURL
 
@@ -27,9 +27,10 @@ static M80CustomDetectLinkBlock customDetectBlock = nil;
 
 + (NSArray *)detectLinks:(NSString *)plainText
 {
-    if (customDetectBlock)
+    M80LinkDetector detector = M80AttributedLabelConfig.shared.detector;
+    if (detector)
     {
-        return customDetectBlock(plainText);
+        return detector(plainText);
     }
     else
     {
@@ -70,12 +71,6 @@ static M80CustomDetectLinkBlock customDetectBlock = nil;
         }
     }
     return detector;
-}
-
-
-+ (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block
-{
-    customDetectBlock = [block copy];
 }
 
 @end

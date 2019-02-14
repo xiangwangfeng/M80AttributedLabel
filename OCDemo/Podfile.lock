@@ -1,5 +1,5 @@
 PODS:
-  - M80AttributedLabel (1.6.2)
+  - M80AttributedLabel (1.8.1)
 
 DEPENDENCIES:
   - M80AttributedLabel (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  M80AttributedLabel: 1bcddc0acb6097991bb41fe17fbf947d128836d6
+  M80AttributedLabel: 5fc22e2a4a9ed7625d69ad5520804c4e26926485
 
 PODFILE CHECKSUM: c204fac8364187b2bd67bb03850fcbcaad8bfd33
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.5.3

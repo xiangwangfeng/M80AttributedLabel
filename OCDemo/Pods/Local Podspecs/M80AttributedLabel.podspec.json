@@ -1,6 +1,6 @@
 {
   "name": "M80AttributedLabel",
-  "version": "1.6.2",
+  "version": "1.8.1",
   "authors": {
     "Xiang Wangfeng": "xiangwangfeng@gmail.com"
   },
@@ -8,7 +8,7 @@
   "summary": "Another attributed label using CoreText",
   "source": {
     "git": "https://github.com/xiangwangfeng/M80AttributedLabel.git",
-    "tag": "1.6.2"
+    "tag": "1.8.1"
   },
   "license": "MIT",
   "requires_arc": true,

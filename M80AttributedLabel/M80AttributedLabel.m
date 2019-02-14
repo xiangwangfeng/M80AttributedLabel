@@ -86,7 +86,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     _autoDetectLinks        = YES;
     _lineSpacing            = 0.0;
     _paragraphSpacing       = 0.0;
-    _maxSyncDetectLength    = 100;
 
     if (self.backgroundColor == nil)
     {
@@ -1042,7 +1041,8 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         return;
     }
-    BOOL sync = length <= self.maxSyncDetectLength;
+    M80SyncLinkChecker checker = M80AttributedLabelConfig.shared.checker;
+    BOOL sync = checker ? checker(text) : YES;
     [self computeLink:text
                  sync:sync];
 }
@@ -1188,12 +1188,5 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         return self;
     }
 }
-
-#pragma mark - 设置自定义的连接检测block
-+ (void)setCustomDetectMethod:(M80CustomDetectLinkBlock)block
-{
-    [M80AttributedLabelURL setCustomDetectMethod:block];
-}
-
 
 @end
