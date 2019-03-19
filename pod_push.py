@@ -16,6 +16,9 @@ def run():
 
 def update(old_version,new_version):
 
+    if run_shell('pod lib lint --no-clean') != 0:
+        return
+
     if update_pod_spec(old_version,new_version) == False:
         return
 
@@ -26,11 +29,10 @@ def update(old_version,new_version):
     git_push_tag    = 'git push --tags'
     pod_push        = 'pod trunk push ' + pod_spec_filename
 
-
-    if(run_shell('pod lib lint --no-clean') == 0):
-        command_list = [git_add,git_commit,git_push,git_add_tag,git_push_tag,pod_push]
-        for command in command_list:
-            run_shell(command)
+    command_list = [git_add,git_commit,git_push,git_add_tag,git_push_tag,pod_push]
+    for command in command_list:
+        run_shell(command)
+        
 
     
 
