@@ -18,7 +18,7 @@ class AttachmentViewController: BaseViewController {
         let label = M80AttributedLabel()
 
         for i in 0..<3 {
-            label.appendText("Chick the icon to fire event")
+            label.appendText("Click the icon to fire event")
             
             let button = UIButton(type: .custom)
             button.setBackgroundImage(UIImage(named:"play"), for: .normal)
@@ -37,7 +37,7 @@ class AttachmentViewController: BaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func buttonClicked(_ sender : AnyObject) {
+    @objc func buttonClicked(_ sender : AnyObject) {
         if let button = sender as? UIButton {
             let message = "button tag is \(button.tag)"
             let controller = UIAlertController(title: "you click a button", message: message, preferredStyle: .alert)

@@ -7,9 +7,10 @@
 //
 
 #import "M80AttributedLabelDefines.h"
+#import "M80AttributedLabelAttachment.h"
+#import "M80AttributedLabelURL.h"
+#import "M80AttributedLabelURLDetector.h"
 #import "NSMutableAttributedString+M80.h"
-#import "M80AttributedLabelConfig.h"
-
 
 NS_ASSUME_NONNULL_BEGIN
 

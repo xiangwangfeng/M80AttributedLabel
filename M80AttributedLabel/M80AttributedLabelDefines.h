@@ -29,8 +29,6 @@ typedef NS_OPTIONS(NSUInteger, M80ImageAlignment) {
 
 @end
 
-typedef NSArray * _Nullable (^M80CustomDetectLinkBlock)(NSString * _Nullable text);
-
 NS_ASSUME_NONNULL_END
 
 #endif

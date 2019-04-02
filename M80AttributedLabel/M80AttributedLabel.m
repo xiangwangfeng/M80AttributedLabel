@@ -7,31 +7,18 @@
 //
 
 #import "M80AttributedLabel.h"
-#import "M80AttributedLabelAttachment.h"
-#import "M80AttributedLabelURL.h"
 
 static NSString* const M80EllipsesCharacter = @"\u2026";
 
-static dispatch_queue_t m80_attributed_label_parse_queue;
-static dispatch_queue_t get_m80_attributed_label_parse_queue() \
-{
-    if (m80_attributed_label_parse_queue == NULL) {
-        m80_attributed_label_parse_queue = dispatch_queue_create("com.m80.parse_queue", 0);
-    }
-    return m80_attributed_label_parse_queue;
-}
-
 @interface M80AttributedLabel ()
-{
-    NSMutableArray              *_attachments;
-    NSMutableArray              *_linkLocations;
-    CTFrameRef                  _textFrame;
-    CGFloat                     _fontAscent;
-    CGFloat                     _fontDescent;
-    CGFloat                     _fontHeight;
-}
-@property (nonatomic,strong)    NSMutableAttributedString *attributedString;
-@property (nonatomic,strong)    M80AttributedLabelURL *touchedLink;
+@property (nonatomic,strong)    NSMutableAttributedString   *attributedString;
+@property (nonatomic,strong)    NSMutableArray              *attachments;
+@property (nonatomic,strong)    NSMutableArray              *linkLocations;
+@property (nonatomic,strong)    M80AttributedLabelURL       *touchedLink;
+@property (nonatomic,assign)    CTFrameRef textFrame;
+@property (nonatomic,assign)    CGFloat fontAscent;
+@property (nonatomic,assign)    CGFloat fontDescent;
+@property (nonatomic,assign)    CGFloat fontHeight;
 @property (nonatomic,assign)    BOOL linkDetected;
 @property (nonatomic,assign)    BOOL ignoreRedraw;
 @end
@@ -1041,52 +1028,32 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
     {
         return;
     }
-    M80SyncLinkChecker checker = M80AttributedLabelConfig.shared.checker;
-    BOOL sync = checker ? checker(text) : YES;
-    [self computeLink:text
-                 sync:sync];
+    [self computeLink:text];
 }
 
 - (void)computeLink:(NSString *)text
-               sync:(BOOL)sync
 {
     __weak typeof(self) weakSelf = self;
-    typedef void (^M80LinkBlock) (NSArray *);
-    M80LinkBlock block = ^(NSArray *links)
-    {
-        weakSelf.linkDetected = YES;
-        if ([links count])
-        {
-            for (M80AttributedLabelURL *link in links)
-            {
-                [weakSelf addAutoDetectedLink:link];
-            }
-            [weakSelf resetTextFrame];
-        }
-    };
+    self.ignoreRedraw = YES;
     
-    if (sync)
-    {
-        _ignoreRedraw = YES;
-        NSArray *links = [M80AttributedLabelURL detectLinks:text];
-        block(links);
-        _ignoreRedraw = NO;
-    }
-    else
-    {
-        dispatch_async(get_m80_attributed_label_parse_queue(), ^{
-        
-            NSArray *links = [M80AttributedLabelURL detectLinks:text];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSString *plainText = [[weakSelf attributedString] string];
-                if ([plainText isEqualToString:text])
-                {
-                    block(links);
-                }
-            });
-        });
-    }
+    [M80AttributedLabelURLDetector.shared detectLinks:text
+                                           completion:^(NSArray<M80AttributedLabelURL *> * _Nullable links) {
+                                               __strong typeof(weakSelf) strongSelf = weakSelf;
+                                               NSString *plainText = [[strongSelf attributedString] string];
+                                               if ([text isEqualToString:plainText])
+                                               {
+                                                   strongSelf.linkDetected = YES;
+                                                   if ([links count])
+                                                   {
+                                                       for (M80AttributedLabelURL *link in links)
+                                                       {
+                                                           [strongSelf addAutoDetectedLink:link];
+                                                       }
+                                                       [strongSelf resetTextFrame];
+                                                   }
+                                                   strongSelf.ignoreRedraw = NO;
+                                               }
+                                            }];
 }
 
 - (void)addAutoDetectedLink:(M80AttributedLabelURL *)link
@@ -1112,7 +1079,6 @@ static dispatch_queue_t get_m80_attributed_label_parse_queue() \
         CGPoint point = [touch locationInView:self];
         self.touchedLink =  [self urlForPoint:point];
     }
-    
     
     if (self.touchedLink)
     {
