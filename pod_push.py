@@ -1,8 +1,8 @@
 import sys
 import os
+import re
 
 pod_spec_filename = 'M80AttributedLabel.podspec'
-
 
 def run():
     new_version = get_new_version()
@@ -38,14 +38,11 @@ def update(old_version,new_version):
 
 def get_old_version():
     old_version = None
-    new_source_version_prefix  = 's.version = \''
-    new_source_version_suffix  = '\''
+    version_pattern = r"\d+.\d+.\d+"
     pod_file = './' + pod_spec_filename
     with open(pod_file) as podspec:
         content = podspec.read()
-        begin = content.find(new_source_version_prefix) + len(new_source_version_prefix)
-        end = content.find(new_source_version_suffix,begin)
-        old_version = content[begin:end]
+        old_version = re.search(version_pattern,content).group()
     return old_version
 
     
