@@ -38,11 +38,11 @@ def update(old_version,new_version):
 
 def get_old_version():
     old_version = None
-    version_pattern = r"\d+.\d+.\d+"
+    version_pattern = r"\s*s.version\s+=\s+'(\d+.\d+.\d+')"
     pod_file = './' + pod_spec_filename
     with open(pod_file) as podspec:
         content = podspec.read()
-        old_version = re.search(version_pattern,content).group()
+        old_version = re.search(version_pattern,content).group(1)
     return old_version
 
     
