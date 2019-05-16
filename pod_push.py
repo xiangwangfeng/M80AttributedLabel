@@ -7,7 +7,7 @@ pod_spec_filename = 'M80AttributedLabel.podspec'
 def run():
     new_version = get_new_version()
     old_version = get_old_version()
-    print('current version',old_version)
+    print('current version is [' + old_version + ']')
     if new_version is not None and old_version is not None:
         question = 'do u want to upgrade current pod to \'' + new_version + '\' ? (y/n)\n'
         choice = input(question).lower()
@@ -38,7 +38,7 @@ def update(old_version,new_version):
 
 def get_old_version():
     old_version = None
-    version_pattern = r"\s*s.version\s+=\s+'(\d+.\d+.\d+')"
+    version_pattern = r"\s*s.version\s+=\s+'(\d+.\d+.\d+)'"
     pod_file = './' + pod_spec_filename
     with open(pod_file) as podspec:
         content = podspec.read()
