@@ -2,7 +2,7 @@ M80AttributedLabel
 ==================
 
 
-富文本显示组件 [中文版本](./Documents/README.md)
+富文本显示组件 [英文版本](./../README.md)
 
 
 # 特性
