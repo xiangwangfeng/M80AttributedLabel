@@ -664,6 +664,9 @@ static NSString* const M80EllipsesCharacter = @"\u2026";
     }
     
     CFRange fitCFRange = CFRangeMake(0, 0);
+    if (_numberOfLines == 0 && size.height == 0) {
+        size.height = 100000;
+    }
     CGSize newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, range, NULL, size, &fitCFRange);
     if (framesetter)
     {
