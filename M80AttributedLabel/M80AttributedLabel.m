@@ -641,6 +641,7 @@ static NSString* const M80EllipsesCharacter = @"\u2026";
     {
         return CGSizeZero;
     }
+    size = size.height == 0 ? CGSizeMake(size.width, CGFLOAT_MAX) : size;
     CFAttributedStringRef attributedStringRef = (__bridge CFAttributedStringRef)drawString;
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attributedStringRef);
     CFRange range = CFRangeMake(0, 0);
