@@ -113,7 +113,7 @@ static NSString* const M80EllipsesCharacter = @"\u2026";
 
 - (void)resetFont
 {
-    CTFontRef fontRef = CTFontCreateWithName((CFStringRef)self.font.fontName, self.font.pointSize, NULL);
+    CTFontRef fontRef = CTFontCreateWithFontDescriptor((__bridge CTFontDescriptorRef)self.font.fontDescriptor, self.font.pointSize, NULL);
     if (fontRef)
     {
         _fontAscent     = CTFontGetAscent(fontRef);

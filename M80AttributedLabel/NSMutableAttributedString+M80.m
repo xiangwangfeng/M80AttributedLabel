@@ -40,7 +40,7 @@
     {
         [self removeAttribute:(NSString*)kCTFontAttributeName range:range];
         
-        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)font.fontName, font.pointSize, nil);
+        CTFontRef fontRef = CTFontCreateWithFontDescriptor((__bridge CTFontDescriptorRef)font.fontDescriptor, font.pointSize, nil);
         if (nil != fontRef)
         {
             [self addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)fontRef range:range];
