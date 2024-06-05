@@ -156,7 +156,6 @@ label.frame     = CGRectInset(self.view.bounds,20,20);
 
 # Contact
 * https://github.com/xiangwangfeng
-* http://www.xiangwangfeng.com
 * xiangwangfeng@gmail.com 
 * http://weibo.com/epmao
 
